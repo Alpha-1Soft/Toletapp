@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "231154026028",
+    "firebase_url": "https://to-let-app-d0099.firebaseio.com",
+    "project_id": "to-let-app-d0099",
+    "storage_bucket": "to-let-app-d0099.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:231154026028:android:c960ecbc7c91af4d",
+        "android_client_info": {
+          "package_name": "com.example.tanvir.to_letapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "231154026028-7586ur1qu0b4pprks674ejuv9cddu9im.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5weyez5qStfTfP7fWd8abVd-VgVrPcoQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
