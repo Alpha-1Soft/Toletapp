@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_weight="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <LinearLayout
+            android:layout_width="205dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:textSize="18dp"
+                android:textColor="#000"/>
+            <TextView
+                android:id="@+id/renternameET"
+                android:text="Omar Faruk"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:textSize="18dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phon Number"
+                android:textColor="#000"
+                android:textSize="18dp"/>
+
+            <TextView
+                android:id="@+id/renterphonenumber"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="01747477690"
+                android:textSize="18dp"
+                android:textColor="#000"/>
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="110dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/renterprofile"/>
+
+    </LinearLayout>
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Contact Email"
+    android:textSize="18dp"
+    android:textColor="#000"/>
+    <TextView
+        android:id="@+id/rentercontactemail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="omar.faruq1998v@gmail.com"
+        android:textSize="18dp"
+        android:textColor="#000"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Permanent Address"
+        android:textSize="18dp"
+        android:textColor="#000"/>
+    <TextView
+        android:id="@+id/renterpermanentaddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mirpur-14"
+        android:textSize="18dp"
+        android:textColor="#000"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Present Address"
+        android:textSize="18dp"
+        android:textColor="#000"/>
+    <TextView
+        android:id="@+id/renterpresentaddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mirpur-14"
+        android:textSize="18dp"
+        android:textColor="#000"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Age"
+        android:textSize="18dp"
+        android:textColor="#000"/>
+    <TextView
+        android:id="@+id/renterage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="22"
+        android:textSize="18dp"
+        android:textColor="#000"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Marital Satus"
+        android:textSize="18dp"
+        android:textColor="#000"/>
+    <TextView
+        android:id="@+id/rentermaritalsatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Unmarried"
+        android:textSize="18dp"
+        android:textColor="#000"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gender"
+        android:textSize="18dp"
+        android:textColor="#000"/>
+    <TextView
+        android:id="@+id/rentergender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Male"
+        android:textSize="18dp"
+        android:textColor="#000"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Religion"
+        android:textSize="18dp"
+        android:textColor="#000"/>
+    <TextView
+        android:id="@+id/renterreligion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Islam"
+        android:textSize="18dp"
+        android:textColor="#000"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nationality"
+        android:textSize="18dp"
+        android:textColor="#000"/>
+    <TextView
+        android:id="@+id/renternatinality"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bangladeshi"
+        android:textSize="18dp"
+        android:textColor="#000"/>
+
+
+
+</LinearLayout>
