@@ -1,5 +1,6 @@
 package com.example.tanvir.to_letapp.activity;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -34,7 +35,9 @@ public class DefaultLoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             Toast.makeText(DefaultLoginActivity.this, "Login successfull", Toast.LENGTH_SHORT).show();
-                            finish();
+                            Intent intent = new Intent(DefaultLoginActivity.this,MainActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
                         }
                         else{
                             Toast.makeText(DefaultLoginActivity.this, "Unsuccessful", Toast.LENGTH_SHORT).show();

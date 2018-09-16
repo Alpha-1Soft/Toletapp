@@ -85,11 +85,15 @@ public class DefaultRegisterActivity extends AppCompatActivity {
         if (type == 2){
             DatabaseReference firebase = databaseReferenceForRenter.child(uid);
             DatabaseReference Username = firebase.child("Name");
+            DatabaseReference key = firebase.child("Key");
+            key.setValue(String.valueOf(type));
             Username.setValue(name);
         }
         else{
             DatabaseReference databaseReference = databaseReferenceForOwner.child(uid);
             DatabaseReference username = databaseReference.child("Name");
+            DatabaseReference key1 = databaseReference.child("Key");
+            key1.setValue(String.valueOf(type));
             username.setValue(name);
         }
     }
