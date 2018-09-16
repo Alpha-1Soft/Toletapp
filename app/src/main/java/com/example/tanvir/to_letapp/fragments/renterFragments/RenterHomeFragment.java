@@ -111,6 +111,7 @@ public class RenterHomeFragment extends Fragment {
                 intent.putExtra("Condition",arrayList.get(i).getFlatCondition());
                 intent.putExtra("Available",arrayList.get(i).getAvailableFor());
                 startActivity(intent);
+
             }
         });
 
