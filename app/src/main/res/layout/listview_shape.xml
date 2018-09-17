@@ -2,6 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="5dp"
     android:orientation="vertical">
     <LinearLayout
         android:weightSum="2"
@@ -24,31 +25,37 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="right">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Flat condition"
-                android:textSize="18dp"
-                android:textColor="#000000"/>
+
             <TextView
                 android:id="@+id/flatConditionTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2 room"
-                android:textSize="15dp"/>
+                android:text="2 Bedrooms,1 Kitchen,seperate bathrooms"
+                android:textColor="#000"
+                android:gravity="right"
+                android:textSize="18sp"/>
             <TextView
+                android:id="@+id/amountTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Available for"
-                android:textSize="18dp"
+                android:text="15000 TK"
+                android:textSize="18sp"
                 android:textColor="#000000"/>
             <TextView
                 android:id="@+id/availableForTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Batchalor"
-                android:textSize="15dp"
+                android:textColor="#000"
+                android:textSize="15sp"
                 />
+            <TextView
+                android:id="@+id/monthTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="September- 2018"
+                android:textSize="15sp"
+                android:textColor="#000"/>
 
         </LinearLayout>
 
