@@ -37,8 +37,6 @@ public class DefaultRegisterActivity extends AppCompatActivity {
         rentarEmailEt = findViewById(R.id.rentarEmailEt);
         rentarPasswordEt = findViewById(R.id.rentarPasswordEt);
 
-        ownerRb = findViewById(R.id.ownerRg);
-        renterRb = findViewById(R.id.renterRg);
 
         auth = FirebaseAuth.getInstance();
 
