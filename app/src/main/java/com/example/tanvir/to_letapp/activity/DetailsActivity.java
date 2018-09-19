@@ -49,20 +49,28 @@ public class DetailsActivity extends AppCompatActivity {
                 String id = getIntent().getStringExtra("location");
                 FirebaseDatabase database;
                 DatabaseReference databaseReferenceOwner,databaseReferenceRenter;
+try {
 
-                String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-                database = FirebaseDatabase.getInstance();
-                databaseReferenceOwner = database.getReference().child("Owner").child("User").child(id).child("Request");
+    database = FirebaseDatabase.getInstance();
+    databaseReferenceOwner = database.getReference().child("Owner").child("User").child(id).child("Request");
 
-                //DataSnapshot dataSnapshot;
-                if(currentuser!=null){
-                    databaseReferenceOwner.push().setValue("Request success");
-                    Toast.makeText(DetailsActivity.this, "Request successful"+currentuser, Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    Toast.makeText(DetailsActivity.this, "Request unsuccessful", Toast.LENGTH_SHORT).show();
-                }
+    //DataSnapshot dataSnapshot;
+    if (currentuser != null) {
+        databaseReferenceOwner.push().setValue("Request success");
+        Toast.makeText(DetailsActivity.this, "Request successful" + currentuser, Toast.LENGTH_SHORT).show();
+    } else {
+        Toast.makeText(DetailsActivity.this, "Request unsuccessful", Toast.LENGTH_SHORT).show();
+    }
+}
+
+    catch(Exception e){
+       Intent intent=new Intent(DetailsActivity.this,DefaultLoginActivity.class);
+       startActivity(intent);
+
+    }
+
             //}
        // };
     }
