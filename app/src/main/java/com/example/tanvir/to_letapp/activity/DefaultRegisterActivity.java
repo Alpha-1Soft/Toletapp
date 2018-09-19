@@ -1,5 +1,6 @@
 package com.example.tanvir.to_letapp.activity;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -48,14 +49,15 @@ public class DefaultRegisterActivity extends AppCompatActivity {
         final String name = rentarNameEt.getText().toString();
         final String email = rentarEmailEt.getText().toString();
         final String password = rentarPasswordEt.getText().toString();
-
+        final int key = Integer.valueOf(getIntent().getStringExtra("Key"));
 
         auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     Toast.makeText(DefaultRegisterActivity.this, "Succ", Toast.LENGTH_SHORT).show();
-                    authSuccess(task.getResult().getUser(),name,email,password);
+                    seperateUser(key,task.getResult().getUser().getUid(),name,email,password);
+                    finish();
                 }
                 else{
                     Toast.makeText(DefaultRegisterActivity.this, "Unsucc"+" "+name+" "+email, Toast.LENGTH_SHORT).show();
@@ -64,34 +66,23 @@ public class DefaultRegisterActivity extends AppCompatActivity {
         });
     }
 
-    public void authSuccess(FirebaseUser user,String name,String email,String password){
-        int type = 0;
-        if(ownerRb.isChecked()){
-            type = 1;
-        }
-        else if(renterRb.isChecked()){
-            type = 2;
-        }
-        seperateUser(user.getUid(),name,email,password,type);
-    }
-
-    public void seperateUser(String uid,String name,String email,String password,int type){
+    public void seperateUser(int key,String uid,String name,String email,String password){
         database = FirebaseDatabase.getInstance();
         databaseReferenceForRenter = database.getReference().child("Rentar").child("User");
         databaseReferenceForOwner = database.getReference().child("Owner").child("User");
 
-        if (type == 2){
-            DatabaseReference firebase = databaseReferenceForRenter.child(uid);
+        if (key == 2){
+            DatabaseReference firebase = databaseReferenceForRenter.child(uid).child("Profile");
             DatabaseReference Username = firebase.child("Name");
-            DatabaseReference key = firebase.child("Key");
-            key.setValue(String.valueOf(type));
+            DatabaseReference Key = firebase.child("Key");
+            Key.setValue(String.valueOf(key));
             Username.setValue(name);
         }
         else{
-            DatabaseReference databaseReference = databaseReferenceForOwner.child(uid);
+            DatabaseReference databaseReference = databaseReferenceForOwner.child(uid).child("Profile");
             DatabaseReference username = databaseReference.child("Name");
             DatabaseReference key1 = databaseReference.child("Key");
-            key1.setValue(String.valueOf(type));
+            key1.setValue(String.valueOf(key));
             username.setValue(name);
         }
     }
