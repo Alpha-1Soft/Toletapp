@@ -34,17 +34,21 @@ public class FlatAdapter extends ArrayAdapter {
         FlatDetails item = flatDetails.get(position);
 
         //finding listview shape component
+        TextView flatConditionTv= view.findViewById(R.id.flatConditionTv);
+        TextView amountTv = view.findViewById(R.id.amountTv);
+        TextView rentDateTv = view.findViewById(R.id.rentDateTv);
         TextView locationTv = view.findViewById(R.id.locationTv);
-        TextView conditionTv = view.findViewById(R.id.flatConditionTv);
-        TextView availableForTv = view.findViewById(R.id.availableForTv);
-        //return super.getView(position, convertView, parent);
+        TextView rentConditionTv = view.findViewById(R.id.rentConditionTv);
+
 
 
 
         //setting listview shape component to arrryList
+        flatConditionTv.setText(item.getBedroom()+" Bedroom,"+item.getKitchen()+" Kitchen,"+item.getBathroom()+" Bathroom");
+        amountTv.setText(item.getTotalRent());
+        rentDateTv.setText(item.getRentDate());
         locationTv.setText(item.getFlatLocation());
-        conditionTv.setText(item.getFlatCondition());
-        availableForTv.setText(item.getAvailableFor());
+        rentConditionTv.setText(item.getCondition());
 
         return view;
     }
