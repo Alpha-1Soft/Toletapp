@@ -2,6 +2,7 @@ package com.example.tanvir.to_letapp.activity;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.example.tanvir.to_letapp.models.FlatDetails;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference databaseReference;
 
     ArrayList<FlatDetails> arrayList = new ArrayList<>();
+    ArrayList<String> ownerIdList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,41 +106,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void homeActivity(){
-
-        databaseReference.addValueEventListener(new com.google.firebase.database.ValueEventListener() {
+        //firebase = new Firebase("https://to-let-app-d0099.firebaseio.com/Owner/User/");
+        //String key = firebase.getKey();
+        //Toast.makeText(this, ""+key, Toast.LENGTH_SHORT).show();
+        databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(@NonNull com.google.firebase.database.DataSnapshot dataSnapshot) {
-                for (com.google.firebase.database.DataSnapshot d : dataSnapshot.getChildren()) {
-                    firebase = new Firebase("https://to-let-app-d0099.firebaseio.com/Owner/User/"+d.getKey()+"/Post");
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+               ownerIdList.add(dataSnapshot.getKey());
+                ownerPost();
+            }
 
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-                    final String id = d.getKey();
-                    //Toast.makeText(MainActivity.this, ""+id, Toast.LENGTH_SHORT).show();
+            }
 
-                    firebase.addValueEventListener(new com.firebase.client.ValueEventListener() {
-                        @Override
-                        public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
-                            for(com.firebase.client.DataSnapshot dd : dataSnapshot.getChildren()){
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
 
-                                String available = dd.child("Available for").getValue(String.class);
-                                String condition = dd.child("Condition").getValue(String.class);
-                                String location = dd.child("Location").getValue(String.class);
+            }
 
-                                Toast.makeText(MainActivity.this, ""+location+" "+condition+" "+available, Toast.LENGTH_SHORT).show();
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-                                FlatDetails flatDetails = new FlatDetails(id,location,condition,available);
-
-                                arrayList.add(flatDetails);
-                            }
-                            listView.setAdapter(flatAdapter);
-                        }
-
-                        @Override
-                        public void onCancelled(FirebaseError firebaseError) {
-
-                        }
-                    });
-                }
             }
 
             @Override
@@ -146,7 +137,42 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    public void ownerPost(){
+        arrayList.clear();
+        for(int i=0;i<ownerIdList.size();i++){
+            firebase = new Firebase("https://to-let-app-d0099.firebaseio.com/Owner/User/"+ownerIdList.get(i)+"/Post");
+            final int finalI = i;
+            firebase.addChildEventListener(new com.firebase.client.ChildEventListener() {
+                @Override
+                public void onChildAdded(com.firebase.client.DataSnapshot dataSnapshot, String s) {
+                    String address = dataSnapshot.child(dataSnapshot.getKey()).child("Available for").getValue(String.class);
+                    FlatDetails flatDetails = new FlatDetails(ownerIdList.get(finalI),"","","");
+                    Toast.makeText(MainActivity.this, ""+dataSnapshot.getKey(), Toast.LENGTH_SHORT).show();                    arrayList.add(flatDetails);
+                    listView.setAdapter(flatAdapter);
+                }
 
+                @Override
+                public void onChildChanged(com.firebase.client.DataSnapshot dataSnapshot, String s) {
+
+                }
+
+                @Override
+                public void onChildRemoved(com.firebase.client.DataSnapshot dataSnapshot) {
+
+                }
+
+                @Override
+                public void onChildMoved(com.firebase.client.DataSnapshot dataSnapshot, String s) {
+
+                }
+
+                @Override
+                public void onCancelled(FirebaseError firebaseError) {
+
+                }
+            });
+        }
+    }
     public void register(View view) {
         Intent intent = new Intent(this,DefaultRegisterActivity.class);
         startActivity(intent);
