@@ -3,6 +3,7 @@ package com.example.tanvir.to_letapp.fragments.renterFragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,9 +19,12 @@ import com.example.tanvir.to_letapp.adapters.FlatAdapter;
 import com.example.tanvir.to_letapp.models.FlatDetails;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -29,8 +33,10 @@ public class RenterHomeFragment extends Fragment {
     DatabaseReference databaseReference;
     ListView renterHomeListview;
     FlatAdapter flatAdapter;
+    private Firebase firebase,firebase2;
 
     ArrayList<FlatDetails> arrayList = new ArrayList<>();
+    ArrayList<String> ownerIdList = new ArrayList<>();
 
 
     public RenterHomeFragment() {
@@ -55,52 +61,13 @@ public class RenterHomeFragment extends Fragment {
 
         renterHomeListview = view.findViewById(R.id.renterHomelistView);
 
+        Firebase.setAndroidContext(getActivity());
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference().child("Owner").child("User");
 
         flatAdapter = new FlatAdapter(getActivity(), arrayList);
 
-        databaseReference.addValueEventListener(new com.google.firebase.database.ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull com.google.firebase.database.DataSnapshot dataSnapshot) {
-                for (com.google.firebase.database.DataSnapshot d : dataSnapshot.getChildren()) {
-                    Firebase firebase = new Firebase("https://to-let-app-d0099.firebaseio.com/Owner/User/" + d.getKey() + "/Post");
-
-                    arrayList.clear();
-                    final String id = d.getKey();
-                    //Toast.makeText(MainActivity.this, ""+id, Toast.LENGTH_SHORT).show();
-
-                    firebase.addValueEventListener(new com.firebase.client.ValueEventListener() {
-                        @Override
-                        public void onDataChange(com.firebase.client.DataSnapshot dataSnapshot) {
-                            for (com.firebase.client.DataSnapshot dd : dataSnapshot.getChildren()) {
-
-                                String available = dd.child("Available for").getValue(String.class);
-                                String condition = dd.child("Condition").getValue(String.class);
-                                String location = dd.child("Location").getValue(String.class);
-
-                                //Toast.makeText(MainActivity.this, ""+location+" "+condition+" "+available, Toast.LENGTH_SHORT).show();
-
-                                FlatDetails flatDetails = new FlatDetails(id, location, condition, available);
-
-                                arrayList.add(flatDetails);
-                            }
-                            renterHomeListview.setAdapter(flatAdapter);
-                        }
-
-                        @Override
-                        public void onCancelled(FirebaseError firebaseError) {
-
-                        }
-                    });
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+        ownerId();
 
         //sending data to details activity
         renterHomeListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -108,14 +75,69 @@ public class RenterHomeFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(getActivity(),DetailsActivity.class);
                 intent.putExtra("location",arrayList.get(i).getOwnerId());
-                intent.putExtra("Condition",arrayList.get(i).getFlatCondition());
-                intent.putExtra("Available",arrayList.get(i).getAvailableFor());
+                //intent.putExtra("Condition",arrayList.get(i).getFlatCondition());
+                //intent.putExtra("Available",arrayList.get(i).getAvailableFor());
                 startActivity(intent);
 
             }
         });
 
         return view;
+    }
+
+    public void ownerId(){
+
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot d: dataSnapshot.getChildren()){
+                    ownerIdList.add(d.getKey());
+                }
+                ownerPost();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+    public void ownerPost(){
+        arrayList.clear();
+        for(int i=0;i<ownerIdList.size();i++){
+            firebase = new Firebase("https://to-let-app-d0099.firebaseio.com/Owner/User/"+ownerIdList.get(i)+"/Post");
+            final int finalI = i;
+            firebase.addChildEventListener(new com.firebase.client.ChildEventListener() {
+                @Override
+                public void onChildAdded(com.firebase.client.DataSnapshot dataSnapshot, String s) {
+                    String address = dataSnapshot.child(dataSnapshot.getKey()).child("Available for").getValue(String.class);
+                    //FlatDetails flatDetails = new FlatDetails(ownerIdList.get(finalI),"","","");
+                    //Toast.makeText(MainActivity.this, ""+dataSnapshot.getKey(), Toast.LENGTH_SHORT).show();                    arrayList.add(flatDetails);
+                    //arrayList.add(flatDetails);
+                    renterHomeListview.setAdapter(flatAdapter);
+                }
+
+                @Override
+                public void onChildChanged(com.firebase.client.DataSnapshot dataSnapshot, String s) {
+
+                }
+
+                @Override
+                public void onChildRemoved(com.firebase.client.DataSnapshot dataSnapshot) {
+
+                }
+
+                @Override
+                public void onChildMoved(com.firebase.client.DataSnapshot dataSnapshot, String s) {
+
+                }
+
+                @Override
+                public void onCancelled(FirebaseError firebaseError) {
+
+                }
+            });
+        }
     }
 }
 
