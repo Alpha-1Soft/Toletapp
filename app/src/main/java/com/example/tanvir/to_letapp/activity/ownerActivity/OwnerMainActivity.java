@@ -1,8 +1,13 @@
 package com.example.tanvir.to_letapp.activity.ownerActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -10,22 +15,24 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.example.tanvir.to_letapp.R;
 import com.example.tanvir.to_letapp.activity.MainActivity;
 import com.example.tanvir.to_letapp.adapters.OwnerPagerAdapter;
-import com.example.tanvir.to_letapp.adapters.RenterPagerAdapter;
-import com.example.tanvir.to_letapp.fragments.ownerFragmets.OwnerHomeFragment;
 import com.example.tanvir.to_letapp.fragments.ownerFragmets.OwnerPostFragment;
 import com.example.tanvir.to_letapp.fragments.ownerFragmets.OwnerProfileFragment;
 import com.example.tanvir.to_letapp.fragments.ownerFragmets.OwnerRequestFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class OwnerMainActivity extends AppCompatActivity implements
-        OwnerHomeFragment.OnFragmentInteractionListener,
-        OwnerPostFragment.OnFragmentInteractionListener,
-        OwnerRequestFragment.OnFragmentInteractionListener,
-        OwnerProfileFragment.OnFragmentInteractionListener{
+public class OwnerMainActivity extends AppCompatActivity {
+
+    BottomNavigationView bottomNavigationView;
+    FrameLayout frameLayout;
+    private OwnerPostFragment ownerPostFragment;
+    private OwnerRequestFragment ownerRequestFragment;
+    private OwnerProfileFragment ownerProfileFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,36 +43,39 @@ public class OwnerMainActivity extends AppCompatActivity implements
         Toolbar toolbar = findViewById(R.id.Ownertoolbar);
         setSupportActionBar(toolbar);
 
-        TabLayout tabLayout = (TabLayout)findViewById(R.id.OwnerTablayoutId);
+        bottomNavigationView = findViewById(R.id.ownerNavigationView);
+        frameLayout = findViewById(R.id.frame_container);
 
-        tabLayout.addTab(tabLayout.newTab().setText("Home"));
-        tabLayout.addTab(tabLayout.newTab().setText("Post"));
-        tabLayout.addTab(tabLayout.newTab().setText("Request"));
-        tabLayout.addTab(tabLayout.newTab().setText("Profile"));
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        ownerPostFragment = new OwnerPostFragment();
+        ownerRequestFragment = new OwnerRequestFragment();
+        ownerProfileFragment = new OwnerProfileFragment();
 
-        final ViewPager viewPager = findViewById(R.id.OwnerViewpagerId);
-        PagerAdapter pagerAdapter = new OwnerPagerAdapter(getSupportFragmentManager(),tabLayout.getTabCount());
-        viewPager.setAdapter(pagerAdapter);
-        viewPager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        setFragment(ownerPostFragment);
 
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.owner_post_nav:
+                        // bottomNavigationView.setItemBackgroundResource(R.color.colorAccent);
+                        setFragment(ownerPostFragment);
+                        break;
+                    case R.id.owner_request_nav:
+                        // bottomNavigationView.setItemBackgroundResource(R.color.colorAccent);
+                        setFragment(ownerRequestFragment);
+                        break;
+                    case R.id.owner_profile_nav:
+                        //bottomNavigationView.setItemBackgroundResource(R.color.colorAccent);
+                        setFragment(ownerProfileFragment);
+                        break;
+                    default:
+                        break;
+                }
+                return true;
             }
         });
     }
+
     //connecting menu with toolbar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -90,6 +100,7 @@ public class OwnerMainActivity extends AppCompatActivity implements
         return true;
     }
 
+    //sign out from firebase
     private void OwnerSignOut() {
         FirebaseAuth userSignOut = FirebaseAuth.getInstance();
         userSignOut.signOut();
@@ -99,4 +110,10 @@ public class OwnerMainActivity extends AppCompatActivity implements
         startActivity(intent);
     }
 
+    //setting fragment with bottom navigation
+    private void setFragment(Fragment fragment) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frame_container, fragment);
+        fragmentTransaction.commit();
+    }
 }
