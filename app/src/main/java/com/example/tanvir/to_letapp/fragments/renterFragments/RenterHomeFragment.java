@@ -66,7 +66,7 @@ public class RenterHomeFragment extends Fragment {
                 for (com.google.firebase.database.DataSnapshot d : dataSnapshot.getChildren()) {
                     Firebase firebase = new Firebase("https://to-let-app-d0099.firebaseio.com/Owner/User/" + d.getKey() + "/Post");
 
-
+                    arrayList.clear();
                     final String id = d.getKey();
                     //Toast.makeText(MainActivity.this, ""+id, Toast.LENGTH_SHORT).show();
 
