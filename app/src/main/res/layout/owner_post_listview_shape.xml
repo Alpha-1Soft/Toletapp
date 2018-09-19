@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/ownerAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Khilkhet,noianagar"
+            android:textSize="18dp"
+            android:layout_alignParentLeft="true" />
+
+        <TextView
+            android:id="@+id/homeDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2 room,1 bathroom,1kitchen"
+            android:textSize="15dp"
+            android:layout_alignLeft="@+id/renterName" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true">
+
+
+            <Button
+                android:id="@+id/deleteBtn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginRight="2dp"
+                android:layout_height="wrap_content"
+                android:background="#FFFF0008"
+                android:text="Delete"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/updateBtn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="2dp"
+                android:layout_height="wrap_content"
+                android:background="#FF01A701"
+                android:text="Update"
+                android:textAllCaps="false" />
+            <Button
+                android:id="@+id/statusBtn"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="2dp"
+                android:layout_height="wrap_content"
+                android:background="#FF01A701"
+                android:text="Status"
+                android:textAllCaps="false" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

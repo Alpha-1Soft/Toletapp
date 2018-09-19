@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.ownerActivity.PostActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Address"
+                android:textColor="#000"
+                android:textSize="20sp"/>
+            <EditText
+                android:id="@+id/postAddressEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Your home Address"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="Total Rent"
+                android:textColor="#000"/>
+            <EditText
+                android:id="@+id/totalRentEt"
+                android:hint="Your home Rent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bedroom"
+                android:textSize="20sp"
+                android:textColor="#000"/>
+            <EditText
+                android:id="@+id/bedroomEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Your home bedroom number"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kitchen"
+                android:textSize="20sp"
+                android:textColor="#000"/>
+            <EditText
+                android:id="@+id/kitchenroomEt"
+                android:hint="Your home Kitchenroom Number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bathroom"
+                android:textSize="20sp"
+                android:textColor="#000"/>
+            <EditText
+                android:id="@+id/bathroomEt"
+                android:hint="Your home bathroom Number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rent Condition"
+                android:textSize="20sp"
+                android:textColor="#000"/>
+            <EditText
+                android:id="@+id/rentconditionEt"
+                android:hint="Your home rent condition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rent date"
+                android:textSize="20sp"
+                android:textColor="#000"/>
+            <EditText
+                android:id="@+id/rentDateEt"
+                android:hint="Your home rent monnth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+            <Button
+                android:background="#15d1c7"
+                android:id="@+id/postBt"
+                android:text="Post"
+                android:textSize="20dp"
+                android:textColor="#000"
+                android:textAllCaps="false"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"/>
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>
