@@ -59,9 +59,6 @@ public class DetailsActivity extends AppCompatActivity {
                 if(currentuser!=null){
                     databaseReferenceOwner.push().setValue("Request success");
                     Toast.makeText(DetailsActivity.this, "Request successful"+currentuser, Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(this,MainActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
                 }
                 else{
                     Toast.makeText(DetailsActivity.this, "Request unsuccessful", Toast.LENGTH_SHORT).show();
