@@ -1,36 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/main"
     tools:context=".activity.ownerActivity.OwnerMainActivity"
-    android:orientation="vertical">
+   >
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/Ownertoolbar"
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbarLayout"
         android:layout_width="match_parent"
-        app:titleTextColor="#ffffff"
-        android:layout_height="50dp"
-        android:background="@color/colorPrimary">
+        android:layout_height="wrap_content"
+        >
 
-    </android.support.v7.widget.Toolbar>
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/Ownertoolbar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/colorPrimary"
+            app:titleTextColor="#ffffff">
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/OwnerTablayoutId"
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/ownerNavigationView"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:background="#5348E8"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:tabGravity="fill"
-        app:tabIndicatorColor="#ffffff"
-        app:tabIndicatorHeight="3dp"
-        />
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        app:itemTextColor="@color/colorAccent"
+        android:background="@color/colorPrimary"
+        app:menu="@menu/owner_navigation_items">
 
-    <android.support.v4.view.ViewPager
+    </android.support.design.widget.BottomNavigationView>
+
+
+    <FrameLayout
+        android:id="@+id/frame_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/OwnerViewpagerId">
-    </android.support.v4.view.ViewPager>
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_above="@id/ownerNavigationView"
+        android:layout_marginTop="50dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-</LinearLayout>
+</RelativeLayout>
