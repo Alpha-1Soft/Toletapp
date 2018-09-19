@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/ownerDialogBt"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#FF008F02"
+        android:text="Owner"
+        android:textSize="20dp"
+        android:layout_marginTop="5dp"/>
+    <Button
+        android:id="@+id/renterDialogBt"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#FF008F02"
+        android:text="Renter"
+        android:textSize="20dp"
+        android:layout_marginTop="5dp"/>
+</LinearLayout>
