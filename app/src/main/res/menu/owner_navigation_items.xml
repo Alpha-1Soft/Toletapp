@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/owner_post_nav"
+        android:icon="@android:drawable/ic_menu_edit"
+        android:title="@string/owner_nav_post" />
+    <item
+        android:id="@+id/owner_request_nav"
+        android:icon="@android:drawable/ic_dialog_email"
+        android:title="@string/owner_nav_request" />
+    <item
+        android:id="@+id/owner_profile_nav"
+        android:icon="@android:drawable/ic_menu_my_calendar"
+        android:title="@string/owner_nav_profile" />
+</menu>
