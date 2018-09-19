@@ -1,100 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:apps="http://schemas.android.com/apk/res-auto"
     android:padding="10dp"
     android:orientation="vertical"
     tools:context=".fragments.ownerFragmets.OwnerPostFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Address"
-        android:textColor="#000"
-        android:textSize="20sp"/>
-    <EditText
-        android:id="@+id/ownerPostAddressEt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Your home Address"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:text="Total Rent"
-        android:textColor="#000"/>
-    <EditText
-        android:id="@+id/totalRentEt"
-        android:hint="Your home Rent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Bedroom"
-        android:textSize="20sp"
-        android:textColor="#000"/>
-    <EditText
-        android:id="@+id/bedroomEt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Your home bedroom number"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Kitchen"
-        android:textSize="20sp"
-        android:textColor="#000"/>
-    <EditText
-        android:id="@+id/kitchenroomEt"
-        android:hint="Your home Kitchenroom Number"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Bathroom"
-        android:textSize="20sp"
-        android:textColor="#000"/>
-    <EditText
-        android:id="@+id/bathroomEt"
-        android:hint="Your home bathroom Number"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Rent Condition"
-        android:textSize="20sp"
-        android:textColor="#000"/>
-    <EditText
-        android:id="@+id/rentconditionEt"
-        android:hint="Your home rent condition"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Rent Month"
-        android:textSize="20sp"
-        android:textColor="#000"/>
-    <EditText
-        android:id="@+id/rentmonthEt"
-        android:hint="Your home rent monnth"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
-    <Button
-        android:background="#15d1c7"
-        android:id="@+id/ownerPostBt"
-        android:text="Post"
-        android:textSize="20dp"
-        android:textColor="#000"
-        android:textAllCaps="false"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"/>
 
-</LinearLayout>
+    <ListView
+        android:id="@+id/ownerPostLv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </ListView>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        apps:layout_anchorGravity="bottom|right|end"
+        apps:srcCompat="@android:drawable/ic_input_add"
+        />
+
+</android.support.design.widget.CoordinatorLayout>
