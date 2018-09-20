@@ -6,46 +6,54 @@
     android:layout_height="match_parent"
     android:padding="10dp"
     android:layout_gravity="center"
-    android:gravity="center"
+    android:gravity="start"
     tools:context=".activity.DefaultLoginActivity"
     android:orientation="vertical">
 
-    <TextView
+    <ImageView
+        android:layout_width="115dp"
+        android:layout_height="125dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ownerpng"/>
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Email"
-        android:textSize="20dp"
-        android:textColor="#000000"
-        />
+        >
 
-    <EditText
-        android:id="@+id/rentalEmailOnLoginEt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="email..."
-        />
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/renterEmailOnLoginEt"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Name"
+            android:inputType="text"
+            android:layout_marginTop="5dp"
+            android:padding="5dp"
+            />
+    </android.support.design.widget.TextInputLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Password"
-        android:textSize="20dp"
-        android:textColor="#000000"
-        />
 
-    <EditText
-        android:id="@+id/rentalPassOnLoginEt"
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="password..."
-        />
+        >
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/renterPassOnLoginEt"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Password"
+            android:inputType="text"
+            android:layout_marginTop="10dp"
+            android:padding="5dp"
+            />
+    </android.support.design.widget.TextInputLayout>
+
     <Button
        android:onClick="login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Login"
         android:background="#008f02"
+        android:layout_marginTop="10dp"
         />
-
-
 </LinearLayout>
