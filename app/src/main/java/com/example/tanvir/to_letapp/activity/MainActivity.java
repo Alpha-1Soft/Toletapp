@@ -53,8 +53,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Firebase.setAndroidContext(this);
 
-        ownerId();
+        Intent intent = new Intent();
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
+        ownerId();
 
         locationTv = findViewById(R.id.locationTv);
         //availavbleForTv = findViewById(R.id.availableForTv);
