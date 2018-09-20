@@ -42,12 +42,13 @@ public class SplashActivity extends AppCompatActivity {
                                   // finish();
                                    Intent intent = new Intent(SplashActivity.this, OwnerMainActivity.class);
                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                   finish();
                                    startActivity(intent);
                                } else {//else renter activity will be start
                                    //finish();
                                    Intent intent = new Intent(SplashActivity.this, RenterMainActivity.class);
                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                   //finish();
+                                   finish();
                                    startActivity(intent);
                                }
                            }
@@ -61,6 +62,7 @@ public class SplashActivity extends AppCompatActivity {
                    } catch (Exception e) {
                        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                       finish();
                        startActivity(intent);
                    }
                } catch (InterruptedException e) {
