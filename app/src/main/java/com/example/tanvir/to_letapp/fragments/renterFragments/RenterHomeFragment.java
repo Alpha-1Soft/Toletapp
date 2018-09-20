@@ -110,10 +110,17 @@ public class RenterHomeFragment extends Fragment {
             firebase.addChildEventListener(new com.firebase.client.ChildEventListener() {
                 @Override
                 public void onChildAdded(com.firebase.client.DataSnapshot dataSnapshot, String s) {
-                    String address = dataSnapshot.child(dataSnapshot.getKey()).child("Available for").getValue(String.class);
-                    //FlatDetails flatDetails = new FlatDetails(ownerIdList.get(finalI),"","","");
-                    //Toast.makeText(MainActivity.this, ""+dataSnapshot.getKey(), Toast.LENGTH_SHORT).show();                    arrayList.add(flatDetails);
-                    //arrayList.add(flatDetails);
+                    String address = dataSnapshot.child(dataSnapshot.getKey()).child("Address").getValue(String.class);
+                    String bedroom = dataSnapshot.child(dataSnapshot.getKey()).child("Bedroom quantity").getValue(String.class);
+                    String kitchen = dataSnapshot.child(dataSnapshot.getKey()).child("Kitchen quantity").getValue(String.class);
+                    String bathroom = dataSnapshot.child(dataSnapshot.getKey()).child("Batchroom quantity").getValue(String.class);
+                    String rentDate = dataSnapshot.child(dataSnapshot.getKey()).child("Rent Date").getValue(String.class);
+                    String condition = dataSnapshot.child(dataSnapshot.getKey()).child("Rent condition").getValue(String.class);
+                    String totalRent = dataSnapshot.child(dataSnapshot.getKey()).child("Total rent").getValue(String.class);
+                    FlatDetails flatDetails = new FlatDetails(ownerIdList.get(finalI), address, bedroom, kitchen,bathroom,rentDate,condition,totalRent);
+
+                    //Toast.makeText(MainActivity.this, "" + dataSnapshot.getKey(), Toast.LENGTH_SHORT).show();
+                    arrayList.add(flatDetails);
                     renterHomeListview.setAdapter(flatAdapter);
                 }
 
