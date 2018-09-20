@@ -24,7 +24,7 @@
             android:id="@+id/renterEmailOnLoginEt"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:hint="Name"
+            android:hint="Email"
             android:inputType="text"
             android:layout_marginTop="5dp"
             android:padding="5dp"
@@ -55,5 +55,15 @@
         android:text="Login"
         android:background="#008f02"
         android:layout_marginTop="10dp"
+        />
+
+    <Button
+        android:onClick="NewAccount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create a new Account"
+        android:textSize="20dp"
+        android:layout_marginTop="20dp"
+        android:background="#036818"
         />
 </LinearLayout>
