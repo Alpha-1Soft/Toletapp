@@ -12,17 +12,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light.NoActionBar">
         <activity android:name=".activity.MainActivity">
+
+        </activity>
+        <activity android:name=".activity.DetailsActivity" />
+        <activity android:name=".activity.DefaultRegisterActivity" />
+        <activity android:name=".activity.DefaultLoginActivity" />
+        <activity android:name=".activity.renterActivity.RenterMainActivity" />
+        <activity android:name=".activity.ownerActivity.OwnerMainActivity" />
+        <activity android:name=".activity.ownerActivity.PostActivity" />
+        <activity android:name=".activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.DetailsActivity" />
-        <activity android:name=".activity.DefaultRegisterActivity" />
-        <activity android:name=".activity.DefaultLoginActivity" />
-        <activity android:name=".activity.renterActivity.RenterMainActivity" />
-        <activity android:name=".activity.ownerActivity.OwnerMainActivity"></activity>
     </application>
 
 </manifest>
