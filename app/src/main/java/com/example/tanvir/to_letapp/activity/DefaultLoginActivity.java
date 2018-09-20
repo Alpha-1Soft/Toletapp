@@ -29,8 +29,8 @@ public class DefaultLoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_default_login);
 
-        rentalEmailOnLoginEt = findViewById(R.id.rentalEmailOnLoginEt);
-        rentalPassOnLoginEt = findViewById(R.id.rentalPassOnLoginEt);
+        rentalEmailOnLoginEt = findViewById(R.id.renterEmailOnLoginEt);
+        rentalPassOnLoginEt = findViewById(R.id.renterPassOnLoginEt);
         firebaseAuth = FirebaseAuth.getInstance();
 
     }
@@ -73,5 +73,10 @@ public class DefaultLoginActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    public void NewAccount(View view) {
+        Intent intent =new Intent(DefaultLoginActivity.this,DefaultRegisterActivity.class);
+        startActivity(intent);
     }
 }
