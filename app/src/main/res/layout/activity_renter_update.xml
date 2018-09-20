@@ -71,7 +71,7 @@
                         android:textColor="#000"/>
 
                     <EditText
-                        android:id="@+id/renterNameTv"
+                        android:id="@+id/renterName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -95,7 +95,7 @@
                     android:textColor="#000"
                     android:textSize="18sp"/>
                 <EditText
-                    android:id="@+id/renterEmailTv"
+                    android:id="@+id/renterEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="omar.faruq1998V@gmail.com"
@@ -145,7 +145,7 @@
                     android:textSize="18sp"
                     android:textColor="#000"/>
                 <EditText
-                    android:id="@+id/renterProfessionTv"
+                    android:id="@+id/renterProfession"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Student"
@@ -153,14 +153,25 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Marital Satus"
+                    android:text="Monthly Income"
                     android:textSize="18sp"
                     android:textColor="#000"/>
                 <EditText
+                    android:id="@+id/renterIncome"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="20000 To 25000"
+                    android:textSize="15dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Marital Satus"
+                    android:textSize="18sp"
+                    android:textColor="#000"/>
+                <Spinner
                     android:id="@+id/renterMaritalsatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Unmarried"
                     android:textSize="15dp"
                     />
                 <TextView
