@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.tanvir.to_letapp.R;
 import com.example.tanvir.to_letapp.models.FlatDetails;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -39,6 +40,7 @@ public class FlatAdapter extends ArrayAdapter {
         TextView rentDateTv = view.findViewById(R.id.rentDateTv);
         TextView locationTv = view.findViewById(R.id.locationTv);
         TextView rentConditionTv = view.findViewById(R.id.rentConditionTv);
+        ImageView imageView = view.findViewById(R.id.locationImage);
 
 
 
@@ -49,6 +51,8 @@ public class FlatAdapter extends ArrayAdapter {
         rentDateTv.setText(item.getRentDate());
         locationTv.setText(item.getFlatLocation());
         rentConditionTv.setText(item.getCondition());
+
+        Picasso.get().load(item.getImage()).into(imageView);
 
         return view;
     }
