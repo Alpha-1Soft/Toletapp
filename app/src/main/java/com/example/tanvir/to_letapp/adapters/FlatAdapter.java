@@ -51,8 +51,9 @@ public class FlatAdapter extends ArrayAdapter {
         rentDateTv.setText(item.getRentDate());
         locationTv.setText(item.getFlatLocation());
         rentConditionTv.setText(item.getCondition());
-
-        Picasso.get().load(item.getImage()).into(imageView);
+        if (item.getImage()!=null){
+            Picasso.get().load(item.getImage()).into(imageView);
+        }
 
         return view;
     }
