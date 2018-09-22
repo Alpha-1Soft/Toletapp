@@ -13,88 +13,223 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="5dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="2dp"
+                    android:layout_weight="1"
+                    android:background="#cecdcd"
+                    android:onClick="uploadImage1"
+                    android:src="@drawable/addimage2"/>
+            </LinearLayout>
+               <LinearLayout
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_gravity="center"
+                   >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Address"
-                android:textColor="#000"
-                android:textSize="20sp"/>
-            <EditText
-                android:id="@+id/postAddressEt"
+                   <ImageView
+                       android:id="@+id/imageView2"
+                       android:layout_width="110dp"
+                       android:layout_height="110dp"
+                       android:layout_gravity="center"
+                       android:background="#cecdcd"
+                       android:onClick="uploadImage2"
+                       android:src="@drawable/addimage2"
+                       android:layout_margin="3dp"
+                       />
+
+
+                   <ImageView
+                       android:id="@+id/imageView3"
+                       android:layout_width="110dp"
+                       android:layout_height="110dp"
+                       android:layout_gravity="center"
+                       android:background="#cecdcd"
+                       android:onClick="uploadImage3"
+                       android:src="@drawable/addimage2"
+                       android:layout_margin="3dp"/>
+
+                   <ImageView
+                       android:id="@+id/imageView4"
+                       android:layout_width="110dp"
+                       android:layout_height="110dp"
+                       android:layout_gravity="center"
+                       android:background="#cecdcd"
+                       android:onClick="uploadImage4"
+                       android:src="@drawable/addimage2"
+                       android:layout_margin="3dp"/>
+
+               </LinearLayout>
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Your home Address"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:text="Total Rent"
-                android:textColor="#000"/>
-            <EditText
-                android:id="@+id/totalRentEt"
-                android:hint="Your home Rent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Bedroom"
-                android:textSize="20sp"
-                android:textColor="#000"/>
-            <EditText
-                android:id="@+id/bedroomEt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Your home bedroom number"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Kitchen"
-                android:textSize="20sp"
-                android:textColor="#000"/>
-            <EditText
-                android:id="@+id/kitchenroomEt"
-                android:hint="Your home Kitchenroom Number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Bathroom"
-                android:textSize="20sp"
-                android:textColor="#000"/>
-            <EditText
-                android:id="@+id/bathroomEt"
-                android:hint="Your home bathroom Number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Rent Condition"
-                android:textSize="20sp"
-                android:textColor="#000"/>
-            <EditText
-                android:id="@+id/rentconditionEt"
-                android:hint="Your home rent condition"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Rent date"
-                android:textSize="20sp"
-                android:textColor="#000"/>
-            <EditText
-                android:id="@+id/rentDateEt"
-                android:hint="Your home rent monnth"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_marginTop="10dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Rent type"
+                        android:textSize="20sp"
+                        android:textColor="#000"/>
+                    <Spinner
+                        android:id="@+id/rentTypeSp"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp">
+
+                    </Spinner>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Rent for"
+                        android:textSize="20sp"
+                        android:textColor="#000"/>
+                    <Spinner
+                        android:id="@+id/rentForSp"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp">
+
+                    </Spinner>
+                </LinearLayout>
+            </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rent date"
+                    android:textSize="20sp"
+                    android:textColor="#000"/>
+
+                <Button
+                    android:onClick="selectDate"
+                    android:layout_width="118dp"
+                    android:layout_height="wrap_content"
+                    android:text="Select date"
+                    android:textAllCaps="false" />
+
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                />
+                >
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/locationEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="Location"
+                    android:inputType="text"
+                    android:layout_marginTop="10dp"
+                    android:padding="8dp"
+                    />
+            </android.support.design.widget.TextInputLayout>
+
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/bedroomEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:hint="Bedroom"
+                    android:inputType="text"
+                    android:padding="8dp"
+                    android:gravity="left|start"/>
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/bathroomEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:hint="Bathroom"
+                    android:inputType="text"
+                    android:padding="8dp"
+                    android:gravity="left|start"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/kitchenEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:hint="Kitchen"
+                    android:inputType="text"
+                    android:padding="8dp"
+                    android:gravity="left|start"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/rentEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:hint="Rent amount"
+                    android:inputType="text"
+                    android:padding="8dp"
+                    android:gravity="left|start"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/posDescriptionEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="126dp"
+                    android:layout_marginTop="10dp"
+                    android:hint="Description"
+                    android:inputType="text"
+                    android:padding="8dp"
+                    android:gravity="left|start"/>
+            </android.support.design.widget.TextInputLayout>
+
             <Button
-                android:background="#15d1c7"
+                android:background="#008f02"
                 android:id="@+id/postBt"
                 android:text="Post"
                 android:textSize="20dp"
