@@ -16,8 +16,7 @@ public class FlatDetails {
         return image;
     }
 
-    public FlatDetails(String ownerId, String flatLocation, String bedroom, String kitchen, String bathroom,
-                       String rentDate, String condition, String totalRent,String image) {
+    public FlatDetails(String ownerId, String flatLocation, String bedroom, String kitchen, String bathroom, String rentDate, String condition, String totalRent,String image) {
 
         this.ownerId = ownerId;
         this.flatLocation = flatLocation;
@@ -30,8 +29,15 @@ public class FlatDetails {
         this.image = image;
     }
 
-    public FlatDetails(String image) {
-        this.image = image;
+    public FlatDetails(String finalI, String address, String bedroom, String kitchen, String bathroom, String rentDate, String condition, String totalRent) {
+        this.ownerId = ownerId;
+        this.flatLocation = flatLocation;
+        this.bedroom = bedroom;
+        this.kitchen = kitchen;
+        this.bathroom = bathroom;
+        this.rentDate = rentDate;
+        this.condition = condition;
+        this.totalRent=totalRent;
     }
 
     public String getTotalRent() {
