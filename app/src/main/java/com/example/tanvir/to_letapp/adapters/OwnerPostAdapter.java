@@ -42,10 +42,9 @@ public class OwnerPostAdapter extends ArrayAdapter {
             view= LayoutInflater.from(context).inflate(R.layout.owner_post_listview_shape,parent,false);//for creating view
         }
 
-        OwnerPost item = ownerPosts.get(position);
+        final OwnerPost item = ownerPosts.get(position);
 
         //current post reference
-        databaseReference = database.getReference().child("Owner").child("User").child(item.getUserId()).child("Post").child(item.getPostId());
         deletePostBt = view.findViewById(R.id.deleteBtn);
         updatePostBt = view.findViewById(R.id.updateBtn);
         postStatusBt = view.findViewById(R.id.postBt);
@@ -56,6 +55,8 @@ public class OwnerPostAdapter extends ArrayAdapter {
         deletePostBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                databaseReference = database.getReference().child("Owner").child("User").child(item.getUserId()).child("Post").child(item.getPostId());
+
                 final AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());//alert dialog for confirm delete action from user
                 dialog.setTitle("Attention!");
                 dialog.setMessage("Are you sure to delete this post ?");
