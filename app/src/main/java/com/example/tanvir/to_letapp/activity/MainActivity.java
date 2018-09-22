@@ -1,6 +1,7 @@
 package com.example.tanvir.to_letapp.activity;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<FlatDetails> arrayList = new ArrayList<>();
     ArrayList<String> ownerIdList = new ArrayList<>();
-    ArrayList<String> imageList = new ArrayList<>();
+    String image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,14 +142,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void ownerPost() {
-        imageList.clear();
-        ArrayList<String> arrayListim = new ArrayList<>();
+
+        ProgressDialog pd = new ProgressDialog(this);
+        pd.setMessage("loading");
+        pd.show();
+
         for (int i = 0; i < ownerIdList.size(); i++) {
             firebase = new Firebase("https://to-let-app-d0099.firebaseio.com/Owner/User/" + ownerIdList.get(i) + "/Post");
             databaseReference2 = database.getReference().child("Owner").child("User").child(ownerIdList.get(i)).child("Post");
             final int finalI = i;
             arrayList.clear();
 
+            //this method is for retriving data from user
             databaseReference2.addChildEventListener(new ChildEventListener() {
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
@@ -164,18 +169,15 @@ public class MainActivity extends AppCompatActivity {
                     String condition = dataSnapshot.child("Rent condition").getValue(String.class);
                     String totalRent = dataSnapshot.child("Total rent").getValue(String.class);
 
-                    Toast.makeText(MainActivity.this, ""+dataSnapshot.getValue(), Toast.LENGTH_SHORT).show();
-                    if(dataSnapshot.getValue().equals("Images")){
-                        images(databaseReference);
-                        flatDetails= new FlatDetails(ownerIdList.get(finalI), address, bedroom,
-                                kitchen,bathroom,rentDate,condition,totalRent,imageList.get(0));
+                    if(dataSnapshot.hasChild("Images")){
+                        images(databaseReference.child("Images"),finalI, address, bedroom,
+                                kitchen,bathroom,rentDate,condition,totalRent);
                     }
                     else {
-                        flatDetails= new FlatDetails(ownerIdList.get(finalI), address, bedroom,
-                                kitchen,bathroom,rentDate,condition,totalRent,"https://vignette.wikia.nocookie.net/ninjagaiden/images/c/c5/Empty_image_icon.png/revision/latest?cb=20150517044050");
+                        flatDetails= new FlatDetails(ownerIdList.get(finalI), address, bedroom, kitchen,bathroom,rentDate,condition,totalRent);
+                        arrayList.add(flatDetails);
+                        listView.setAdapter(flatAdapter);
                     }
-                    arrayList.add(flatDetails);
-                    listView.setAdapter(flatAdapter);
                 }
 
                 @Override
@@ -199,17 +201,35 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+        pd.dismiss();
     }
 
-    private void images(DatabaseReference databaseReference) {
-        databaseReference.child("Images").addListenerForSingleValueEvent(new ValueEventListener() {
+    //this method is for retriving
+    private void images(DatabaseReference databaseReference, final int finalI, final String address, final String bedroom,
+                        final String kitchen, final String bathroom, final String rentDate, final String condition, final String totalRent) {
+        databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Toast.makeText(MainActivity.this, ""+dataSnapshot.getValue(), Toast.LENGTH_SHORT).show();
-               imageList.add(dataSnapshot.getValue().toString());
-                //flatDetails= new FlatDetails(ownerIdList.get(i), address, bedroom, kitchen,bathroom,rentDate,condition,totalRent);
-               // arrayList.add(flatDetails);
-                //listView.setAdapter(flatAdapter);
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Toast.makeText(MainActivity.this, ""+dataSnapshot.getValue(String.class), Toast.LENGTH_SHORT).show();
+                image = dataSnapshot.getValue(String.class);
+                FlatDetails flatDetails= new FlatDetails(ownerIdList.get(finalI), address, bedroom, kitchen,bathroom,rentDate,condition,totalRent,image);
+                arrayList.add(flatDetails);
+                listView.setAdapter(flatAdapter);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
             }
 
             @Override
