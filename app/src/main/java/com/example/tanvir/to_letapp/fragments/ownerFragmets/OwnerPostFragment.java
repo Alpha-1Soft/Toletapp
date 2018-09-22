@@ -87,7 +87,7 @@ public class OwnerPostFragment extends Fragment {
                     String bedroom =  d.child("Bedroom quantity").getValue(String.class);
                     String kitchen =  d.child("Kitchen quantity").getValue(String.class);
 
-                    //Toast.makeText(MainActivity.this, ""+location+" "+condition+" "+available, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), ""+postId, Toast.LENGTH_SHORT).show();
 
                     OwnerPost ownerPost = new OwnerPost(userID,postId,address,bathroom,bedroom,kitchen);
 
@@ -114,32 +114,6 @@ public class OwnerPostFragment extends Fragment {
         });
         return view;
     }
-
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        MenuInflater inflater = getActivity().getMenuInflater();
-        inflater.inflate(R.menu.owner_post_menu, menu);
-    }
-
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.ownerPostStatus:
-                //
-                break;
-            case R.id.ownerPostEdit:
-                //
-                break;
-            case  R.id.ownerPostDelete:
-                //
-                break;
-                default:
-                    break;
-        }
-        return true;
-    }
-
     //Owner post delete functionality
 
     public void deleteOwnerPost(){
