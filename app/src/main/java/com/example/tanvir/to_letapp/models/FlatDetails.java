@@ -9,11 +9,15 @@ public class FlatDetails {
     private String rentDate;
     private String totalRent;
     private String condition;
+    public  String image;
 
 
+    public String getImage() {
+        return image;
+    }
 
-
-    public FlatDetails(String ownerId, String flatLocation, String bedroom, String kitchen, String bathroom, String rentDate, String condition,String totalRent) {
+    public FlatDetails(String ownerId, String flatLocation, String bedroom, String kitchen, String bathroom,
+                       String rentDate, String condition, String totalRent,String image) {
 
         this.ownerId = ownerId;
         this.flatLocation = flatLocation;
@@ -23,6 +27,11 @@ public class FlatDetails {
         this.rentDate = rentDate;
         this.condition = condition;
         this.totalRent=totalRent;
+        this.image = image;
+    }
+
+    public FlatDetails(String image) {
+        this.image = image;
     }
 
     public String getTotalRent() {
