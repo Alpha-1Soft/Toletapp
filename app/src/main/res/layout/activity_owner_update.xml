@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <Button
+            android:onClick="cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -19,6 +20,7 @@
             android:textSize="20dp"
             android:textAllCaps="false"/>
         <Button
+            android:onClick="save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -53,25 +55,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginTop="50dp"
-                        android:text="Name"
-                        android:textSize="20sp"
-                        android:textColor="#FFFFFFFF"
-                        />
-                    <EditText
-                        android:id="@+id/wonerName"
+                    <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginLeft="30dp"
-                        android:text="Saiful"
-                        android:textColor="#FFFFFFFF"
-                        android:textSize="20dp"
-                        />
+                        >
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/ownerNameUp"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:hint="Name"
+                            android:inputType="text"
+                            android:layout_marginTop="50dp"
+                            android:layout_marginLeft="20dp"
+                            android:padding="5dp"
+                            />
+                    </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
 
             </LinearLayout>
@@ -82,68 +81,69 @@
                 android:orientation="vertical"
                 android:padding="10dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Email"
-                    android:textSize="18sp"
-                    android:textColor="#000"
-                    />
-
-                <EditText
-                    android:id="@+id/wonerEmail"
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="something@example.com"
-                    android:textSize="15dp"
-                    />
+                    >
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Phone Number"
-                    android:textSize="18sp"
-                    android:textColor="#000"
-                    />
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/ownerEmailUp"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:hint="Email"
+                        android:inputType="text"
+                        android:layout_marginTop="5dp"
+                        android:padding="5dp"
+                        />
+                </android.support.design.widget.TextInputLayout>
 
-                <EditText
-                    android:id="@+id/wonerPhoneNumber"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="01837560379"
-                    android:textSize="15dp"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Address"
-                    android:textSize="18sp"
-                    android:textColor="#000"
-                    />
 
-                <EditText
-                    android:id="@+id/wonerAddress"
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Mirpor, Dhaka, Bangladesh"
-                    android:textSize="15dp"
-                    />
+                    >
 
-                <TextView
-                    android:layout_width="wrap_content"
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/ownerPhoneNumberUp"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:hint="Phone Number"
+                        android:inputType="number"
+                        android:layout_marginTop="5dp"
+                        android:padding="5dp"
+                        />
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Age"
-                    android:textSize="18sp"
-                    android:textColor="#000"
-                    />
+                    >
 
-                <EditText
-                    android:id="@+id/wonerAge"
-                    android:layout_width="wrap_content"
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/ownerAddressUp"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:hint="Address"
+                        android:inputType="text"
+                        android:layout_marginTop="5dp"
+                        android:padding="5dp"
+                        />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="55"
-                    android:textSize="15dp"
-                    />
+                    >
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/ownerAgeUp"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:hint="Age"
+                        android:inputType="number"
+                        android:layout_marginTop="5dp"
+                        android:padding="5dp"
+                        />
+                </android.support.design.widget.TextInputLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -154,7 +154,7 @@
                     />
 
                 <Spinner
-                    android:id="@+id/wonerRelation"
+                    android:id="@+id/ownerRelationUp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
@@ -169,10 +169,12 @@
                     android:textColor="#000"
                     />
 
-                <Spinner
-                    android:id="@+id/wonerGender"
+                <TextView
+                    android:id="@+id/ownerGenderUp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="Male"
+                    android:textSize="15sp"
 
                     />
 
