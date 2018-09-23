@@ -7,14 +7,14 @@
     xmlns:apps="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".activity.MainActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#cccccc">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbarLayout"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
         >
-
         <android.support.v7.widget.Toolbar
             android:id="@+id/mainActivitytoolbar"
             android:layout_width="match_parent"
@@ -23,13 +23,18 @@
             app:titleTextColor="#ffffff">
 
         </android.support.v7.widget.Toolbar>
-    </android.support.design.widget.AppBarLayout>
 
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </ListView>
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/edittext_border"
+            android:dividerHeight="3dp"
+            android:padding="5dp"
+            android:cacheColorHint="#0000ffff">
+        </ListView>
+    </LinearLayout>
+
 
 
     <android.support.design.widget.FloatingActionButton
