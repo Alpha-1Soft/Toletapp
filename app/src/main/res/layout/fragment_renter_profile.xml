@@ -1,41 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:apps="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".fragments.renterFragments.RenterProfileFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <Button
-                android:id="@+id/rentercancel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#067b39"
-                android:layout_weight="1"
-                android:text="Cancel"
-                android:textSize="20dp"
-                android:textAllCaps="false"
-                android:textColor="#000"/>
-            <Button
-                android:id="@+id/renteredit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="1dp"
-                android:background="#067b39"
-                android:layout_weight="1"
-                android:text="Edit"
-                android:textSize="20dp"
-                android:textAllCaps="false"
-                android:textColor="#000"/>
-
-        </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -91,7 +64,7 @@
                     android:textSize="18sp"
                     android:textColor="#000"/>
                 <TextView
-                    android:id="@+id/renterPhoneTv"
+                    android:id="@+id/renterPhoneNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="01747477690"
@@ -129,7 +102,7 @@
                     android:textSize="18sp"
                     android:textColor="#000"/>
                 <TextView
-                    android:id="@+id/renterProfessionTv"
+                    android:id="@+id/renterProfession"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Student"
@@ -142,7 +115,7 @@
                     android:textColor="#000"
                     />
                 <TextView
-                    android:id="@+id/monthlyincome"
+                    android:id="@+id/renterMonthlyIncome"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="20000 To 25000 TK "
@@ -168,7 +141,7 @@
                     android:textSize="18sp"
                     android:textColor="#000"/>
                 <TextView
-                    android:id="@+id/rentergender"
+                    android:id="@+id/renterGender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Male"
@@ -181,7 +154,7 @@
                     android:textSize="18sp"
                     android:textColor="#000"/>
                 <TextView
-                    android:id="@+id/renterreligion"
+                    android:id="@+id/renterReligion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Islam"
@@ -194,7 +167,7 @@
                     android:textSize="18sp"
                     android:textColor="#000"/>
                 <TextView
-                    android:id="@+id/renternatinality"
+                    android:id="@+id/renterNatinality"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Bangladeshi"
@@ -205,6 +178,14 @@
         </LinearLayout>
     </ScrollView>
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        apps:layout_anchorGravity="bottom|right|end"
+        apps:srcCompat="@android:drawable/ic_input_add"
+        />
 
-
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>
