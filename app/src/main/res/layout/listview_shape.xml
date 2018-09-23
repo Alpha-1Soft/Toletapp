@@ -4,7 +4,11 @@
     android:layout_height="match_parent"
     android:padding="5dp"
     android:orientation="vertical">
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="5dp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,30 +17,22 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight=".8">
 
             <ImageView
                 android:id="@+id/locationImage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@drawable/defaultimage" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="1.2"
             android:gravity="right"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/flatConditionTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:text="2 Bedrooms,1 Kitchen,2 bathrooms"
-                android:textColor="#000000"
-                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/amountTv"
@@ -57,6 +53,15 @@
                 android:textStyle="bold"/>
 
             <TextView
+                android:id="@+id/flatConditionTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="2 Bedrooms,.."
+                android:textColor="#949191"
+                android:textSize="18sp" />
+
+            <TextView
                 android:id="@+id/rentDateTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -69,13 +74,23 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/locationpng"
+            android:layout_gravity="center"
+            android:padding="2dp"
+            />
         <TextView
             android:id="@+id/locationTv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Noianagar,Khilkhet ,Dhaka"
             android:textSize="20dp"
-            android:textColor="#000000"/>
+            android:textColor="#000000"
+            android:padding="2dp"/>
+    </LinearLayout>
     </LinearLayout>
 </LinearLayout>
