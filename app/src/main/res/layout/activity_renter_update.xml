@@ -35,9 +35,11 @@
             android:textColor="#000"/>
 
     </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -46,158 +48,187 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="130dp"
-                android:orientation="horizontal"
                 android:background="#0959da"
-                >
+                android:orientation="horizontal">
+
                 <ImageView
                     android:id="@+id/renterProfileImg"
                     android:layout_width="110dp"
                     android:layout_height="110dp"
+                    android:layout_marginLeft="30dp"
                     android:layout_marginTop="10dp"
-                    android:src="@drawable/renterprofile"
-                    android:layout_marginLeft="30dp" />
+                    android:src="@drawable/renterprofile" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="5dp"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginLeft="10dp"
-                        android:text="Name"
-                        android:textSize="20sp"
-                        android:textColor="#000"/>
+                    android:orientation="vertical"
+                    android:padding="5dp">
 
-                    <EditText
-                        android:id="@+id/renterName"
+                    <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="0dp"
-                        android:text="Omar Faruk"
-                        android:textColor="#000"
-                        android:textSize="20dp" />
+                        android:layout_height="wrap_content">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:id="@+id/renterNameUp"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="50dp"
+                            android:hint="Name"
+                            android:inputType="text"
+                            android:padding="5dp" />
+                    </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
 
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="10dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Email"
-                    android:textColor="#000"
-                    android:textSize="18sp"/>
-                <EditText
-                    android:id="@+id/renterEmail"
+
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="omar.faruq1998V@gmail.com"
-                    android:textSize="15dp"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Phone Number"
-                    android:textSize="18sp"
-                    android:textColor="#000"/>
-                <EditText
-                    android:id="@+id/renterPhoneTv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="01747477690"
-                    android:textSize="15dp"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Address"
-                    android:textSize="18sp"
-                    android:textColor="#000"/>
-                <EditText
-                    android:id="@+id/renterAddress"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Mirpur-14"
-                    android:textSize="15dp"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Age"
-                    android:textSize="18sp"
-                    android:textColor="#000"/>
-                <EditText
-                    android:id="@+id/renterAge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="22"
-                    android:textSize="15dp"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Profession"
-                    android:textSize="18sp"
-                    android:textColor="#000"/>
-                <EditText
-                    android:id="@+id/renterProfession"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Student"
-                    android:textSize="15dp"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Monthly Income"
-                    android:textSize="18sp"
-                    android:textColor="#000"/>
-                <EditText
-                    android:id="@+id/renterIncome"
+                    android:layout_height="wrap_content">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/renterEmailUp"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="5dp"
+                        android:hint="Email"
+                        android:inputType="text"
+                        android:padding="5dp" />
+                </android.support.design.widget.TextInputLayout>
+
+
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/renterPhoneNumberUp"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="5dp"
+                        android:hint="Phone Number"
+                        android:inputType="number"
+                        android:padding="5dp" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/renterAddressUp"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="5dp"
+                        android:hint="Address"
+                        android:inputType="text"
+                        android:padding="5dp" />
+                </android.support.design.widget.TextInputLayout>
+
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/renterAgeUp"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="5dp"
+                        android:hint="Age"
+                        android:inputType="number"
+                        android:padding="5dp" />
+                </android.support.design.widget.TextInputLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="20000 To 25000"
-                    android:textSize="15dp"/>
+                    android:text="Gender"
+                    android:textSize="18sp"
+                    android:textColor="#000"/>
+                <TextView
+                    android:id="@+id/renterGenderUp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Male"
+                    android:textSize="15sp"/>
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/renterProfessionUp"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="5dp"
+                        android:hint="Profession"
+                        android:inputType="text"
+                        android:padding="5dp" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/renterMonthlyIncomeUp"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="5dp"
+                        android:hint="Monthly Income"
+                        android:inputType="number"
+                        android:padding="5dp" />
+                </android.support.design.widget.TextInputLayout>
+
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Marital Satus"
-                    android:textSize="18sp"
-                    android:textColor="#000"/>
+                    android:textColor="#000"
+                    android:textSize="18sp" />
+
                 <Spinner
-                    android:id="@+id/renterMaritalsatus"
+                    android:id="@+id/renterMaritalsatusUp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="15dp"
-                    />
+                    android:textSize="15dp" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Religion"
-                    android:textSize="18sp"
-                    android:textColor="#000"/>
+                    android:textColor="#000"
+                    android:textSize="18sp" />
+
                 <Spinner
-                    android:id="@+id/renterreligionSp"
+                    android:id="@+id/renterReligionSp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="15sp"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Nationality"
-                    android:textSize="18sp"
-                    android:textColor="#000"/>
-                <EditText
-                    android:id="@+id/renternatinality"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Bangladeshi"
-                    android:textSize="15dp" />
+                    android:textSize="15sp" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/renterNatinalityUp"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="5dp"
+                        android:hint="Natinality"
+                        android:inputType="text"
+                        android:padding="5dp" />
+                </android.support.design.widget.TextInputLayout>
+
 
             </LinearLayout>
 
