@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<FlatDetails> arrayList = new ArrayList<>();
     ArrayList<String> ownerIdList = new ArrayList<>();
+    ArrayList<String> postIdList = new ArrayList<>();
     String image;
 
     @Override
@@ -77,8 +78,10 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(MainActivity.this, ""+arrayList.get(i).getPostId(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this,DetailsActivity.class);
-                intent.putExtra("location",arrayList.get(i).getOwnerId());
+                intent.putExtra("ownerId",arrayList.get(i).getOwnerId()+i);
+                intent.putExtra("ownerPostId",arrayList.get(i).getPostId());
                 //intent.putExtra("Condition",arrayList.get(i).getFlatCondition());
                 //intent.putExtra("Available",arrayList.get(i).getAvailableFor());
                 startActivity(intent);
@@ -130,10 +133,26 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot d: dataSnapshot.getChildren()){
                    ownerIdList.add(d.getKey());
+                   ownerPostId(databaseReference,d.getKey());
                 }
                 ownerPost();
             }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void ownerPostId(DatabaseReference databaseReference,String userId) {
+        databaseReference.child(userId).child("Post").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot d: dataSnapshot.getChildren()){
+                    postIdList.add(d.getKey());
+                }
+            }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -160,6 +179,7 @@ public class MainActivity extends AppCompatActivity {
 
                     FlatDetails flatDetails = null;
                     DatabaseReference databaseReference = databaseReference2.child(dataSnapshot.getKey());
+                    String postId = dataSnapshot.getKey();
 
                     String address = dataSnapshot.child("Address").getValue(String.class);
                     String bedroom = dataSnapshot.child("Bedroom quantity").getValue(String.class);
@@ -169,12 +189,14 @@ public class MainActivity extends AppCompatActivity {
                     String condition = dataSnapshot.child("Rent condition").getValue(String.class);
                     String totalRent = dataSnapshot.child("Total rent").getValue(String.class);
 
+                   // Toast.makeText(MainActivity.this, "Tvr/"+postIdList.get(finalI), Toast.LENGTH_SHORT).show();
+
                     if(dataSnapshot.hasChild("Images")){
                         images(databaseReference.child("Images"),finalI, address, bedroom,
-                                kitchen,bathroom,rentDate,condition,totalRent);
+                                kitchen,bathroom,rentDate,condition,totalRent,postId);
                     }
                     else {
-                        flatDetails= new FlatDetails(ownerIdList.get(finalI), address, bedroom, kitchen,bathroom,rentDate,condition,totalRent);
+                        flatDetails= new FlatDetails(ownerIdList.get(finalI),address, bedroom, kitchen,bathroom,rentDate,condition,totalRent,"",postId);
                         arrayList.add(flatDetails);
                         listView.setAdapter(flatAdapter);
                     }
@@ -206,13 +228,13 @@ public class MainActivity extends AppCompatActivity {
 
     //this method is for retriving
     private void images(DatabaseReference databaseReference, final int finalI, final String address, final String bedroom,
-                        final String kitchen, final String bathroom, final String rentDate, final String condition, final String totalRent) {
+                        final String kitchen, final String bathroom, final String rentDate, final String condition, final String totalRent,final String postId) {
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Toast.makeText(MainActivity.this, ""+dataSnapshot.getValue(String.class), Toast.LENGTH_SHORT).show();
                 image = dataSnapshot.getValue(String.class);
-                FlatDetails flatDetails= new FlatDetails(ownerIdList.get(finalI), address, bedroom, kitchen,bathroom,rentDate,condition,totalRent,image);
+                FlatDetails flatDetails= new FlatDetails(ownerIdList.get(finalI), address, bedroom, kitchen,bathroom,rentDate,condition,totalRent,image,postId);
                 arrayList.add(flatDetails);
                 listView.setAdapter(flatAdapter);
             }
