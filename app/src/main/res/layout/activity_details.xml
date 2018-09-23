@@ -35,7 +35,7 @@
                            android:textSize="20sp"
                            android:textColor="#000"/>
                        <TextView
-                           android:id="@+id/locTv"
+                           android:id="@+id/locationTv"
                            android:layout_width="match_parent"
                            android:layout_height="wrap_content"
                            android:text="Location"
@@ -50,7 +50,7 @@
                            />
 
                        <TextView
-                           android:id="@+id/avTv"
+                           android:id="@+id/bedroomsTv"
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
                            android:text="2 Bedrooms"
@@ -62,7 +62,7 @@
                            android:textSize="20sp"
                            android:textColor="#000"/>
                        <TextView
-                           android:id="@+id/conTv"
+                           android:id="@+id/conditionTv"
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
                            android:text="1 Kitchan"
@@ -75,6 +75,7 @@
                            android:textSize="20sp"
                            android:textColor="#000"/>
                        <TextView
+                           android:id="@+id/bathroomTv"
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
                            android:text="Separet Bathrooms"
@@ -82,10 +83,11 @@
                        <TextView
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
-                           android:text="Rent Condition"
+                           android:text="Rent For"
                            android:textSize="20sp"
                            android:textColor="#000"/>
                        <TextView
+                           android:id="@+id/rentForTv"
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
                            android:text="Batchalor"
@@ -93,22 +95,24 @@
                        <TextView
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
-                           android:text="Rent"
+                           android:text="Rent amount"
                            android:textSize="20sp"
                            android:textColor="#000"/>
+
                        <TextView
+                           android:id="@+id/rentAmountTv"
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
                            android:text="15000 Tk"
-                           android:textSize="18sp"
-                           />
+                           android:textSize="18sp" />
                        <TextView
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
-                           android:text="Rent Month"
+                           android:text="Rent Date"
                            android:textSize="20sp"
                            android:textColor="#000"/>
                        <TextView
+                           android:id="@+id/rentDate"
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
                            android:text="September 2018"
