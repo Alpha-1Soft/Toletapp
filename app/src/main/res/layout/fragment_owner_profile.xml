@@ -1,38 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:apps="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.ownerFragmets.OwnerProfileFragment"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <Button
-            android:id="@+id/ownerproCancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Cancel"
-            android:textSize="20dp"
-            android:textAllCaps="false"
-            android:textColor="#000"
-            />
-        <Button
-            android:id="@+id/ownerproEdit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Edit"
-            android:textSize="20dp"
-            android:textColor="#000"
-            android:textAllCaps="false"/>
-
-    </LinearLayout>
 
 <ScrollView
     android:layout_width="match_parent"
@@ -58,7 +33,7 @@
             android:src="@drawable/renterprofile"
             />
         <TextView
-            android:id="@+id/wonerName"
+            android:id="@+id/ownerNameTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Saiful"
@@ -82,7 +57,7 @@
             />
 
         <TextView
-            android:id="@+id/wonerEmail"
+            android:id="@+id/ownerEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="something@example.com"
@@ -97,7 +72,7 @@
             />
 
         <TextView
-            android:id="@+id/wonerPhoneNumber"
+            android:id="@+id/ownerPhoneNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="01837560379"
@@ -111,7 +86,7 @@
             />
 
         <TextView
-            android:id="@+id/wonerAddress"
+            android:id="@+id/ownerAddress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Mirpor, Dhaka, Bangladesh"
@@ -126,7 +101,7 @@
             />
 
         <TextView
-            android:id="@+id/wonerAge"
+            android:id="@+id/ownerAge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="55"
@@ -141,7 +116,7 @@
             />
 
         <TextView
-            android:id="@+id/wonerRelation"
+            android:id="@+id/ownerRelation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Islam"
@@ -157,7 +132,7 @@
             />
 
         <TextView
-            android:id="@+id/wonerGender"
+            android:id="@+id/ownerGender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="all"
@@ -168,4 +143,15 @@
 
     </LinearLayout>
 </ScrollView>
-</LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        apps:layout_anchorGravity="bottom|right|end"
+        apps:srcCompat="@android:drawable/ic_input_add"
+        />
+
+</android.support.design.widget.CoordinatorLayout>
