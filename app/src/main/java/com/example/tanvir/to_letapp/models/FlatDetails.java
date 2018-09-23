@@ -10,13 +10,22 @@ public class FlatDetails {
     private String totalRent;
     private String condition;
     public  String image;
+    private String postId;
 
-
-    public String getImage() {
-        return image;
+    public FlatDetails(String ownerId, String flatLocation, String bedroom, String kitchen, String bathroom, String rentDate, String condition, String totalRent, String s1, String postId) {
+        this.ownerId = ownerId;
+        this.flatLocation = flatLocation;
+        this.bedroom = bedroom;
+        this.kitchen = kitchen;
+        this.bathroom = bathroom;
+        this.rentDate = rentDate;
+        this.condition = condition;
+        this.totalRent=totalRent;
+        this.postId = postId;
+        this.image = s1;
     }
 
-    public FlatDetails(String ownerId, String flatLocation, String bedroom, String kitchen, String bathroom, String rentDate, String condition, String totalRent,String image) {
+    public FlatDetails(String ownerId,String flatLocation, String bedroom, String kitchen, String bathroom, String rentDate, String condition, String totalRent,String image) {
 
         this.ownerId = ownerId;
         this.flatLocation = flatLocation;
@@ -29,15 +38,24 @@ public class FlatDetails {
         this.image = image;
     }
 
-    public FlatDetails(String finalI, String address, String bedroom, String kitchen, String bathroom, String rentDate, String condition, String totalRent) {
+    /*public FlatDetails(String ownerId,String postId,String address,String bedroom, String kitchen, String bathroom, String rentDate, String condition, String totalRent,String s) {
+        //ownerIdList.get(finalI),dataSnapshot.getKey() address, bedroom, kitchen,bathroom,rentDate,condition,totalRent
         this.ownerId = ownerId;
-        this.flatLocation = flatLocation;
+        this.flatLocation = address;
         this.bedroom = bedroom;
         this.kitchen = kitchen;
         this.bathroom = bathroom;
         this.rentDate = rentDate;
         this.condition = condition;
         this.totalRent=totalRent;
+        this.postId = postId;
+    }*/
+
+    public String getImage() {
+        return image;
+    }
+    public String getPostId() {
+        return postId;
     }
 
     public String getTotalRent() {
