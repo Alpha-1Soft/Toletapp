@@ -12,9 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light.NoActionBar">
-        <activity android:name=".activity.MainActivity">
-
-        </activity>
+        <activity android:name=".activity.MainActivity"></activity>
         <activity android:name=".activity.DetailsActivity" />
         <activity android:name=".activity.DefaultRegisterActivity" />
         <activity android:name=".activity.DefaultLoginActivity" />
@@ -28,6 +26,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.ownerActivity.OwnerUpdateActivity"></activity>
+        <activity android:name=".activity.renterActivity.RenterUpdateActivity"></activity>
     </application>
 
 </manifest>
