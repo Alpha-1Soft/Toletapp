@@ -6,11 +6,11 @@
     <string name="owner_nav_post">Post</string>
     <string name="owner_nav_request">Request</string>
     <string name="owner_nav_profile">Profile</string>
+    <string name="selectrelagion">Select Relagion</string>
     <string-array name="relagion">
         <item>Islam</item>
         <item>Hinduism</item>
         <item>Buddhists</item>
-
         <item>Christians</item>
         <item>None</item>
     </string-array>
