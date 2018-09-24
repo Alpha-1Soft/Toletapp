@@ -65,7 +65,8 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
 
     DatabaseReference imageReference;
 
-    ArrayList<Uri> uriList = new ArrayList<>();
+    //ArrayList<Uri> uriList = new ArrayList<>();
+    Uri uri;
 
     ArrayList<String> imageList = new ArrayList<>();
 
@@ -301,75 +302,25 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        int count1 = 0;
         if (requestCode == 1 && resultCode == RESULT_OK) {
-
-            Uri uri = data.getData();
-            uriList.add(data.getData());
-
-            String[] filePathColumn = {MediaStore.Images.Media.DATA};
-            Cursor cursor = getContentResolver().query(uri, filePathColumn, null, null, null);
-            cursor.moveToFirst();
-
-            int columnIndex1 = cursor.getColumnIndex(filePathColumn[0]);
+            count1++;
+            if (count1 == 1) {
+               uri = data.getData();
 
 
-            String filePath1 = cursor.getString(columnIndex1);
+                String[] filePathColumn = {MediaStore.Images.Media.DATA};
+                Cursor cursor = getContentResolver().query(uri, filePathColumn, null, null, null);
+                cursor.moveToFirst();
+
+                int columnIndex1 = cursor.getColumnIndex(filePathColumn[0]);
 
 
-            imageView1.setImageBitmap(BitmapFactory.decodeFile(filePath1));
+                String filePath1 = cursor.getString(columnIndex1);
 
 
-        } else if (requestCode == 2 && resultCode == RESULT_OK) {
-
-            Uri uri = data.getData();
-            uriList.add(data.getData());
-
-            String[] filePathColumn = {MediaStore.Images.Media.DATA};
-            Cursor cursor = getContentResolver().query(uri, filePathColumn, null, null, null);
-            cursor.moveToFirst();
-
-            int columnIndex1 = cursor.getColumnIndex(filePathColumn[0]);
-
-
-            String filePath1 = cursor.getString(columnIndex1);
-
-
-            imageView2.setImageBitmap(BitmapFactory.decodeFile(filePath1));
-
-
-        } else if (requestCode == 3 && resultCode == RESULT_OK) {
-
-            Uri uri = data.getData();
-            uriList.add(data.getData());
-
-            String[] filePathColumn = {MediaStore.Images.Media.DATA};
-            Cursor cursor = getContentResolver().query(uri, filePathColumn, null, null, null);
-            cursor.moveToFirst();
-
-            int columnIndex1 = cursor.getColumnIndex(filePathColumn[0]);
-
-
-            String filePath1 = cursor.getString(columnIndex1);
-
-
-            imageView3.setImageBitmap(BitmapFactory.decodeFile(filePath1));
-
-
-        } else if (requestCode == 4 && resultCode == RESULT_OK) {
-
-            Uri uri = data.getData();
-            uriList.add(data.getData());
-
-            String[] filePathColumn = {MediaStore.Images.Media.DATA};
-            Cursor cursor = getContentResolver().query(uri, filePathColumn, null, null, null);
-            cursor.moveToFirst();
-
-            int columnIndex1 = cursor.getColumnIndex(filePathColumn[0]);
-
-
-            String filePath1 = cursor.getString(columnIndex1);
-
-            imageView4.setImageBitmap(BitmapFactory.decodeFile(filePath1));
+                imageView1.setImageBitmap(BitmapFactory.decodeFile(filePath1));
+            }
 
         }
     }
@@ -404,117 +355,24 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
         dialog.show();
     }
 
-    public void uploadImage2(View view) {
-        final Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.image_option_dialog);
-        //dialog.setTitle("Choose your position.");
-
-        ImageButton cameraDialogImageBt = dialog.findViewById(R.id.cameraDialogImageBt);
-        ImageButton gallaryDialogImageBt = dialog.findViewById(R.id.gallaryDialogImageBt);
-
-
-        cameraDialogImageBt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, 2);
-                startActivityForResult(intent, 2);
-                dialog.dismiss();
-            }
-        });
-
-        gallaryDialogImageBt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setType("image/*");
-                startActivityForResult(intent, 2);
-                dialog.dismiss();
-            }
-        });
-        dialog.show();
-    }
-
-    public void uploadImage3(View view) {
-        final Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.image_option_dialog);
-        //dialog.setTitle("Choose your position.");
-
-        ImageButton cameraDialogImageBt = dialog.findViewById(R.id.cameraDialogImageBt);
-        ImageButton gallaryDialogImageBt = dialog.findViewById(R.id.gallaryDialogImageBt);
-
-
-        cameraDialogImageBt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, 3);
-                startActivityForResult(intent, 3);
-                dialog.dismiss();
-            }
-        });
-
-        gallaryDialogImageBt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setType("image/*");
-                startActivityForResult(intent, 3);
-                dialog.dismiss();
-            }
-        });
-        dialog.show();
-    }
-
-    public void uploadImage4(View view) {
-        final Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.image_option_dialog);
-        //dialog.setTitle("Choose your position.");
-
-        ImageButton cameraDialogImageBt = dialog.findViewById(R.id.cameraDialogImageBt);
-        ImageButton gallaryDialogImageBt = dialog.findViewById(R.id.gallaryDialogImageBt);
-
-
-        cameraDialogImageBt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, 4);
-                startActivityForResult(intent, 4);
-                dialog.dismiss();
-            }
-        });
-
-        gallaryDialogImageBt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setType("image/*");
-                startActivityForResult(intent, 4);
-                dialog.dismiss();
-            }
-        });
-        dialog.show();
-    }
 
     public void uploadImages(final DatabaseReference databaseReference) {
         try {
-                for(int i=0;i<uriList.size();i++){
-
                     final StorageReference storageReference =
-                            FirebaseStorage.getInstance().getReference().child("Photo").child(uriList.get(i).getLastPathSegment());
+                            FirebaseStorage.getInstance().getReference().child("Photo").child(uri.getLastPathSegment());
 
-                    Bitmap bitmap = BitmapFactory.decodeFile(uriList.get(i).toString());
+                    Bitmap bitmap = BitmapFactory.decodeFile(uri.toString());
                     Toast.makeText(this, "upload checked", Toast.LENGTH_SHORT).show();
 
-                    storageReference.putFile(uriList.get(i)).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
                             storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
-                                    databaseReference.push().setValue(uri.toString());
+                                    Toast.makeText(PostActivity.this, ""+databaseReference, Toast.LENGTH_SHORT).show();
+                                    databaseReference.setValue(uri.toString());
                                     //progressDialog.dismiss();
                                     //Picasso.get().load(uri.toString()).into(imageView);
                                     //Toast.makeText(PostActivity.this, "Uploading finished...", Toast.LENGTH_SHORT).show();
@@ -522,7 +380,6 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
                             });
                         }
                     });
-                }
         }catch (Exception e){
 
         }
