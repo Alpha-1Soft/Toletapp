@@ -95,21 +95,6 @@
                     android:layout_height="wrap_content">
 
                     <android.support.design.widget.TextInputEditText
-                        android:id="@+id/renterEmailUp"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="5dp"
-                        android:hint="Email"
-                        android:inputType="text"
-                        android:padding="5dp" />
-                </android.support.design.widget.TextInputLayout>
-
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <android.support.design.widget.TextInputEditText
                         android:id="@+id/renterPhoneNumberUp"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
@@ -151,28 +136,15 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Gender"
-                    android:textSize="18sp"
-                    android:textColor="#000"/>
-                <TextView
-                    android:id="@+id/renterGenderUp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Male"
-                    android:textSize="15sp"/>
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:text="Profession"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
 
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/renterProfessionUp"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="5dp"
-                        android:hint="Profession"
-                        android:inputType="text"
-                        android:padding="5dp" />
-                </android.support.design.widget.TextInputLayout>
+                <Spinner
+                    android:id="@+id/renterProfessionUp"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:textSize="15dp" />
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
@@ -188,7 +160,6 @@
                         android:padding="5dp" />
                 </android.support.design.widget.TextInputLayout>
 
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -197,11 +168,10 @@
                     android:textSize="18sp" />
 
                 <Spinner
-                    android:id="@+id/renterMaritalsatusUp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/renterMaritalSatusUp"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
                     android:textSize="15dp" />
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -211,8 +181,11 @@
 
                 <Spinner
                     android:id="@+id/renterReligionSp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:prompt="@string/selectrelagion"
+                    android:entries="@array/relagion"
+                    android:spinnerMode="dialog"
                     android:textSize="15sp" />
 
                 <android.support.design.widget.TextInputLayout
