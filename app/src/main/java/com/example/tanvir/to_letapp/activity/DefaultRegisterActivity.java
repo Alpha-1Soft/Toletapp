@@ -49,7 +49,8 @@ public class DefaultRegisterActivity extends AppCompatActivity {
         final String name = rentarNameEt.getText().toString();
         final String email = rentarEmailEt.getText().toString();
         final String password = rentarPasswordEt.getText().toString();
-        final int key = Integer.valueOf(getIntent().getStringExtra("Key"));
+        //final int key = Integer.valueOf(getIntent().getStringExtra("Key"));
+        final String key = getIntent().getStringExtra("key");
 
         auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
@@ -66,24 +67,32 @@ public class DefaultRegisterActivity extends AppCompatActivity {
         });
     }
 
-    public void seperateUser(int key,String uid,String name,String email,String password){
+    public void seperateUser(String key,String uid,String name,String email,String password){
         database = FirebaseDatabase.getInstance();
         databaseReferenceForRenter = database.getReference().child("Rentar").child("User");
         databaseReferenceForOwner = database.getReference().child("Owner").child("User");
 
-        if (key == 2){
-            DatabaseReference firebase = databaseReferenceForRenter.child(uid).child("Profile");
+        if (key.equals("2")){
+            DatabaseReference firebase = databaseReferenceForRenter.child(uid).child("Profile").push();
             DatabaseReference Username = firebase.child("Name");
             DatabaseReference Key = firebase.child("Key");
+            DatabaseReference mail = firebase.child("Email");
+            DatabaseReference pass = firebase.child("Password");
             Key.setValue(String.valueOf(key));
             Username.setValue(name);
+            mail.setValue(email);
+            pass.setValue(password);
         }
         else{
-            DatabaseReference databaseReference = databaseReferenceForOwner.child(uid).child("Profile");
+            DatabaseReference databaseReference = databaseReferenceForOwner.child(uid).child("Profile").push();
             DatabaseReference username = databaseReference.child("Name");
             DatabaseReference key1 = databaseReference.child("Key");
+            DatabaseReference mail = databaseReference.child("Email");
+            DatabaseReference pass = databaseReference.child("Password");
             key1.setValue(String.valueOf(key));
             username.setValue(name);
+            mail.setValue(email);
+            pass.setValue(password);
         }
     }
 }
