@@ -51,10 +51,15 @@ public class FlatAdapter extends ArrayAdapter {
         rentDateTv.setText(item.getRentDate());
         locationTv.setText(item.getFlatLocation());
         rentConditionTv.setText(item.getCondition());
-        if (item.getImage().length()!=0){
-            //Picasso.get().load(item.getImage()).into(imageView);
-            Picasso.get().load(item.getImage()).resize(500,400).centerCrop().into(imageView);
+        try{
+            if (item.getImage().length()!=0){
+                //Picasso.get().load(item.getImage()).into(imageView);
+                Picasso.get().load(item.getImage()).resize(500,400).centerCrop().into(imageView);
+            }
+        }catch (Exception e){
+
         }
+
 
         return view;
     }
