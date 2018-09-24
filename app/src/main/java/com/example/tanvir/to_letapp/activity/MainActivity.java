@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     FlatAdapter flatAdapter;
     FirebaseDatabase database;
     DatabaseReference databaseReference,databaseReference2,databaseReferenceForImage;
+    FlatDetails flatDetails = null;
 
     FloatingActionButton fab;
 
@@ -94,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, DefaultLoginActivity.class);
+                intent.putExtra("key","1");
                 startActivity(intent);
             }
         });
@@ -123,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void ownerId(){
-        ownerIdList.clear();
+        //ownerIdList.clear();
         database = FirebaseDatabase.getInstance();//database refrence
         databaseReference = database.getReference().child("Owner").child("User");
 
@@ -131,7 +133,9 @@ public class MainActivity extends AppCompatActivity {
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Toast.makeText(MainActivity.this, ""+dataSnapshot.getKey(), Toast.LENGTH_SHORT).show();
                 for (DataSnapshot d: dataSnapshot.getChildren()){
+                    Toast.makeText(MainActivity.this, ""+d.getKey(), Toast.LENGTH_SHORT).show();
                    ownerIdList.add(d.getKey());
                    ownerPostId(databaseReference,d.getKey());
                 }
@@ -150,6 +154,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot d: dataSnapshot.getChildren()){
+                    Toast.makeText(MainActivity.this, ""+d.getKey(), Toast.LENGTH_SHORT).show();
                     postIdList.add(d.getKey());
                 }
             }
@@ -161,23 +166,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void ownerPost() {
-
+        arrayList.clear();
         ProgressDialog pd = new ProgressDialog(this);
         pd.setMessage("loading");
         pd.show();
 
         for (int i = 0; i < ownerIdList.size(); i++) {
+            //Toast.makeText(this, ""+ownerIdList.get(i), Toast.LENGTH_SHORT).show();
             firebase = new Firebase("https://to-let-app-d0099.firebaseio.com/Owner/User/" + ownerIdList.get(i) + "/Post");
             databaseReference2 = database.getReference().child("Owner").child("User").child(ownerIdList.get(i)).child("Post");
             final int finalI = i;
-            arrayList.clear();
 
             //this method is for retriving data from user
             databaseReference2.addChildEventListener(new ChildEventListener() {
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-                    FlatDetails flatDetails = null;
                     DatabaseReference databaseReference = databaseReference2.child(dataSnapshot.getKey());
                     String postId = dataSnapshot.getKey();
 
@@ -188,18 +192,18 @@ public class MainActivity extends AppCompatActivity {
                     String rentDate = dataSnapshot.child("Rent Date").getValue(String.class);
                     String condition = dataSnapshot.child("Rent condition").getValue(String.class);
                     String totalRent = dataSnapshot.child("Total rent").getValue(String.class);
+                    String image = dataSnapshot.child("Images").getValue(String.class);
 
                    // Toast.makeText(MainActivity.this, "Tvr/"+postIdList.get(finalI), Toast.LENGTH_SHORT).show();
 
-                    if(dataSnapshot.hasChild("Images")){
-                        images(databaseReference.child("Images"),finalI, address, bedroom,
-                                kitchen,bathroom,rentDate,condition,totalRent,postId);
-                    }
-                    else {
-                        flatDetails= new FlatDetails(ownerIdList.get(finalI),address, bedroom, kitchen,bathroom,rentDate,condition,totalRent,"",postId);
+                    //if(dataSnapshot.hasChild("Images")){
+                        flatDetails= new FlatDetails(ownerIdList.get(finalI),address, bedroom, kitchen,bathroom,rentDate,condition,totalRent,image,postId);
+                    //}
+                    //else {
+                        //flatDetails= new FlatDetails(ownerIdList.get(finalI),address, bedroom, kitchen,bathroom,rentDate,condition,totalRent,"",postId);
                         arrayList.add(flatDetails);
                         listView.setAdapter(flatAdapter);
-                    }
+                   // }
                 }
 
                 @Override
@@ -224,41 +228,6 @@ public class MainActivity extends AppCompatActivity {
             });
         }
         pd.dismiss();
-    }
-
-    //this method is for retriving
-    private void images(DatabaseReference databaseReference, final int finalI, final String address, final String bedroom,
-                        final String kitchen, final String bathroom, final String rentDate, final String condition, final String totalRent,final String postId) {
-        databaseReference.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                Toast.makeText(MainActivity.this, ""+dataSnapshot.getValue(String.class), Toast.LENGTH_SHORT).show();
-                image = dataSnapshot.getValue(String.class);
-                FlatDetails flatDetails= new FlatDetails(ownerIdList.get(finalI), address, bedroom, kitchen,bathroom,rentDate,condition,totalRent,image,postId);
-                arrayList.add(flatDetails);
-                listView.setAdapter(flatAdapter);
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
     }
 
     public void register(View view) {
