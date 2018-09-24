@@ -24,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 public class DefaultLoginActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
     EditText renterEmailOnLoginEt,renterPassOnLoginEt;
+    String key;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +35,8 @@ public class DefaultLoginActivity extends AppCompatActivity {
         renterPassOnLoginEt = findViewById(R.id.renterPassOnLoginEt);
 
         firebaseAuth = FirebaseAuth.getInstance();
+
+        key = getIntent().getStringExtra("key");
 
     }
     DatabaseReference database = FirebaseDatabase.getInstance().getReference();//database reference
@@ -56,7 +59,7 @@ public class DefaultLoginActivity extends AppCompatActivity {
 
                                         //checking current user id exist or not
                                         //if exist then owner activity will be start
-                                        if (dataSnapshot.exists()) {
+                                        if (dataSnapshot.exists() && key.equals("1")) {
                                             Toast.makeText(DefaultLoginActivity.this, "Login successful as a owner", Toast.LENGTH_SHORT).show();
                                             Intent intent = new Intent(DefaultLoginActivity.this, OwnerMainActivity.class);
                                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -88,6 +91,7 @@ public class DefaultLoginActivity extends AppCompatActivity {
 
     public void NewAccount(View view) {
         Intent intent =new Intent(DefaultLoginActivity.this,DefaultRegisterActivity.class);
+        intent.putExtra("key",key);
         startActivity(intent);
     }
 }
