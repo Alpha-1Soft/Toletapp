@@ -20,7 +20,7 @@
 
 
         <TextView
-            android:id="@+id/renterName"
+            android:id="@+id/renterNameTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -31,22 +31,22 @@
             android:layout_alignParentLeft="true" />
 
         <TextView
-            android:id="@+id/renterAge"
+            android:id="@+id/renterAgeTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/renterName"
-            android:layout_below="@+id/renterName"
+            android:layout_alignStart="@+id/renterNameTv"
+            android:layout_below="@+id/renterNameTv"
             android:text="22 years old"
-            android:layout_alignLeft="@+id/renterName" />
+            android:layout_alignLeft="@+id/renterNameTv" />
 
         <TextView
-            android:id="@+id/renterWork"
+            android:id="@+id/renterProfessionTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/renterName"
-            android:layout_below="@+id/renterAge"
+            android:layout_alignStart="@+id/renterNameTv"
+            android:layout_below="@+id/renterAgeTv"
             android:text="student"
-            android:layout_alignLeft="@+id/renterName" />
+            android:layout_alignLeft="@+id/renterNameTv" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,6 +57,7 @@
 
 
             <Button
+                android:onClick="denied"
                 android:id="@+id/denideBtn"
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -67,6 +68,7 @@
                 android:textAllCaps="false" />
 
             <Button
+                android:onClick="accept"
                 android:id="@+id/acceptBtn"
                 android:layout_width="0dp"
                 android:layout_weight="1"
