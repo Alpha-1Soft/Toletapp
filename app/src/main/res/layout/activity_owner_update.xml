@@ -87,23 +87,6 @@
                     >
 
                     <android.support.design.widget.TextInputEditText
-                        android:id="@+id/ownerEmailUp"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:hint="Email"
-                        android:inputType="text"
-                        android:layout_marginTop="5dp"
-                        android:padding="5dp"
-                        />
-                </android.support.design.widget.TextInputLayout>
-
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    >
-
-                    <android.support.design.widget.TextInputEditText
                         android:id="@+id/ownerPhoneNumberUp"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
@@ -150,34 +133,14 @@
                     android:layout_height="wrap_content"
                     android:text="Relagion"
                     android:textSize="18sp"
-                    android:textColor="#000"
                     />
 
                 <Spinner
                     android:id="@+id/ownerRelationUp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
 
                     />
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Gender"
-                    android:textSize="18sp"
-                    android:textColor="#000"
-                    />
-
-                <TextView
-                    android:id="@+id/ownerGenderUp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Male"
-                    android:textSize="15sp"
-
-                    />
-
 
             </LinearLayout>
         </LinearLayout>
