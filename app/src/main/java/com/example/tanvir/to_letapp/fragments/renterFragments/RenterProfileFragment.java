@@ -132,12 +132,12 @@ public class RenterProfileFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), RenterUpdateActivity.class);
                  intent.putExtra("Name",Name);
-                 intent.putExtra("Email",Email);
+                // intent.putExtra("Email",Email);
                  intent.putExtra("Phone Number",PhoneNumber);
                  intent.putExtra("Address",Address);
                  intent.putExtra("Age",Age);
                  intent.putExtra("Relagion",Relagion);
-                 intent.putExtra("Gender",Gender);
+                // intent.putExtra("Gender",Gender);
                  intent.putExtra("Profession",Profession);
                  intent.putExtra("MonthlyIncome",MonthlyIncome);
                  intent.putExtra("MaritalSatus",MaritalSatus);
