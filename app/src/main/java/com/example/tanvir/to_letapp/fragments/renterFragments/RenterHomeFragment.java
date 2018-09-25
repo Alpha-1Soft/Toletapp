@@ -42,6 +42,7 @@ public class RenterHomeFragment extends Fragment {
 
     ArrayList<FlatDetails> arrayList = new ArrayList<>();
     ArrayList<String> ownerIdList = new ArrayList<>();
+    ArrayList<String> ownerPostIdList = new ArrayList<>();
 
 
     public RenterHomeFragment() {
@@ -79,7 +80,8 @@ public class RenterHomeFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(getActivity(),DetailsActivity.class);
-                intent.putExtra("location",arrayList.get(i).getOwnerId());
+                intent.putExtra("ownerId",arrayList.get(i).getOwnerId());
+                intent.putExtra("ownerPostId",arrayList.get(i).getPostId());
                 //intent.putExtra("Condition",arrayList.get(i).getFlatCondition());
                 //intent.putExtra("Available",arrayList.get(i).getAvailableFor());
                 startActivity(intent);
@@ -89,14 +91,18 @@ public class RenterHomeFragment extends Fragment {
 
         return view;
     }
-
     public void ownerId(){
+        ownerIdList.clear();
+        database = FirebaseDatabase.getInstance();//database refrence
+        databaseReference = database.getReference().child("Owner").child("User");
 
+        //getting specific user id dynamically
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot d: dataSnapshot.getChildren()){
                     ownerIdList.add(d.getKey());
+                    ownerPostId(databaseReference,d.getKey());
                 }
                 ownerPost();
             }
@@ -107,52 +113,23 @@ public class RenterHomeFragment extends Fragment {
             }
         });
     }
-    public void ownerPost(){
-        /*arrayList.clear();
-        for(int i=0;i<ownerIdList.size();i++){
-            firebase = new Firebase("https://to-let-app-d0099.firebaseio.com/Owner/User/"+ownerIdList.get(i)+"/Post");
-            final int finalI = i;
-            firebase.addChildEventListener(new com.firebase.client.ChildEventListener() {
-                @Override
-                public void onChildAdded(com.firebase.client.DataSnapshot dataSnapshot, String s) {
-                    String address = dataSnapshot.child(dataSnapshot.getKey()).child("Address").getValue(String.class);
-                    String bedroom = dataSnapshot.child(dataSnapshot.getKey()).child("Bedroom quantity").getValue(String.class);
-                    String kitchen = dataSnapshot.child(dataSnapshot.getKey()).child("Kitchen quantity").getValue(String.class);
-                    String bathroom = dataSnapshot.child(dataSnapshot.getKey()).child("Batchroom quantity").getValue(String.class);
-                    String rentDate = dataSnapshot.child(dataSnapshot.getKey()).child("Rent Date").getValue(String.class);
-                    String condition = dataSnapshot.child(dataSnapshot.getKey()).child("Rent condition").getValue(String.class);
-                    String totalRent = dataSnapshot.child(dataSnapshot.getKey()).child("Total rent").getValue(String.class);
-                    //FlatDetails flatDetails = new FlatDetails(ownerIdList.get(finalI), address, bedroom, kitchen,bathroom,rentDate,condition,totalRent);
 
-                    //Toast.makeText(MainActivity.this, "" + dataSnapshot.getKey(), Toast.LENGTH_SHORT).show();
-                    //arrayList.add(flatDetails);
-                    renterHomeListview.setAdapter(flatAdapter);
+    private void ownerPostId(DatabaseReference databaseReference,String userId) {
+        databaseReference.child(userId).child("Post").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot d: dataSnapshot.getChildren()){
+                    ownerPostIdList.add(d.getKey());
                 }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                @Override
-                public void onChildChanged(com.firebase.client.DataSnapshot dataSnapshot, String s) {
+            }
+        });
+    }
 
-                }
-
-                @Override
-                public void onChildRemoved(com.firebase.client.DataSnapshot dataSnapshot) {
-
-                }
-
-                @Override
-                public void onChildMoved(com.firebase.client.DataSnapshot dataSnapshot, String s) {
-
-                }
-
-                @Override
-                public void onCancelled(FirebaseError firebaseError) {
-
-                }
-            });
-        }*/
-        ProgressDialog pd = new ProgressDialog(getActivity());
-        pd.setMessage("loading");
-        pd.show();
+    public void ownerPost() {
 
         for (int i = 0; i < ownerIdList.size(); i++) {
             firebase = new Firebase("https://to-let-app-d0099.firebaseio.com/Owner/User/" + ownerIdList.get(i) + "/Post");
@@ -167,6 +144,7 @@ public class RenterHomeFragment extends Fragment {
 
                     FlatDetails flatDetails = null;
                     DatabaseReference databaseReference = databaseReference2.child(dataSnapshot.getKey());
+                    String postId = dataSnapshot.getKey();
 
                     String address = dataSnapshot.child("Address").getValue(String.class);
                     String bedroom = dataSnapshot.child("Bedroom quantity").getValue(String.class);
@@ -175,16 +153,17 @@ public class RenterHomeFragment extends Fragment {
                     String rentDate = dataSnapshot.child("Rent Date").getValue(String.class);
                     String condition = dataSnapshot.child("Rent condition").getValue(String.class);
                     String totalRent = dataSnapshot.child("Total rent").getValue(String.class);
+                    String image = dataSnapshot.child("Images").getValue(String.class);
 
-                    if(dataSnapshot.hasChild("Images")){
-                        images(databaseReference.child("Images"),finalI, address, bedroom,
-                                kitchen,bathroom,rentDate,condition,totalRent);
-                    }
-                    else {
-                        flatDetails= new FlatDetails(ownerIdList.get(finalI),dataSnapshot.getKey(),address, bedroom, kitchen,bathroom,rentDate,condition,totalRent,"");
-                        arrayList.add(flatDetails);
-                        renterHomeListview.setAdapter(flatAdapter);
-                    }
+                    // Toast.makeText(MainActivity.this, "Tvr/"+postIdList.get(finalI), Toast.LENGTH_SHORT).show();
+
+                    //if(dataSnapshot.hasChild("Images")){
+                    flatDetails= new FlatDetails(ownerIdList.get(finalI),address, bedroom, kitchen,bathroom,rentDate,condition,totalRent,image,postId);
+                    //}
+                    //else {
+                    //flatDetails= new FlatDetails(ownerIdList.get(finalI),address, bedroom, kitchen,bathroom,rentDate,condition,totalRent,"",postId);
+                    arrayList.add(flatDetails);
+                    renterHomeListview.setAdapter(flatAdapter);
                 }
 
                 @Override
@@ -208,18 +187,18 @@ public class RenterHomeFragment extends Fragment {
                 }
             });
         }
-        pd.dismiss();
     }
 
     //this method is for retriving
-    private void images(DatabaseReference databaseReference, final int finalI, final String address, final String bedroom,
-                        final String kitchen, final String bathroom, final String rentDate, final String condition, final String totalRent) {
+    private void images(DatabaseReference databaseReference, final int finalI, final String address,
+                        final String bedroom, final String kitchen, final String bathroom, final String rentDate,
+                        final String condition, final String totalRent,final String postId) {
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                Toast.makeText(getActivity(), ""+dataSnapshot.getValue(String.class), Toast.LENGTH_SHORT).show();
+               // Toast.makeText(MainActivity.this, ""+dataSnapshot.getValue(String.class), Toast.LENGTH_SHORT).show();
                 image = dataSnapshot.getValue(String.class);
-                FlatDetails flatDetails= new FlatDetails(ownerIdList.get(finalI), address, bedroom, kitchen,bathroom,rentDate,condition,totalRent,image);
+                FlatDetails flatDetails= new FlatDetails(ownerIdList.get(finalI), address, bedroom, kitchen,bathroom,rentDate,condition,totalRent,image,postId);
                 arrayList.add(flatDetails);
                 renterHomeListview.setAdapter(flatAdapter);
             }
