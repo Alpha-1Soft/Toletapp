@@ -79,29 +79,32 @@ public class RenterProfileFragment extends Fragment {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 profileId=String.valueOf(dataSnapshot.getKey());
 
-                Name=dataSnapshot.child("Name").getValue(String.class);
-                Email=dataSnapshot.child("Email").getValue(String.class);
-                PhoneNumber=dataSnapshot.child("Phone Number").getValue(String.class);
-                Address=dataSnapshot.child("Address").getValue(String.class);
-                Age=dataSnapshot.child("Age").getValue(String.class);
-                Relagion=dataSnapshot.child("Relagion").getValue(String.class);
-                Gender=dataSnapshot.child("Gender").getValue(String.class);
-                Profession=dataSnapshot.child("Profession").getValue(String.class);
-                MonthlyIncome=dataSnapshot.child("MonthlyIncome").getValue(String.class);
-                MaritalSatus=dataSnapshot.child("MaritalSatus").getValue(String.class);
-                Natinality=dataSnapshot.child("Natinality").getValue(String.class);
+                if (!dataSnapshot.getKey().equals("Notification")){
+                    Name=dataSnapshot.child("Name").getValue(String.class);
+                    Email=dataSnapshot.child("Email").getValue(String.class);
+                    PhoneNumber=dataSnapshot.child("Phone Number").getValue(String.class);
+                    Address=dataSnapshot.child("Address").getValue(String.class);
+                    Age=dataSnapshot.child("Age").getValue(String.class);
+                    Relagion=dataSnapshot.child("Relagion").getValue(String.class);
+                    Gender=dataSnapshot.child("Gender").getValue(String.class);
+                    Profession=dataSnapshot.child("Profession").getValue(String.class);
+                    MonthlyIncome=dataSnapshot.child("MonthlyIncome").getValue(String.class);
+                    MaritalSatus=dataSnapshot.child("MaritalSatus").getValue(String.class);
+                    Natinality=dataSnapshot.child("Natinality").getValue(String.class);
 
-                renterName.setText(Name);
-                renterEmail.setText(Email);
-                renterPhoneNumber.setText(PhoneNumber);
-                renterAddress.setText(Address);
-                renterAge.setText(Age);
-                renterReligion.setText(Relagion);
-                renterGender.setText(Gender);
-                renterProfession.setText(Profession);
-                renterMonthlyIncome.setText(MonthlyIncome);
-                renterMaritalSatus.setText(MaritalSatus);
-                renterNatinality.setText(Natinality);
+                    renterName.setText(Name);
+                    renterEmail.setText(Email);
+                    renterPhoneNumber.setText(PhoneNumber);
+                    renterAddress.setText(Address);
+                    renterAge.setText(Age);
+                    renterReligion.setText(Relagion);
+                    renterGender.setText(Gender);
+                    renterProfession.setText(Profession);
+                    renterMonthlyIncome.setText(MonthlyIncome);
+                    renterMaritalSatus.setText(MaritalSatus);
+                    renterNatinality.setText(Natinality);
+                }
+
             }
 
             @Override

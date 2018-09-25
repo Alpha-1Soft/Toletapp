@@ -115,17 +115,20 @@ public class RenterUpdateActivity extends AppCompatActivity implements AdapterVi
                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
                     Toast.makeText(RenterUpdateActivity.this, ""+dataSnapshot.getKey(), Toast.LENGTH_SHORT).show();
-                    DatabaseReference databaseReference = databaseReferenceRenter.child(dataSnapshot.getKey());
-                    databaseReference.child("Name").setValue(renterNameEt.getText().toString());
-                   // databaseReference.child("Email").setValue(renterEmailEt.getText().toString());
-                    databaseReference.child("Phone Number").setValue(renterPhoneNumberEt.getText().toString());
-                    databaseReference.child("Address").setValue(renterAddresEt.getText().toString());
-                    databaseReference.child("Age").setValue(renterAgeEt.getText().toString());
-                    databaseReference.child("Profession").setValue(professiontext);
-                    databaseReference.child("MonthlyIncome").setValue(renterMonthlyIncomeEt.getText().toString());
-                    databaseReference.child("Natinality").setValue(renterNationality.getText().toString());
-                    databaseReference.child("Relagion").setValue(relagiontext);
-                    databaseReference.child("MaritalSatus").setValue(maritalSatustext);
+                    if (!dataSnapshot.getKey().equals("Notification")){
+                        DatabaseReference databaseReference = databaseReferenceRenter.child(dataSnapshot.getKey());
+                        databaseReference.child("Name").setValue(renterNameEt.getText().toString());
+                        // databaseReference.child("Email").setValue(renterEmailEt.getText().toString());
+                        databaseReference.child("Phone Number").setValue(renterPhoneNumberEt.getText().toString());
+                        databaseReference.child("Address").setValue(renterAddresEt.getText().toString());
+                        databaseReference.child("Age").setValue(renterAgeEt.getText().toString());
+                        databaseReference.child("Profession").setValue(professiontext);
+                        databaseReference.child("MonthlyIncome").setValue(renterMonthlyIncomeEt.getText().toString());
+                        databaseReference.child("Natinality").setValue(renterNationality.getText().toString());
+                        databaseReference.child("Relagion").setValue(relagiontext);
+                        databaseReference.child("MaritalSatus").setValue(maritalSatustext);
+                    }
+
 
                     setFragment(renterProfileFragment);
 

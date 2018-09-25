@@ -66,49 +66,53 @@ public class DetailsActivity extends AppCompatActivity {
                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
                     //Toast.makeText(DetailsActivity.this, ""+dataSnapshot.child("Name").getValue(String.class), Toast.LENGTH_SHORT).show();
-                    if(dataSnapshot.getChildrenCount()<8){
-                        dialog.setTitle("Attention!");
-                        dialog.setMessage("Your profile still incomplete. Do you want to update your profile ?");
-                        final String name=dataSnapshot.child("Name").getValue(String.class);
-                        final String email=dataSnapshot.child("Email").getValue(String.class);
-                        final String phoneNumber=dataSnapshot.child("Phone Number").getValue(String.class);
-                        final String address=dataSnapshot.child("Address").getValue(String.class);
-                        final String age=dataSnapshot.child("Age").getValue(String.class);
-                        final String relagion=dataSnapshot.child("Relagion").getValue(String.class);
-                        final String gender=dataSnapshot.child("Gender").getValue(String.class);
-                        final String profession=dataSnapshot.child("Profession").getValue(String.class);
-                        final String monthlyIncome=dataSnapshot.child("MonthlyIncome").getValue(String.class);
-                        final String maritalSatus=dataSnapshot.child("MaritalSatus").getValue(String.class);
-                        final String natinality=dataSnapshot.child("Natinality").getValue(String.class);
+                    //Toast.makeText(DetailsActivity.this, ""+dataSnapshot.getKey(), Toast.LENGTH_SHORT).show();
+                    if(!dataSnapshot.getKey().equals("Notification")){
+                        if(dataSnapshot.getChildrenCount()<8){
+                            dialog.setTitle("Attention!");
+                            dialog.setMessage("Your profile still incomplete. Do you want to update your profile ?");
+                            final String name=dataSnapshot.child("Name").getValue(String.class);
+                            final String email=dataSnapshot.child("Email").getValue(String.class);
+                            final String phoneNumber=dataSnapshot.child("Phone Number").getValue(String.class);
+                            final String address=dataSnapshot.child("Address").getValue(String.class);
+                            final String age=dataSnapshot.child("Age").getValue(String.class);
+                            final String relagion=dataSnapshot.child("Relagion").getValue(String.class);
+                            final String gender=dataSnapshot.child("Gender").getValue(String.class);
+                            final String profession=dataSnapshot.child("Profession").getValue(String.class);
+                            final String monthlyIncome=dataSnapshot.child("MonthlyIncome").getValue(String.class);
+                            final String maritalSatus=dataSnapshot.child("MaritalSatus").getValue(String.class);
+                            final String natinality=dataSnapshot.child("Natinality").getValue(String.class);
 
-                        dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                Intent intent = new Intent(DetailsActivity.this, RenterUpdateActivity.class);
-                                intent.putExtra("Name",name);
-                                intent.putExtra("Email",email);
-                                intent.putExtra("Phone Number",phoneNumber);
-                                intent.putExtra("Address",address);
-                                intent.putExtra("Age",age);
-                                intent.putExtra("Relagion",relagion);
-                                intent.putExtra("Gender",gender);
-                                intent.putExtra("Profession",profession);
-                                intent.putExtra("MonthlyIncome",monthlyIncome);
-                                intent.putExtra("MaritalSatus",maritalSatus);
-                                intent.putExtra("Natinality",natinality);
-                                startActivity(intent);
-                            }
-                        });
-                        dialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.dismiss();
-                            }
-                        });
-                        dialog.show();
-                    }else{
-                        checkUserForRequestAvailability();
+                            dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    Intent intent = new Intent(DetailsActivity.this, RenterUpdateActivity.class);
+                                    intent.putExtra("Name",name);
+                                    intent.putExtra("Email",email);
+                                    intent.putExtra("Phone Number",phoneNumber);
+                                    intent.putExtra("Address",address);
+                                    intent.putExtra("Age",age);
+                                    intent.putExtra("Relagion",relagion);
+                                    intent.putExtra("Gender",gender);
+                                    intent.putExtra("Profession",profession);
+                                    intent.putExtra("MonthlyIncome",monthlyIncome);
+                                    intent.putExtra("MaritalSatus",maritalSatus);
+                                    intent.putExtra("Natinality",natinality);
+                                    startActivity(intent);
+                                }
+                            });
+                            dialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.dismiss();
+                                }
+                            });
+                            dialog.show();
+                        }else{
+                            checkUserForRequestAvailability();
+                        }
                     }
+
                 }
 
                 @Override
@@ -147,11 +151,16 @@ public class DetailsActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //DatabaseReference databaseReference = databaseReferenceOwner.child(dataSnapshot.getKey());
-                Toast.makeText(DetailsActivity.this, "" + dataSnapshot, Toast.LENGTH_SHORT).show();
+
 
                     for (DataSnapshot d : dataSnapshot.getChildren()) {
+                        //Toast.makeText(DetailsActivity.this, "" + d.getValue(), Toast.LENGTH_SHORT).show();
                         if (d.getValue().equals(currentuser)) {
                             count[0]++;
+                            break;
+                        }
+                        else {
+                           continue;
                         }
                     }
 
