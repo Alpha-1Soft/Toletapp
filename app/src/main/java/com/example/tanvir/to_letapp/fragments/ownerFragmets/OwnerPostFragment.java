@@ -87,7 +87,7 @@ public class OwnerPostFragment extends Fragment {
                     String bedroom =  d.child("Bedroom quantity").getValue(String.class);
                     String kitchen =  d.child("Kitchen quantity").getValue(String.class);
 
-                    Toast.makeText(getActivity(), ""+postId, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getActivity(), ""+postId, Toast.LENGTH_SHORT).show();
 
                     OwnerPost ownerPost = new OwnerPost(userID,postId,address,bathroom,bedroom,kitchen);
 
