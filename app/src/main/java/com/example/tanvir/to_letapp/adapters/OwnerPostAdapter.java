@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +28,7 @@ public class OwnerPostAdapter extends ArrayAdapter {
     DatabaseReference databaseReference;
     ArrayList<OwnerPost> ownerPosts;
     Context context;
+
     public OwnerPostAdapter(@NonNull Context context, ArrayList<OwnerPost> ownerPosts) {
         super(context, R.layout.owner_post_listview_shape,ownerPosts);
         this.ownerPosts=ownerPosts;
@@ -34,7 +37,7 @@ public class OwnerPostAdapter extends ArrayAdapter {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        Button deletePostBt,updatePostBt,postStatusBt;
+        ImageView deletePostBt,updatePostBt,postStatusBt;
         database = FirebaseDatabase.getInstance();//database refrence
 
         View view = convertView;
@@ -46,8 +49,8 @@ public class OwnerPostAdapter extends ArrayAdapter {
 
         //current post reference
         deletePostBt = view.findViewById(R.id.deleteBtn);
-        updatePostBt = view.findViewById(R.id.updateBtn);
-        postStatusBt = view.findViewById(R.id.postBt);
+        //updatePostBt = view.findViewById(R.id.updateBtn);
+       // postStatusBt = view.findViewById(R.id.postBt);
         //finding listview shape component
         TextView address = view.findViewById(R.id.ownerAddress);
         TextView homeDetails = view.findViewById(R.id.homeDetails);
