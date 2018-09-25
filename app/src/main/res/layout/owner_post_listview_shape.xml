@@ -2,69 +2,70 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#ffffff">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="3">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_weight="3"
         android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/ownerAddress"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Khilkhet,noianagar"
-            android:textSize="18dp"
-            android:layout_alignParentLeft="true" />
+            android:orientation="horizontal">
+            <ImageView
+                android:padding="2dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/locationpng"
+                android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/ownerAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="Khilkhet,noianagar"
+                android:textSize="18dp"
+                android:padding="2dp"
+                android:textColor="#000000"/>
+        </LinearLayout>
+
 
         <TextView
             android:id="@+id/homeDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/renterName"
             android:text="2 room,1 bathroom,1kitchen"
             android:textSize="15dp"
-            android:layout_alignLeft="@+id/renterName" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true">
-
-
-            <Button
-                android:id="@+id/deleteBtn"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_marginRight="2dp"
-                android:layout_height="wrap_content"
-                android:background="#FFFF0008"
-                android:text="Delete"
-                android:textAllCaps="false" />
-
-            <Button
-                android:id="@+id/updateBtn"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_marginLeft="2dp"
-                android:layout_height="wrap_content"
-                android:background="#FF01A701"
-                android:text="Update"
-                android:textAllCaps="false" />
-            <Button
-                android:id="@+id/statusBtn"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_marginLeft="2dp"
-                android:layout_height="wrap_content"
-                android:background="#FF01A701"
-                android:text="Status"
-                android:textAllCaps="false" />
-
-        </LinearLayout>
+            android:padding="2dp"/>
 
 
     </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/deleteBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="2dp"
+            android:src="@drawable/delete"
+            android:textAllCaps="false"
+            android:padding="2dp"
+            />
+
+
+
+
+    </LinearLayout>
+
+
 
 </LinearLayout>
