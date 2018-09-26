@@ -1,7 +1,11 @@
 package com.example.tanvir.to_letapp.activity.renterActivity;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +13,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 
 import com.example.tanvir.to_letapp.R;
 import com.example.tanvir.to_letapp.activity.MainActivity;
@@ -22,6 +27,12 @@ public class RenterMainActivity extends AppCompatActivity implements
         RenterHomeFragment.OnFragmentInteractionListener,
         RenterNotificationFragment.OnFragmentInteractionListener,
         RenterProfileFragment.OnFragmentInteractionListener {
+    FrameLayout frameLayout;
+    BottomNavigationView bottomNavigationView;
+
+    private RenterHomeFragment renterHomeFragment;
+    private  RenterNotificationFragment renterNotificationFragment;
+    private  RenterProfileFragment renterProfileFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,32 +43,31 @@ public class RenterMainActivity extends AppCompatActivity implements
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tablayoutId);
+        renterHomeFragment = new RenterHomeFragment();
+        renterNotificationFragment = new RenterNotificationFragment();
+        renterProfileFragment = new RenterProfileFragment();
 
-        tabLayout.addTab(tabLayout.newTab().setText("Home"));
-        tabLayout.addTab(tabLayout.newTab().setText("Notification"));
-        tabLayout.addTab(tabLayout.newTab().setText("Profile"));
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        frameLayout = findViewById(R.id.frame_container_renter);
+        bottomNavigationView = findViewById(R.id.renterNavigationView);
 
-        final ViewPager viewPager = findViewById(R.id.viewpagerId);
-        PagerAdapter pagerAdapter = new RenterPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
-        viewPager.setAdapter(pagerAdapter);
-        viewPager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        setFragment(renterHomeFragment);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.renter_home_nav:
+                        setFragment(renterHomeFragment);
+                        break;
+                    case R.id.renter_notification_nav:
+                        setFragment(renterNotificationFragment);
+                        break;
+                    case R.id.renter_profile_nav:
+                        setFragment(renterProfileFragment);
+                        break;
+                        default:
+                            break;
+                }
+                return true;
             }
         });
     }
@@ -94,5 +104,12 @@ public class RenterMainActivity extends AppCompatActivity implements
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         finish();
         startActivity(intent);
+    }
+
+    //setting fragment with bottom navigation
+    private void setFragment(Fragment fragment) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frame_container_renter, fragment);
+        fragmentTransaction.commit();
     }
 }

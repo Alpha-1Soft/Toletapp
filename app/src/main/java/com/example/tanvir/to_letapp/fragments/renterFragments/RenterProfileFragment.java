@@ -29,7 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class RenterProfileFragment extends Fragment {
 
-   TextView renterName,renterEmail,renterPhoneNumber,renterAddress,renterAge,renterProfession,renterMonthlyIncome,
+   private  TextView renterName,renterEmail,renterPhoneNumber,renterAddress,renterAge,renterProfession,renterMonthlyIncome,
             renterMaritalSatus,renterGender,renterReligion,renterNatinality;
 
     FirebaseDatabase database;
@@ -85,12 +85,12 @@ public class RenterProfileFragment extends Fragment {
                     PhoneNumber=dataSnapshot.child("Phone Number").getValue(String.class);
                     Address=dataSnapshot.child("Address").getValue(String.class);
                     Age=dataSnapshot.child("Age").getValue(String.class);
-                    Relagion=dataSnapshot.child("Relagion").getValue(String.class);
+                    Relagion=dataSnapshot.child("Religion").getValue(String.class);
                     Gender=dataSnapshot.child("Gender").getValue(String.class);
                     Profession=dataSnapshot.child("Profession").getValue(String.class);
-                    MonthlyIncome=dataSnapshot.child("MonthlyIncome").getValue(String.class);
-                    MaritalSatus=dataSnapshot.child("MaritalSatus").getValue(String.class);
-                    Natinality=dataSnapshot.child("Natinality").getValue(String.class);
+                    MonthlyIncome=dataSnapshot.child("Monthly Income").getValue(String.class);
+                    MaritalSatus=dataSnapshot.child("Marital Status").getValue(String.class);
+                    Natinality=dataSnapshot.child("Nationality").getValue(String.class);
 
                     renterName.setText(Name);
                     renterEmail.setText(Email);

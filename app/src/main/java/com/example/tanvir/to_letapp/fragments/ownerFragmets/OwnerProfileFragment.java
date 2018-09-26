@@ -13,6 +13,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.jar.Attributes;
 
@@ -35,7 +37,9 @@ public class OwnerProfileFragment extends Fragment {
     TextView ownerName,ownerEmail,ownerPhoneNumber,ownerAddress,ownerAge,ownerRelation,ownerGender;
     FirebaseDatabase database;
     DatabaseReference databaseReference;
-    private String profileId;
+    ImageView profileImageView;
+    FloatingActionButton fab1;
+    private String profileId,profileImage;
 
     String Name,Email,PhoneNumber,Address,Age,Relagion,Gender;
 
@@ -58,16 +62,8 @@ public class OwnerProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_owner_profile, container, false);
-        ownerName=view.findViewById(R.id.ownerNameTv);
-        ownerEmail=view.findViewById(R.id.ownerEmail);
-        ownerPhoneNumber=view.findViewById(R.id.ownerPhoneNumber);
-        ownerAddress=view.findViewById(R.id.ownerAddress);
-        ownerAge=view.findViewById(R.id.ownerAge);
-        ownerRelation=view.findViewById(R.id.ownerRelation);
-        ownerGender=view.findViewById(R.id.ownerGender);
 
-        FloatingActionButton fab1 = view.findViewById(R.id.fab1);
-
+        viewInisialization(view);
         final String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         database=FirebaseDatabase.getInstance();
         databaseReference=database.getReference().child("Owner").child("User").child(userID).child("Profile");
@@ -87,6 +83,7 @@ public class OwnerProfileFragment extends Fragment {
                 Age=dataSnapshot.child("Age").getValue(String.class);
                 Relagion=dataSnapshot.child("Relagion").getValue(String.class);
                 Gender=dataSnapshot.child("Gender").getValue(String.class);
+                profileImage = dataSnapshot.child("ProfileImage").getValue(String.class);
 
 
                 ownerName.setText(Name);
@@ -96,6 +93,12 @@ public class OwnerProfileFragment extends Fragment {
                 ownerAge.setText(Age);
                 ownerRelation.setText(Relagion);
                 ownerGender.setText(Gender);
+                try {
+                    if(profileImage.length()!=0){
+                        Picasso.get().load(profileImage).into(profileImageView);
+                    }
+                }catch (Exception e){}
+
             }
 
             @Override
@@ -132,10 +135,25 @@ public class OwnerProfileFragment extends Fragment {
                 intent.putExtra("Age",Age);
                 intent.putExtra("Relagion",Relagion);
                 intent.putExtra("Gender",Gender);
+                intent.putExtra("ownerProfileImage",profileImage);
                 startActivity(intent);
             }
         });
 
         return view;
+    }
+
+    public void viewInisialization(View view){
+        ownerName=view.findViewById(R.id.ownerNameTv);
+        ownerEmail=view.findViewById(R.id.ownerEmail);
+        ownerPhoneNumber=view.findViewById(R.id.ownerPhoneNumber);
+        ownerAddress=view.findViewById(R.id.ownerAddress);
+        ownerAge=view.findViewById(R.id.ownerAge);
+        ownerRelation=view.findViewById(R.id.ownerRelation);
+        ownerGender=view.findViewById(R.id.ownerGender);
+
+        profileImageView=view.findViewById(R.id.ownerProfileImage);
+
+        fab1 = view.findViewById(R.id.fab1);
     }
 }

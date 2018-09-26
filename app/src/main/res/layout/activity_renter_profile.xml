@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:apps="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    tools:context=".fragments.renterFragments.RenterProfileFragment">
+    tools:context=".activity.renterActivity.RenterProfileActivity">
 
 
     <ScrollView
@@ -20,12 +19,15 @@
                 android:layout_height="160dp"
                 android:background="#0959da"
                 android:orientation="vertical">
-                <ImageView
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/renterProfileImg"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
                     android:src="@drawable/renterprofile"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="#FF000000"
                     android:layout_gravity="center"/>
                 <TextView
                     android:id="@+id/renterNameTv"
@@ -177,14 +179,4 @@
         </LinearLayout>
     </ScrollView>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        apps:layout_anchorGravity="bottom|right|end"
-        apps:srcCompat="@android:drawable/ic_input_add"
-        />
-
-</android.support.design.widget.CoordinatorLayout>
+</LinearLayout>

@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(MainActivity.this, ""+arrayList.get(i).getPostId(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this,DetailsActivity.class);
-                intent.putExtra("ownerId",arrayList.get(i).getOwnerId()+i);
+                intent.putExtra("ownerId",arrayList.get(i).getOwnerId());
                 intent.putExtra("ownerPostId",arrayList.get(i).getPostId());
                 //intent.putExtra("Condition",arrayList.get(i).getFlatCondition());
                 //intent.putExtra("Available",arrayList.get(i).getAvailableFor());

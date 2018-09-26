@@ -5,56 +5,73 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="138dp">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
 
-        <ImageView
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/requestImage"
-            android:layout_width="90dp"
-            android:layout_height="82dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:src="@drawable/renterprofile" />
-
-
-        <TextView
-            android:id="@+id/renterNameTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="105dp"
-            android:text="tanvir Hasan"
-            android:layout_marginLeft="105dp"
-            android:layout_alignParentLeft="true" />
-
-        <TextView
-            android:id="@+id/renterAgeTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/renterNameTv"
-            android:layout_below="@+id/renterNameTv"
-            android:text="22 years old"
-            android:layout_alignLeft="@+id/renterNameTv" />
-
-        <TextView
-            android:id="@+id/renterProfessionTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/renterNameTv"
-            android:layout_below="@+id/renterAgeTv"
-            android:text="student"
-            android:layout_alignLeft="@+id/renterNameTv" />
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/renterprofile"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#FF000000"
+            android:padding="5dp"
+            android:layout_gravity="center"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true">
+            android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/renterNameBt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tanvir Hasan"
+                android:textSize="18sp"
+                android:textColor="#000"
+                android:padding="2dp"
+                android:layout_marginLeft="4dp"
+                android:background="#0000ffff"/>
+
+            <TextView
+                android:id="@+id/renterAgeTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="2dp"
+                android:text="22 years old"
+                android:layout_marginLeft="4dp"/>
+
+            <TextView
+                android:id="@+id/renterProfessionTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="student"
+                android:padding="2dp"
+                android:layout_marginLeft="4dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:padding="2dp">
 
             <Button
                 android:onClick="denied"
@@ -62,10 +79,12 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_marginRight="2dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:background="#FFFF0008"
                 android:text="Denide"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                style="@style/Widget.AppCompat.Button.Colored"
+                />
 
             <Button
                 android:onClick="accept"
@@ -73,14 +92,17 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_marginLeft="2dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:background="#FF01A701"
                 android:text="Accept"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                style="@style/Widget.AppCompat.Button.Colored"/>
+        </LinearLayout>
 
         </LinearLayout>
 
+    </LinearLayout>
 
-    </RelativeLayout>
+    </LinearLayout>
 
-</LinearLayout>
+    </LinearLayout>

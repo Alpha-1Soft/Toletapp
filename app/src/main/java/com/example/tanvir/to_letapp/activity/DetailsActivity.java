@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,12 +24,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
 public class DetailsActivity extends AppCompatActivity {
-    TextView locationTv,bedroomsTv, conditionTv,bathroomTv,rentForTv,rentAmountTv,rentDateTv;
-    String ownerId,ownerPostId;
+    TextView locationTv,bedroomsTv, conditionTv,bathroomTv,rentForTv,rentAmountTv,rentDateTv,kitchenTv,rentTypeTv;
+    String ownerId,ownerPostId,ownerPostKey;
+    ImageView imageView;
     Button requestBt;
     FirebaseDatabase database;
     DatabaseReference databaseReference;
@@ -43,9 +46,23 @@ public class DetailsActivity extends AppCompatActivity {
 
         viewIntialization();
 
+        database = FirebaseDatabase.getInstance();
+
         Intent intent = getIntent();
         ownerId = intent.getStringExtra("ownerId");
         ownerPostId = intent.getStringExtra("ownerPostId");
+        ownerPostKey = intent.getStringExtra("ownerPostActivity");
+        try{
+            if(ownerPostKey.equals("1")){
+                requestBt.setVisibility(View.INVISIBLE);
+            }
+        }catch (Exception e){
+
+        }
+
+        Toast.makeText(this, ""+ownerId+"   "+ownerPostId, Toast.LENGTH_SHORT).show();
+
+        postDetails();
     }
 
     public void Request(View view) {
@@ -56,9 +73,6 @@ public class DetailsActivity extends AppCompatActivity {
         try {
             currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
             final AlertDialog.Builder dialog = new AlertDialog.Builder(this);//alert dialog for confirm delete action from user
-
-            database = FirebaseDatabase.getInstance();
-            databaseReferenceOwner = database.getReference().child("Owner").child("User").child(ownerId).child("Post").child(ownerPostId).child("Request");
             databaseReference = database.getReference().child("Rentar").child("User").child(currentuser).child("Profile");
 
             databaseReference.addChildEventListener(new ChildEventListener() {
@@ -145,9 +159,67 @@ public class DetailsActivity extends AppCompatActivity {
         }
     }
 
+    public void postDetails(){
+        databaseReferenceOwner = database.getReference().child("Owner").child("User").child(ownerId).child("Post").child(ownerPostId);
+       databaseReferenceOwner.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+               // Toast.makeText(DetailsActivity.this, ""+dataSnapshot, Toast.LENGTH_SHORT).show();
+                if(dataSnapshot.getKey().equals("Address")){
+                    locationTv.setText(dataSnapshot.getValue(String.class));
+                }
+                else if(dataSnapshot.getKey().equals("Bedroom quantity")){
+                    bedroomsTv.setText(dataSnapshot.getValue(String.class));
+                }
+                else if(dataSnapshot.getKey().equals("Bathroom quantity")){
+                    bathroomTv.setText(dataSnapshot.getValue(String.class));
+                }
+                else if(dataSnapshot.getKey().equals("Kitchen quantity")){
+                    kitchenTv.setText(dataSnapshot.getValue(String.class));
+                }
+                else if(dataSnapshot.getKey().equals("Rent For")){
+                    rentForTv.setText(dataSnapshot.getValue(String.class));
+                }
+                else if(dataSnapshot.getKey().equals("Rent Type")){
+                    rentTypeTv.setText(dataSnapshot.getValue(String.class));
+                }
+                else if(dataSnapshot.getKey().equals("Images")){
+                    //Toast.makeText(DetailsActivity.this, ""+dataSnapshot.getValue(String.class), Toast.LENGTH_SHORT).show();
+                    //Picasso.get().load(dataSnapshot.getValue(String.class)).into(imageView);
+                    Picasso.get().load(dataSnapshot.getValue(String.class)).resize(500,500).centerCrop().into(imageView);
+
+                }
+                else if(dataSnapshot.getKey().equals("Total rent")){
+                    rentAmountTv.setText(dataSnapshot.getValue(String.class));
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     public void checkUserForRequestAvailability(){
-        final int[] count = {0};
-        databaseReferenceOwner.addListenerForSingleValueEvent(new ValueEventListener() {
+       final int[] count = {0};
+       DatabaseReference databaseReference = database.getReference().child("Owner").child("User").child(ownerId).child("Post").child(ownerPostId);
+       databaseReference.child("Request").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //DatabaseReference databaseReference = databaseReferenceOwner.child(dataSnapshot.getKey());
@@ -156,7 +228,7 @@ public class DetailsActivity extends AppCompatActivity {
                     for (DataSnapshot d : dataSnapshot.getChildren()) {
                         //Toast.makeText(DetailsActivity.this, "" + d.getValue(), Toast.LENGTH_SHORT).show();
                         if (d.getValue().equals(currentuser)) {
-                            count[0]++;
+                            count[0]=1;
                             break;
                         }
                         else {
@@ -164,11 +236,11 @@ public class DetailsActivity extends AppCompatActivity {
                         }
                     }
 
-                    if(count[0]>0){
+                    if(count[0] == 1){
                         Toast.makeText(DetailsActivity.this, "Sorry, you have already sent a request for this post.", Toast.LENGTH_SHORT).show();
                     }
                     else{
-                        databaseReferenceOwner.push().setValue(currentuser);
+                        databaseReferenceOwner.child("Request").push().setValue(currentuser);
                         Toast.makeText(DetailsActivity.this, "Request sent successfully.", Toast.LENGTH_SHORT).show();
                     }
             }
@@ -182,12 +254,15 @@ public class DetailsActivity extends AppCompatActivity {
     private void viewIntialization() {
         requestBt = findViewById(R.id.requestBt);
 
+        imageView= findViewById(R.id.flatImage);
+
         locationTv = findViewById(R.id.locationTv);
         bedroomsTv = findViewById(R.id.bedroomsTv);
-        conditionTv =findViewById(R.id.conditionTv);
-        bathroomTv = findViewById(R.id.bathroomEt);
+        bathroomTv = findViewById(R.id.bathroomTv);
         rentForTv = findViewById(R.id.rentForTv);
         rentAmountTv = findViewById(R.id.rentAmountTv);
         rentDateTv = findViewById(R.id.rentDateTv);
+        kitchenTv = findViewById(R.id.kitchenTv);
+        rentTypeTv = findViewById(R.id.rentTypeTv);
     }
 }

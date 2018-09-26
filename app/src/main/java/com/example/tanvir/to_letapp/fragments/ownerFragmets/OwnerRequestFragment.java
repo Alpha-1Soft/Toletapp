@@ -1,6 +1,7 @@
 package com.example.tanvir.to_letapp.fragments.ownerFragmets;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,10 +10,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.tanvir.to_letapp.R;
+import com.example.tanvir.to_letapp.activity.renterActivity.RenterProfileActivity;
 import com.example.tanvir.to_letapp.adapters.OwnerRequestAdapter;
 import com.example.tanvir.to_letapp.models.OwnerRequest;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,6 +38,11 @@ public class OwnerRequestFragment extends Fragment {
     ListView listView;
     OwnerRequestAdapter ownerRequestAdapter;
     String currentuser;
+    String renterName,renterEmail,renterPhoneNum,renterAddress,
+            renterAge,renterProfession,renterMonthlyIn,renterMaritStatus,
+            renterGender,renterReligion,renterNationality,renterImage;
+    Button renterNameBt;
+    ImageView requestIm;
 
     public interface OnFragmentInteractionListener {
 
@@ -45,7 +55,6 @@ public class OwnerRequestFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -54,9 +63,31 @@ public class OwnerRequestFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_owner_request, container, false);
         listView = view.findViewById(R.id.requestLv);
+        renterNameBt = view.findViewById(R.id.renterNameBt);
+        requestIm = view.findViewById(R.id.requestImage);
 
         ownerRequestAdapter = new OwnerRequestAdapter(getActivity(),arrayList);
         ownerId();
+
+       /* listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(getActivity(), "cllicked", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), RenterProfileActivity.class);
+                intent.putExtra("name",renterName);
+                intent.putExtra("email",renterEmail);
+                intent.putExtra("phoneNumber",renterPhoneNum);
+                intent.putExtra("address",renterAddress);
+                intent.putExtra("Age",renterAge);
+                intent.putExtra("profession",renterProfession);
+                intent.putExtra("monthlyIncome",renterMonthlyIn);
+                intent.putExtra("maritialStatus",renterMaritStatus);
+                intent.putExtra("gender",renterGender);
+                intent.putExtra("religion",renterReligion);
+                intent.putExtra("nationality",renterNationality);
+                startActivity(intent);
+            }
+        });*/
         return view;
     }
 
@@ -109,11 +140,23 @@ public class OwnerRequestFragment extends Fragment {
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                    if(!dataSnapshot.getKey().equals("Notification")){
-                       String name = dataSnapshot.child("Name").getValue(String.class);
-                       String age = dataSnapshot.child("Age").getValue(String.class);
-                       String profession = dataSnapshot.child("Profession").getValue(String.class);
+                       renterName = dataSnapshot.child("Name").getValue(String.class);
+                       renterAge = dataSnapshot.child("Age").getValue(String.class);
+                       renterProfession = dataSnapshot.child("Profession").getValue(String.class);
+                       renterPhoneNum = dataSnapshot.child("Phone Number").getValue(String.class);
+                       renterAddress = dataSnapshot.child("Address").getValue(String.class);
+                       renterMonthlyIn = dataSnapshot.child("MonthlyIncome").getValue(String.class);
+                       renterMaritStatus = dataSnapshot.child("MaritalStatus").getValue(String.class);
+                       renterGender = dataSnapshot.child("Gender").getValue(String.class);
+                       renterReligion = dataSnapshot.child("Religion").getValue(String.class);
+                       renterNationality = dataSnapshot.child("Nationality").getValue(String.class);
+                       renterImage = dataSnapshot.child("Images").getValue(String.class);
+                       renterEmail = dataSnapshot.child("Email").getValue(String.class);
 
-                       OwnerRequest ownerRequest = new OwnerRequest(name,age,profession,renterId,currentuser);
+
+                       OwnerRequest ownerRequest = new OwnerRequest(renterImage,renterName,renterAge,renterProfession,renterPhoneNum,
+                               renterAddress,renterMonthlyIn,renterMaritStatus,renterGender,renterReligion,renterNationality,renterId,
+                               currentuser,renterEmail);
                        arrayList.add(ownerRequest);
                        listView.setAdapter(ownerRequestAdapter);
                    }
