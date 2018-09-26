@@ -124,8 +124,8 @@ public class RenterUpdateActivity extends AppCompatActivity implements AdapterVi
                         databaseReference.child("Age").setValue(renterAgeEt.getText().toString());
                         databaseReference.child("Profession").setValue(professiontext);
                         databaseReference.child("MonthlyIncome").setValue(renterMonthlyIncomeEt.getText().toString());
-                        databaseReference.child("Natinality").setValue(renterNationality.getText().toString());
-                        databaseReference.child("Relagion").setValue(relagiontext);
+                        databaseReference.child("Nationality").setValue(renterNationality.getText().toString());
+                        databaseReference.child("Religion").setValue(relagiontext);
                         databaseReference.child("MaritalSatus").setValue(maritalSatustext);
                     }
 
