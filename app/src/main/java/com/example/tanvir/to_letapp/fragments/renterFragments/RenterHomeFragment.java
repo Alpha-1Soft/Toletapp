@@ -1,28 +1,25 @@
 package com.example.tanvir.to_letapp.fragments.renterFragments;
 
-import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.tanvir.to_letapp.R;
-import com.example.tanvir.to_letapp.activity.DefaultRegisterActivity;
 import com.example.tanvir.to_letapp.activity.DetailsActivity;
-import com.example.tanvir.to_letapp.activity.MainActivity;
 import com.example.tanvir.to_letapp.adapters.FlatAdapter;
 import com.example.tanvir.to_letapp.models.FlatDetails;
 import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -39,6 +36,7 @@ public class RenterHomeFragment extends Fragment {
     FlatAdapter flatAdapter;
     private Firebase firebase,firebase2;
     String image;
+    SearchView searchView;
 
     ArrayList<FlatDetails> arrayList = new ArrayList<>();
     ArrayList<String> ownerIdList = new ArrayList<>();
@@ -91,6 +89,51 @@ public class RenterHomeFragment extends Fragment {
 
         return view;
     }
+
+    /*@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_activity_menu, menu);
+        MenuItem search = menu.findItem(R.id.searchMainMenu);
+        searchView = (android.support.v7.widget.SearchView) search.getActionView();
+
+        searchView.setOnQueryTextListener(new android.support.v7.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                //Toast.makeText(MainActivity.this, ""+newText, Toast.LENGTH_SHORT).show();
+                flatAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.searchMainMenu:
+                // search
+                //OwnerSignOut();
+                break;
+            case R.id.filterMainMenu:
+                //
+                break;
+            default:
+                //
+                break;
+        }
+        return true;
+    }*/
+
+    public void search(String newText){
+        flatAdapter.getFilter().filter(newText);
+    }
+
     public void ownerId(){
         ownerIdList.clear();
         database = FirebaseDatabase.getInstance();//database refrence

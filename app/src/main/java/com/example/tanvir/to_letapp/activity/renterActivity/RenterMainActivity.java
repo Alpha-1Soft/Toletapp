@@ -10,6 +10,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,6 +18,7 @@ import android.widget.FrameLayout;
 
 import com.example.tanvir.to_letapp.R;
 import com.example.tanvir.to_letapp.activity.MainActivity;
+import com.example.tanvir.to_letapp.adapters.FlatAdapter;
 import com.example.tanvir.to_letapp.adapters.RenterPagerAdapter;
 import com.example.tanvir.to_letapp.fragments.renterFragments.RenterHomeFragment;
 import com.example.tanvir.to_letapp.fragments.renterFragments.RenterNotificationFragment;
@@ -29,6 +31,7 @@ public class RenterMainActivity extends AppCompatActivity implements
         RenterProfileFragment.OnFragmentInteractionListener {
     FrameLayout frameLayout;
     BottomNavigationView bottomNavigationView;
+    String searchText;
 
     private RenterHomeFragment renterHomeFragment;
     private  RenterNotificationFragment renterNotificationFragment;
@@ -42,6 +45,8 @@ public class RenterMainActivity extends AppCompatActivity implements
         //setting toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
 
         renterHomeFragment = new RenterHomeFragment();
         renterNotificationFragment = new RenterNotificationFragment();
@@ -76,6 +81,22 @@ public class RenterMainActivity extends AppCompatActivity implements
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.renter_toolbar_menu, menu);
+        MenuItem search = menu.findItem(R.id.searchRenterHome);
+        SearchView searchView = (android.support.v7.widget.SearchView) search.getActionView();
+
+        searchView.setOnQueryTextListener(new android.support.v7.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                //Toast.makeText(MainActivity.this, ""+newText, Toast.LENGTH_SHORT).show();
+                renterHomeFragment.search(searchText);
+                return false;
+            }
+        });
         return true;
     }
 
@@ -83,6 +104,8 @@ public class RenterMainActivity extends AppCompatActivity implements
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
+            case R.id.searchRenterHome:
+                break;
             case R.id.renterLogOut:
                renterSignOut();
                 break;

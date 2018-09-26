@@ -12,7 +12,16 @@ public class FlatDetails {
     public  String image;
     private String postId;
 
-    public FlatDetails(String ownerId, String flatLocation, String bedroom, String kitchen, String bathroom, String rentDate, String condition, String totalRent, String s1, String postId) {
+    public FlatDetails(String flatLocation, String bedroom, String kitchen, String totalRent) {
+        this.flatLocation = flatLocation;
+        this.bedroom =  bedroom;
+        this.kitchen = kitchen;
+        this.totalRent = totalRent;
+    }
+
+    public FlatDetails(String ownerId, String flatLocation, String bedroom
+            , String kitchen, String bathroom, String rentDate, String condition
+            , String totalRent, String s1, String postId) {
         this.ownerId = ownerId;
         this.flatLocation = flatLocation;
         this.bedroom = bedroom;
