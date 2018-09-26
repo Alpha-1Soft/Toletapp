@@ -57,6 +57,8 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
     Spinner rentForSp, rentTypeSp;
     String rentForSpinnerText, rentTypeSpinnerText, rentDate;
     DatePickerDialog datePickerDialog;
+    String[] rentType = null;
+    String[] rentFor = null;
 
     ImageView imageView1, imageView2, imageView3, imageView4;
     ProgressDialog progressDialog;
@@ -70,8 +72,8 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
 
     ArrayList<String> imageList = new ArrayList<>();
 
-    String[] rentType = {"Flat", "Sub let", "Hostel", "Office"};
-    String[] rentFor = {"Male", "Female", "Family"};
+   // String[] rentType = {"Flat", "Sub let", "Hostel", "Office"};
+   // String[] rentFor = {"Male", "Female", "Family"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,24 +96,27 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
         rentForSp = findViewById(R.id.rentForSp);
         rentTypeSp = findViewById(R.id.rentTypeSp);
 
+
+        rentTypeSpinnerText=rentTypeSp.getSelectedItem().toString();
+        rentForSpinnerText=rentTypeSp.getSelectedItem().toString();
         //listener
-        rentForSp.setOnItemSelectedListener(this);
+       // rentForSp.setOnItemSelectedListener(this);
         rentTypeSp.setOnItemSelectedListener(this);
 
-        ownerPostFragment = new OwnerPostFragment();
+       ownerPostFragment = new OwnerPostFragment();
         progressDialog = new ProgressDialog(this);
 
-        ArrayAdapter<String> rentForAdapter = new ArrayAdapter<String>
-                (this, android.R.layout.simple_dropdown_item_1line, rentFor);
-        ArrayAdapter<String> rentTypeAdapter = new ArrayAdapter<String>
-                (this, android.R.layout.simple_dropdown_item_1line, rentType);
+      //  ArrayAdapter<String> rentForAdapter = new ArrayAdapter<String>
+           //     (this, android.R.layout.simple_dropdown_item_1line, rentFor);
+      //  ArrayAdapter<String> rentTypeAdapter = new ArrayAdapter<String>
+              //  (this, android.R.layout.simple_dropdown_item_1line, rentType);
 
-        rentForAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        rentTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+       // rentForAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //rentTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         // attaching data adapter to spinner
-        rentForSp.setAdapter(rentForAdapter);
-        rentTypeSp.setAdapter(rentTypeAdapter);
+      // rentForSp.setAdapter(rentForAdapter);
+        //rentTypeSp.setAdapter(rentTypeAdapter);
 
 
         postBt.setOnClickListener(new View.OnClickListener() {
@@ -124,9 +129,9 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private void post(final Fragment fragment) {
 
-        ProgressDialog pd = new ProgressDialog(this);
+       /* ProgressDialog pd = new ProgressDialog(this);
         pd.setMessage("loading");
-        pd.show();
+       / pd.show();*/
 
         FirebaseDatabase database;
         final DatabaseReference databaseReferenceOwner, databaseReferenceRenter;
@@ -229,14 +234,14 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        rentForSpinnerText = adapterView.getItemAtPosition(i).toString();
+        /*rentForSpinnerText = adapterView.getItemAtPosition(i).toString();
         rentTypeSpinnerText = adapterView.getItemAtPosition(i).toString();
         if (i == 3) {
             rentForSpinnerText = adapterView.getItemAtPosition(i-1).toString();
             rentTypeSpinnerText = adapterView.getItemAtPosition(i).toString();
-        }
+        }*/
         try{
-            if (rentTypeSpinnerText.equals("Office")) {//if user select office then hole "rentForSp" and some editText will be disabled
+            if (i==3) {//if user select office then hole "rentForSp" and some editText will be disabled
                 rentForSp.setEnabled(false);
                 rentForSp.setClickable(false);
 
@@ -248,18 +253,13 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
 
                 bathroomEt.setEnabled(false);
                 bathroomEt.setClickable(false);
-                Toast.makeText(this, "office checked", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(this, "office checked", Toast.LENGTH_SHORT).show();
             }
 
-            else if (rentForSpinnerText.equals("Family")) {//if user select family then "hostel" option will be disabled
-                rentType[2] = "";
-                rentType[3] = "";
-            } else {//otherwise all disabled options will be enabled
-                rentType[3] = "Office";
-                rentType[2] = "Hostel";
-
-                rentFor[2] = "Family";
-
+          //  else if (rentForSpinnerText.equals("Family")) {//if user select family then "hostel" option will be disabled
+              else if(i==2){
+                //rentType[2] = "";
+               // rentType[3] = "";
                 rentForSp.setEnabled(true);
                 rentForSp.setClickable(true);
 
@@ -271,8 +271,36 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
 
                 bathroomEt.setEnabled(true);
                 bathroomEt.setClickable(true);
+                rentFor =new String[] {"Male", "Female"};
+               // ArrayAdapter<String> rentfor = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,rentFor);
+               // rentForSp.setAdapter(rentfor);
+
+            } else {//otherwise all disabled options will be enabled
+              /*  rentType[3] = "Office";
+                rentType[2] = "Hostel";
+
+                rentFor[2] = "Family";*/
+                rentFor = new String[]{"Male", "Female", "Family"};
+                rentForSp.setEnabled(true);
+                rentForSp.setClickable(true);
+
+                bedroomEt.setEnabled(true);
+                bedroomEt.setClickable(true);
+
+                kitchenroomEt.setEnabled(true);
+                kitchenroomEt.setClickable(true);
+
+                bathroomEt.setEnabled(true);
+                bathroomEt.setClickable(true);
+             //   ArrayAdapter<String> rentfor = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,rentFor);
+                //rentForSp.setAdapter(rentfor);
             }
-        }catch (Exception e){
+            ArrayAdapter<String> rentfor = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,rentFor);
+            rentForSp.setAdapter(rentfor);
+
+        }
+        catch (Exception e){
+            Toast.makeText(this, "office checked", Toast.LENGTH_SHORT).show();
 
         }
     }
