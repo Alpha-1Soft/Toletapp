@@ -23,8 +23,9 @@
                        android:layout_height="match_parent"
                        android:orientation="vertical">
                        <ImageView
-                           android:layout_width="200dp"
-                           android:layout_height="110dp"
+                           android:id="@+id/flatImage"
+                           android:layout_width="match_parent"
+                           android:layout_height="200dp"
                            android:layout_gravity="center"
                            android:src="@drawable/bedroom"
                            />
@@ -62,7 +63,7 @@
                            android:textSize="20sp"
                            android:textColor="#000"/>
                        <TextView
-                           android:id="@+id/conditionTv"
+                           android:id="@+id/kitchenTv"
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
                            android:text="1 Kitchan"
@@ -86,6 +87,20 @@
                            android:text="Rent For"
                            android:textSize="20sp"
                            android:textColor="#000"/>
+
+                       <TextView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="Rent amount"
+                           android:textSize="20sp"
+                           android:textColor="#000"/>
+
+                       <TextView
+                           android:id="@+id/rentTypeTv"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="15000 Tk"
+                           android:textSize="18sp" />
                        <TextView
                            android:id="@+id/rentForTv"
                            android:layout_width="wrap_content"
