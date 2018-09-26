@@ -18,10 +18,12 @@ import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.tanvir.to_letapp.R;
+import com.example.tanvir.to_letapp.activity.DetailsActivity;
 import com.example.tanvir.to_letapp.activity.MainActivity;
 import com.example.tanvir.to_letapp.activity.ownerActivity.PostActivity;
 import com.example.tanvir.to_letapp.adapters.OwnerPostAdapter;
@@ -100,6 +102,17 @@ public class OwnerPostFragment extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getActivity(), DetailsActivity.class);
+                intent.putExtra("ownerId",userID);
+                intent.putExtra("ownerPostId",arrayList.get(i).getPostId());
+                intent.putExtra("ownerPostActivity","1");
+                startActivity(intent);
             }
         });
 
