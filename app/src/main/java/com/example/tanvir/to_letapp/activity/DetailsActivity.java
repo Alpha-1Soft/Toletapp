@@ -263,6 +263,6 @@ public class DetailsActivity extends AppCompatActivity {
         rentAmountTv = findViewById(R.id.rentAmountTv);
         rentDateTv = findViewById(R.id.rentDateTv);
         kitchenTv = findViewById(R.id.kitchenTv);
-        rentTypeTv = findViewById(R.id.rentTypeTv);
+        rentTypeTv = findViewById(R.id.rentertype);
     }
 }
