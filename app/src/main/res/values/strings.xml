@@ -14,4 +14,11 @@
         <item>Christians</item>
         <item>None</item>
     </string-array>
+    <string name="selectrenttype">Select RentType</string>
+    <string-array name="renttype">
+        <item>Flat</item>
+        <item>Sub-Let</item>
+        <item>Hosel</item>
+        <item>Office</item>
+    </string-array>
 </resources>
