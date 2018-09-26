@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="5dp"
     tools:context=".activity.DetailsActivity"
     android:weightSum="10"
     android:orientation="vertical">
@@ -30,108 +31,146 @@
                            android:src="@drawable/bedroom"
                            />
                        <TextView
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="Location"
-                           android:textSize="20sp"
-                           android:textColor="#000"/>
-                       <TextView
                            android:id="@+id/locationTv"
+                           android:padding="5dp"
                            android:layout_width="match_parent"
                            android:layout_height="wrap_content"
+                           android:gravity="center"
                            android:text="Location"
-                           android:textSize="18sp"
-                           />
-                       <TextView
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="Bedrooms"
-                           android:textSize="20sp"
+                           android:textSize="30sp"
                            android:textColor="#000"
                            />
+                       <TextView
+                           android:id="@+id/flore"
+                           android:layout_width="wrap_content"
+                           android:layout_gravity="center"
+                           android:layout_height="wrap_content"
+                           android:text="5th Flore"
+                           android:textSize="20sp"
+                           android:textColor="#000"/>
+                       <TextView
+                           android:id="@+id/rentertype"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_gravity="center"
+                           android:text="Flat"
+                           android:textSize="20sp"
+                           android:textColor="#000"/>
+                       <LinearLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:gravity="center"
+                           android:orientation="horizontal">
 
-                       <TextView
-                           android:id="@+id/bedroomsTv"
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="2 Bedrooms"
-                           android:textSize="18sp"/>
-                       <TextView
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="Kitchen"
-                           android:textSize="20sp"
-                           android:textColor="#000"/>
-                       <TextView
-                           android:id="@+id/kitchenTv"
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="1 Kitchan"
-                           android:textSize="18sp"
-                           />
-                       <TextView
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="Bathroom"
-                           android:textSize="20sp"
-                           android:textColor="#000"/>
+                           <TextView
+                               android:id="@+id/bedroomsTv"
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:padding="5dp"
+                               android:text="2 Bedrooms"
+                               android:textColor="#000"
+                               android:textSize="20sp"/>
+                           <TextView
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:text=","
+                               android:textSize="20sp"
+                               android:textColor="#000"/>
+                           <TextView
+                               android:id="@+id/kitchenTv"
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:padding="5dp"
+                               android:text="1 Kitchan"
+                               android:textColor="#000"
+                               android:textSize="20sp"
+                               />
+
+                       </LinearLayout>
+
                        <TextView
                            android:id="@+id/bathroomTv"
                            android:layout_width="wrap_content"
+                           android:padding="5dp"
                            android:layout_height="wrap_content"
+                           android:layout_gravity="center"
                            android:text="Separet Bathrooms"
-                           android:textSize="18sp"/>
-                       <TextView
-                           android:layout_width="wrap_content"
+                           android:textColor="#000"
+                           android:textSize="20sp"/>
+                       <LinearLayout
+                           android:layout_width="match_parent"
                            android:layout_height="wrap_content"
-                           android:text="Rent For"
-                           android:textSize="20sp"
-                           android:textColor="#000"/>
+                           android:padding="5dp"
+                           android:gravity="center"
+                           android:orientation="horizontal">
+                           <TextView
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:text="Rent amount"
+                               android:textSize="20sp"
+                               android:textColor="#000"/>
 
-                       <TextView
-                           android:layout_width="wrap_content"
+                           <TextView
+                               android:id="@+id/rentAmountTv"
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:layout_marginLeft="5dp"
+                               android:text="15000 Tk"
+                               android:textSize="20sp"
+                               android:textColor="#000"/>
+                       </LinearLayout>
+                       <LinearLayout
+                           android:layout_width="match_parent"
+                           android:padding="5dp"
                            android:layout_height="wrap_content"
-                           android:text="Rent amount"
-                           android:textSize="20sp"
-                           android:textColor="#000"/>
+                           android:gravity="center">
+                           <TextView
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:text="Rent For"
+                               android:textSize="20sp"
+                               android:textColor="#000"/>
+                           <TextView
+                               android:id="@+id/rentForTv"
+                               android:layout_width="wrap_content"
+                               android:layout_marginLeft="5dp"
+                               android:layout_height="wrap_content"
+                               android:text="Batchalor"
+                               android:textSize="20sp"
+                               android:textColor="#000"/>
+                       </LinearLayout>
 
+                       <LinearLayout
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:padding="5dp"
+                           android:gravity="center"
+                           android:orientation="horizontal">
+                           <TextView
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:text="Rent Date"
+                               android:textSize="20sp"
+                               android:textColor="#000"/>
+                           <TextView
+                               android:id="@+id/rentDate"
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:layout_marginLeft="5dp"
+                               android:text="September 2018"
+                               android:textSize="20sp"
+                               android:textColor="#000"/>
+                       </LinearLayout>
                        <TextView
-                           android:id="@+id/rentTypeTv"
+                           android:id="@+id/description"
                            android:layout_width="wrap_content"
                            android:layout_height="wrap_content"
-                           android:text="15000 Tk"
-                           android:textSize="18sp" />
-                       <TextView
-                           android:id="@+id/rentForTv"
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="Batchalor"
-                           android:textSize="18sp"/>
-                       <TextView
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="Rent amount"
-                           android:textSize="20sp"
-                           android:textColor="#000"/>
+                           android:layout_gravity="center"
+                           android:padding="5dp"
+                           android:text="Description"
+                           android:textColor="#000"
+                           android:textSize="20sp"/>
 
-                       <TextView
-                           android:id="@+id/rentAmountTv"
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="15000 Tk"
-                           android:textSize="18sp" />
-                       <TextView
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="Rent Date"
-                           android:textSize="20sp"
-                           android:textColor="#000"/>
-                       <TextView
-                           android:id="@+id/rentDate"
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:text="September 2018"
-                           android:textSize="18sp"/>
                    </LinearLayout>
 
                </ScrollView>
