@@ -3,6 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/searchRenterHome"
+        android:icon="@android:drawable/ic_search_category_default"
+        android:title="Search"
+        app:showAsAction="always"
+        app:actionViewClass="android.support.v7.widget.SearchView" />
+    <item
+        android:id="@+id/filterrenterHome"
+        android:title="Filter"
+        app:showAsAction="always"
+        android:icon="@drawable/filter"/>
+    <item
         android:id="@+id/renterLogOut"
         android:title="Log out" />
     <item

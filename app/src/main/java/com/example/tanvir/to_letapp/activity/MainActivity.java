@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
     private Firebase firebase,firebase2;
     TextView locationTv,availavbleForTv,conditionTv;
     ListView listView;
+    android.support.v7.widget.SearchView searchView;
+
+
     FlatAdapter flatAdapter;
     FirebaseDatabase database;
     DatabaseReference databaseReference,databaseReference2,databaseReferenceForImage;
@@ -99,11 +103,31 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_activity_menu, menu);
+        MenuItem search = menu.findItem(R.id.searchMainMenu);
+         searchView = (android.support.v7.widget.SearchView) search.getActionView();
+
+        searchView.setOnQueryTextListener(new android.support.v7.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+               //Toast.makeText(MainActivity.this, ""+newText, Toast.LENGTH_SHORT).show();
+                flatAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
         return true;
     }
 
@@ -112,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
         switch (id) {
             case R.id.searchMainMenu:
+                // search
                 //OwnerSignOut();
                 break;
             case R.id.filterMainMenu:
