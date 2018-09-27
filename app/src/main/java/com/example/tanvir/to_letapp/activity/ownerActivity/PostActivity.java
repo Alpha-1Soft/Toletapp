@@ -28,6 +28,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tanvir.to_letapp.R;
@@ -52,6 +53,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class PostActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+    TextView bedroomquantity,kitchenquantity,bathroomquantity;
     private EditText postAddressEt, totalRentEt, bedroomEt, kitchenroomEt, bathroomEt,rentDateEt;
     private String postAddress, totalRent, bedroom, kitchenroom, bathroom,rentDate,rentForSt,rentTypeSt,image, postId;
     private Button postBt;
@@ -60,7 +62,7 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
     String rentForSpinnerText, rentTypeSpinnerText;
     DatePickerDialog datePickerDialog;
     String[] rentType = null;
-    String[] rentFor = null;
+    String[] rentFor = {"Male", "Female", "Family"};
     ImageView imageView1, imageView2, imageView3, imageView4;
     ProgressDialog progressDialog;
     FirebaseDatabase database;
@@ -76,9 +78,6 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
     Uri uri;
 
     ArrayList<String> imageList = new ArrayList<>();
-
-   // String[] rentType = {"Flat", "Sub let", "Hostel", "Office"};
-   // String[] rentFor = {"Male", "Female", "Family"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,21 +105,23 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
         bathroomPlusBt = findViewById(R.id.bathroomPlusBt);
         bathroomMinusBt = findViewById(R.id.bathroomMinusBt);
 
+        bedroomquantity=findViewById(R.id.bedroomquantity);
+        bathroomquantity=findViewById(R.id.bathroomquantity);
+        kitchenquantity=findViewById(R.id.kitchenquantity);
+
         postBt = findViewById(R.id.postBt);
 
         rentForSp = findViewById(R.id.rentForSp);
         rentTypeSp = findViewById(R.id.rentTypeSp);
 
-
-        rentTypeSpinnerText=rentTypeSp.getSelectedItem().toString();
-        rentForSpinnerText=rentTypeSp.getSelectedItem().toString();
         //listener
-       // rentForSp.setOnItemSelectedListener(this);
         rentTypeSp.setOnItemSelectedListener(this);
 
        ownerPostFragment = new OwnerPostFragment();
         progressDialog = new ProgressDialog(this);
 
+        ArrayAdapter<String> rentfor = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,rentFor);
+        rentForSp.setAdapter(rentfor);
         Toast.makeText(this, ""+getIntent().getStringExtra("key")+" "+getIntent().getStringExtra("OwnerPostId"), Toast.LENGTH_SHORT).show();
 
         try{
@@ -245,6 +246,9 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
        / pd.show();*/
 
         final DatabaseReference databaseReferenceOwner, databaseReferenceRenter;
+
+        rentTypeSpinnerText=rentTypeSp.getSelectedItem().toString();
+        rentForSpinnerText=rentForSp.getSelectedItem().toString();
 
         final String postAddress = postAddressEt.getText().toString();
         final String totalRent = totalRentEt.getText().toString();
@@ -416,23 +420,33 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        /*rentForSpinnerText = adapterView.getItemAtPosition(i).toString();
-        rentTypeSpinnerText = adapterView.getItemAtPosition(i).toString();
-        if (i == 3) {
-            rentForSpinnerText = adapterView.getItemAtPosition(i-1).toString();
-            rentTypeSpinnerText = adapterView.getItemAtPosition(i).toString();
-        }*/
+
         try{
             if (i==3) {//if user select office then hole "rentForSp" and some editText will be disabled
                 rentForSp.setEnabled(false);
                 rentForSp.setClickable(false);
 
+                bedroomquantity.setEnabled(false);
+                bedroomMInusBt.setEnabled(false);
+                bedroomMInusBt.setClickable(false);
+                bedroomPlusBt.setEnabled(false);
+                bedroomPlusBt.setClickable(false);
                 bedroomEt.setEnabled(false);
                 bedroomEt.setClickable(false);
 
+                kitchenquantity.setEnabled(false);
+                kitchenMinusBt.setEnabled(false);
+                kitchenMinusBt.setClickable(false);
+                kitchenPlusBt.setEnabled(false);
+                kitchenPlusBt.setClickable(false);
                 kitchenroomEt.setEnabled(false);
                 kitchenroomEt.setClickable(false);
 
+                bathroomquantity.setEnabled(false);
+                bathroomMinusBt.setEnabled(false);
+                bathroomMinusBt.setClickable(false);
+                bathroomPlusBt.setEnabled(false);
+                bathroomPlusBt.setClickable(false);
                 bathroomEt.setEnabled(false);
                 bathroomEt.setClickable(false);
                // Toast.makeText(this, "office checked", Toast.LENGTH_SHORT).show();
@@ -440,45 +454,70 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
 
           //  else if (rentForSpinnerText.equals("Family")) {//if user select family then "hostel" option will be disabled
               else if(i==2){
-                //rentType[2] = "";
-               // rentType[3] = "";
+
+                rentFor[0]="Male";
+                rentFor[1]="Female";
+                rentFor[2]="";
                 rentForSp.setEnabled(true);
                 rentForSp.setClickable(true);
 
+                bedroomquantity.setEnabled(true);
+                bedroomMInusBt.setEnabled(true);
+                bedroomMInusBt.setClickable(true);
+                bedroomPlusBt.setEnabled(true);
+                bedroomPlusBt.setClickable(true);
                 bedroomEt.setEnabled(true);
                 bedroomEt.setClickable(true);
 
+                kitchenquantity.setEnabled(true);
+                kitchenMinusBt.setEnabled(true);
+                kitchenMinusBt.setClickable(true);
+                kitchenPlusBt.setEnabled(true);
+                kitchenPlusBt.setClickable(true);
                 kitchenroomEt.setEnabled(true);
                 kitchenroomEt.setClickable(true);
 
+                bathroomquantity.setEnabled(true);
+                bathroomMinusBt.setEnabled(true);
+                bathroomMinusBt.setClickable(true);
+                bathroomPlusBt.setEnabled(true);
+                bathroomPlusBt.setClickable(true);
                 bathroomEt.setEnabled(true);
                 bathroomEt.setClickable(true);
-                rentFor =new String[] {"Male", "Female"};
-               // ArrayAdapter<String> rentfor = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,rentFor);
-               // rentForSp.setAdapter(rentfor);
 
             } else {//otherwise all disabled options will be enabled
-              /*  rentType[3] = "Office";
-                rentType[2] = "Hostel";
 
-                rentFor[2] = "Family";*/
-                rentFor = new String[]{"Male", "Female", "Family"};
+               rentFor[0]="Male";
+               rentFor[1]="Female";
+               rentFor[2]="Family";
                 rentForSp.setEnabled(true);
                 rentForSp.setClickable(true);
 
+                bedroomquantity.setEnabled(true);
+                bedroomMInusBt.setEnabled(true);
+                bedroomMInusBt.setClickable(true);
+                bedroomPlusBt.setEnabled(true);
+                bedroomPlusBt.setClickable(true);
                 bedroomEt.setEnabled(true);
                 bedroomEt.setClickable(true);
 
+                kitchenquantity.setEnabled(true);
+                kitchenMinusBt.setEnabled(true);
+                kitchenMinusBt.setClickable(true);
+                kitchenPlusBt.setEnabled(true);
+                kitchenPlusBt.setClickable(true);
                 kitchenroomEt.setEnabled(true);
                 kitchenroomEt.setClickable(true);
 
+                bathroomquantity.setEnabled(true);
+                bathroomMinusBt.setEnabled(true);
+                bathroomMinusBt.setClickable(true);
+                bathroomPlusBt.setEnabled(true);
+                bathroomPlusBt.setClickable(true);
                 bathroomEt.setEnabled(true);
                 bathroomEt.setClickable(true);
-             //   ArrayAdapter<String> rentfor = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,rentFor);
-                //rentForSp.setAdapter(rentfor);
+
             }
-            ArrayAdapter<String> rentfor = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,rentFor);
-            rentForSp.setAdapter(rentfor);
 
         }
         catch (Exception e){
