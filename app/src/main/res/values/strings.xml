@@ -18,7 +18,7 @@
     <string-array name="renttype">
         <item>Flat</item>
         <item>Sub-Let</item>
-        <item>Hosel</item>
+        <item>Hostel</item>
         <item>Office</item>
     </string-array>
 </resources>
