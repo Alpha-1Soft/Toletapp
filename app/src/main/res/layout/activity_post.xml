@@ -70,7 +70,36 @@
 
                </LinearLayout>
 
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/locationEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="Location"
+                    android:inputType="text"
+                    android:layout_marginTop="20dp"
+                    android:padding="8dp"
+                    />
+            </android.support.design.widget.TextInputLayout>
 
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/rentEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:hint="Rent amount"
+                    android:inputType="text"
+                    android:padding="8dp"
+                    android:gravity="left|start"/>
+            </android.support.design.widget.TextInputLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -128,92 +157,127 @@
                     android:text="Rent date"
                     android:textSize="20sp"
                     android:textColor="#000"/>
-
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/rentDateEt"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"/>
                 <Button
                     android:onClick="selectDate"
-                    android:layout_width="118dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Select date"
                     android:textAllCaps="false" />
+            </LinearLayout>
 
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Bedroom quantity"
+                        android:textColor="#000"
+                        android:textSize="20sp"/>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <ImageButton
+                            android:id="@+id/bedroomMinusBt"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/minus"
+                            />
+                        <EditText
+                            android:id="@+id/bedroomEt"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            />
+                        <ImageButton
+                            android:id="@+id/bedroomPlusBt"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/plusicon"
+                            />
+                    </LinearLayout>
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kitchen quantity"
+                    android:textColor="#000"
+                    android:textSize="20sp"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ImageButton
+                        android:id="@+id/kitchenMinusBt"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/minus"
+                        />
+                    <EditText
+                        android:id="@+id/kitchenEt"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        />
+                    <ImageButton
+                        android:id="@+id/kitchenPlusBt"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/plusicon"
+                        />
+                </LinearLayout>
+                </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                >
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/locationEt"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:hint="Location"
-                    android:inputType="text"
-                    android:layout_marginTop="10dp"
-                    android:padding="8dp"
-                    />
-            </android.support.design.widget.TextInputLayout>
-
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
-
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/bedroomEt"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="10dp"
-                    android:hint="Bedroom"
-                    android:inputType="text"
-                    android:padding="8dp"
-                    android:gravity="left|start"/>
-            </android.support.design.widget.TextInputLayout>
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
-
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/bathroomEt"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="10dp"
-                    android:hint="Bathroom"
-                    android:inputType="text"
-                    android:padding="8dp"
-                    android:gravity="left|start"/>
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
-
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/kitchenEt"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="10dp"
-                    android:hint="Kitchen"
-                    android:inputType="text"
-                    android:padding="8dp"
-                    android:gravity="left|start"/>
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
-
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/rentEt"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="10dp"
-                    android:hint="Rent amount"
-                    android:inputType="text"
-                    android:padding="8dp"
-                    android:gravity="left|start"/>
-            </android.support.design.widget.TextInputLayout>
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bathroom quantity"
+                    android:textColor="#000"
+                    android:textSize="20sp"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ImageButton
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/minus"
+                        android:id="@+id/bathroomMinusBt"
+                        />
+                    <EditText
+                        android:id="@+id/bathroomEt"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        />
+                    <ImageButton
+                        android:id="@+id/bathroomPlusBt"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/plusicon"
+                        />
+                </LinearLayout>
+            </LinearLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -225,7 +289,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="126dp"
                     android:layout_marginTop="10dp"
-                    android:hint="Description"
+                    android:hint="Description (Optional)"
                     android:inputType="text"
                     android:padding="8dp"
                     android:gravity="left|start"/>
