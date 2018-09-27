@@ -85,6 +85,7 @@ public class DetailsActivity extends AppCompatActivity {
                         if(dataSnapshot.getChildrenCount()<8){
                             dialog.setTitle("Attention!");
                             dialog.setMessage("Your profile still incomplete. Do you want to update your profile ?");
+
                             final String name=dataSnapshot.child("Name").getValue(String.class);
                             final String email=dataSnapshot.child("Email").getValue(String.class);
                             final String phoneNumber=dataSnapshot.child("Phone Number").getValue(String.class);

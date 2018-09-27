@@ -37,6 +37,7 @@ import com.example.tanvir.to_letapp.fragments.ownerFragmets.OwnerPostFragment;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -51,21 +52,25 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class PostActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-    EditText postAddressEt, totalRentEt, bedroomEt, kitchenroomEt, bathroomEt;
-    Button postBt;
+    private EditText postAddressEt, totalRentEt, bedroomEt, kitchenroomEt, bathroomEt,rentDateEt;
+    private String postAddress, totalRent, bedroom, kitchenroom, bathroom,rentDate,rentForSt,rentTypeSt,image, postId;
+    private Button postBt;
     OwnerPostFragment ownerPostFragment;
     Spinner rentForSp, rentTypeSp;
-    String rentForSpinnerText, rentTypeSpinnerText, rentDate;
+    String rentForSpinnerText, rentTypeSpinnerText;
     DatePickerDialog datePickerDialog;
     String[] rentType = null;
     String[] rentFor = null;
-
     ImageView imageView1, imageView2, imageView3, imageView4;
     ProgressDialog progressDialog;
+    FirebaseDatabase database;
 
+    ImageButton bedroomMInusBt,bedroomPlusBt,kitchenMinusBt,kitchenPlusBt,bathroomMinusBt,bathroomPlusBt;
+
+    int bedoomCount=0,kitchenCount=0,bathroomCount=0;
     String currentUserId;
 
-    DatabaseReference imageReference;
+    DatabaseReference imageReference,databaseReferenceUpdate;
 
     //ArrayList<Uri> uriList = new ArrayList<>();
     Uri uri;
@@ -85,11 +90,21 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
         bedroomEt = findViewById(R.id.bedroomEt);
         kitchenroomEt = findViewById(R.id.kitchenEt);
         bathroomEt = findViewById(R.id.bathroomEt);
+        rentDateEt = findViewById(R.id.rentDateEt);
 
         imageView1 = findViewById(R.id.imageView1);
         imageView2 = findViewById(R.id.imageView2);
         imageView3 = findViewById(R.id.imageView3);
         imageView4 = findViewById(R.id.imageView4);
+
+        bedroomPlusBt = findViewById(R.id.bedroomPlusBt);
+        bedroomMInusBt = findViewById(R.id.bedroomMinusBt);
+
+        kitchenPlusBt = findViewById(R.id.kitchenPlusBt);
+        kitchenMinusBt = findViewById(R.id.kitchenMinusBt);
+
+        bathroomPlusBt = findViewById(R.id.bathroomPlusBt);
+        bathroomMinusBt = findViewById(R.id.bathroomMinusBt);
 
         postBt = findViewById(R.id.postBt);
 
@@ -106,25 +121,121 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
        ownerPostFragment = new OwnerPostFragment();
         progressDialog = new ProgressDialog(this);
 
-      //  ArrayAdapter<String> rentForAdapter = new ArrayAdapter<String>
-           //     (this, android.R.layout.simple_dropdown_item_1line, rentFor);
-      //  ArrayAdapter<String> rentTypeAdapter = new ArrayAdapter<String>
-              //  (this, android.R.layout.simple_dropdown_item_1line, rentType);
+        Toast.makeText(this, ""+getIntent().getStringExtra("key")+" "+getIntent().getStringExtra("OwnerPostId"), Toast.LENGTH_SHORT).show();
 
-       // rentForAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //rentTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        try{
+            if(getIntent().getStringExtra("key").equals("1")){
+                Intent intent = getIntent();
+                postId = intent.getStringExtra("OwnerPostId");
 
-        // attaching data adapter to spinner
-      // rentForSp.setAdapter(rentForAdapter);
-        //rentTypeSp.setAdapter(rentTypeAdapter);
+                postAddress = intent.getStringExtra("location");
+                bedroom =  intent.getStringExtra("bedroom");
+                kitchenroom =  intent.getStringExtra("kitchen");
+                totalRent =  intent.getStringExtra("rentAmount");
+                rentForSt =  intent.getStringExtra("rentFor");
+                rentTypeSt =  intent.getStringExtra("rentType");
+                image =  intent.getStringExtra("bedroom");
+                rentDate  =  intent.getStringExtra("rentDate");
+
+                postAddressEt.setText(postAddress);
+                bedroomEt.setText(bedroom);
+                kitchenroomEt.setText(kitchenroom);
+                totalRentEt.setText(totalRent);
+                rentDateEt.setText(rentDate);
+                bathroomEt.setText(bathroom);
+
+                if(rentForSt.equals("Flat")){
+                    rentForSp.setSelection(0);
+                }
+                else if(rentForSt.equals("Sub-Let")){
+                    rentForSp.setSelection(1);
+                }
+                else if(rentForSt.equals("Hostel")){
+                    rentForSp.setSelection(2);
+                }
+                else if(rentForSt.equals("Office")){
+                    rentForSp.setSelection(3);
+                }
+
+                if(rentTypeSt.equals("Male")){
+                    rentTypeSp.setSelection(0);
+
+                }else if(rentTypeSt.equals("Female")){
+                    rentTypeSp.setSelection(1);
+
+                }else if(rentTypeSt.equals("Family")){
+                    rentTypeSp.setSelection(2);
+                }
 
 
-        postBt.setOnClickListener(new View.OnClickListener() {
+            }
+        }catch (Exception e){
+
+        }
+
+        bedroomPlusBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                post(ownerPostFragment);
+                bedoomCount++;
+                bedroomEt.setText(String.valueOf(bedoomCount));
             }
         });
+        bedroomMInusBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bedoomCount--;
+                bedroomEt.setText(String.valueOf(bedoomCount));
+            }
+        });
+
+        kitchenPlusBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                kitchenCount++;
+                kitchenroomEt.setText(String.valueOf(kitchenCount));
+            }
+        });
+        kitchenMinusBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                kitchenCount--;
+                kitchenroomEt.setText(String.valueOf(kitchenCount));
+            }
+        });
+
+        bathroomPlusBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bathroomCount++;
+                bathroomEt.setText(String.valueOf(bathroomCount));
+            }
+        });
+        bathroomMinusBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bathroomCount--;
+                bathroomEt.setText(String.valueOf(bathroomCount));
+            }
+        });
+        try{
+            if(getIntent().getStringExtra("key").equals("1")){
+                postBt.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        updatePost();
+                    }
+                });
+            }
+
+        }catch (Exception e){
+            postBt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    post(ownerPostFragment);
+                }
+            });
+        }
+
     }
 
     private void post(final Fragment fragment) {
@@ -133,7 +244,6 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
         pd.setMessage("loading");
        / pd.show();*/
 
-        FirebaseDatabase database;
         final DatabaseReference databaseReferenceOwner, databaseReferenceRenter;
 
         final String postAddress = postAddressEt.getText().toString();
@@ -208,6 +318,7 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
                                 databaseReferenceOwner.child("Rent Type").setValue(rentTypeSpinnerText);
                                 databaseReferenceOwner.child("Rent For").setValue(rentForSpinnerText);
                                 databaseReferenceOwner.child("Rent Date").setValue(rentDate);
+                                databaseReferenceOwner.child("Available status").setValue("Available");
 
                                 imageReference = databaseReferenceOwner.child("Images");
                                 uploadImages(imageReference);
@@ -230,6 +341,77 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
         }
         progressDialog.dismiss();
 
+    }
+
+    public void updatePost() {
+        currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        database = FirebaseDatabase.getInstance();
+        databaseReferenceUpdate = database.getReference().child("Owner").child("User").child(currentUserId).child("Post").child(postId);
+        final String postAddress = postAddressEt.getText().toString();
+        final String totalRent = totalRentEt.getText().toString();
+        final String bedroomQuantity = bedroomEt.getText().toString();
+        final String kitchenroomQuantity = kitchenroomEt.getText().toString();
+        final String bathroomQuantity = bathroomEt.getText().toString();
+
+        databaseReferenceUpdate.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                //Toast.makeText(PostActivity.this, ""+dataSnapshot.getKey(), Toast.LENGTH_SHORT).show();
+                if(dataSnapshot.getKey().equals("Address")){
+                    databaseReferenceUpdate.child("Address").setValue(postAddress);
+                }
+                else if(dataSnapshot.getKey().equals("Total rent")){
+                    databaseReferenceUpdate.child("Total rent").setValue(totalRent);
+                }
+                else if(dataSnapshot.getKey().equals("Bedroom quantity")){
+                    databaseReferenceUpdate.child("Bedroom quantity").setValue(bedroomQuantity);
+                }
+                else if(dataSnapshot.getKey().equals("Kitchen quantity")){
+                    databaseReferenceUpdate.child("Kitchen quantity").setValue(kitchenroomQuantity);
+                }
+                else if(dataSnapshot.getKey().equals("Bathroom quantity")){
+                    databaseReferenceUpdate.child("Bathroom quantity").setValue(bathroomQuantity);
+                }
+                else if(dataSnapshot.getKey().equals("Rent Type")){
+                    databaseReferenceUpdate.child("Rent Type").setValue(postAddress);
+                }
+                else if(dataSnapshot.getKey().equals("Rent Date")){
+                    databaseReferenceUpdate.child("Rent Date").setValue(postAddress);
+                }
+                else if(dataSnapshot.getKey().equals("Available status")){
+                    databaseReferenceUpdate.child("Available status").setValue(postAddress);
+                }
+
+
+                //imageReference = databaseReferenceOwner.child("Images");
+                //uploadImages(imageReference);
+
+                imageList.clear();
+                progressDialog.dismiss();
+                Toast.makeText(PostActivity.this, "Upload finished", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override
