@@ -170,13 +170,13 @@ public class DetailsActivity extends AppCompatActivity {
                     locationTv.setText(dataSnapshot.getValue(String.class));
                 }
                 else if(dataSnapshot.getKey().equals("Bedroom quantity")){
-                    bedroomsTv.setText(dataSnapshot.getValue(String.class));
+                    bedroomsTv.setText(dataSnapshot.getValue(String.class)+" Bedroom");
                 }
                 else if(dataSnapshot.getKey().equals("Bathroom quantity")){
-                    bathroomTv.setText(dataSnapshot.getValue(String.class));
+                    bathroomTv.setText(dataSnapshot.getValue(String.class)+" Bathroom");
                 }
                 else if(dataSnapshot.getKey().equals("Kitchen quantity")){
-                    kitchenTv.setText(dataSnapshot.getValue(String.class));
+                    kitchenTv.setText(dataSnapshot.getValue(String.class)+" Kitchen");
                 }
                 else if(dataSnapshot.getKey().equals("Rent For")){
                     rentForTv.setText(dataSnapshot.getValue(String.class));
