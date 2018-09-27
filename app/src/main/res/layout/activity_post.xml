@@ -180,6 +180,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
                     <TextView
+                        android:id="@+id/bedroomquantity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Bedroom quantity"
@@ -216,6 +217,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
                 <TextView
+                    android:id="@+id/kitchenquantity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Kitchen quantity"
@@ -250,6 +252,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
+                    android:id="@+id/bathroomquantity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Bathroom quantity"
