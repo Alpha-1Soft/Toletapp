@@ -42,6 +42,7 @@ public class RenterMainActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_renter_main);
 
+        //getSupportActionBar().hide();
         //setting toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -78,7 +79,7 @@ public class RenterMainActivity extends AppCompatActivity implements
     }
 
     //connecting menu with toolbar
-    @Override
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.renter_toolbar_menu, menu);
         MenuItem search = menu.findItem(R.id.searchRenterHome);
@@ -117,17 +118,9 @@ public class RenterMainActivity extends AppCompatActivity implements
                 break;
         }
         return true;
-    }
+    }*/
 
-    //user signOut method
-    private void renterSignOut() {
-        FirebaseAuth userSignOut = FirebaseAuth.getInstance();
-        userSignOut.signOut();
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        finish();
-        startActivity(intent);
-    }
+
 
     //setting fragment with bottom navigation
     private void setFragment(Fragment fragment) {
