@@ -84,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(MainActivity.this, ""+arrayList.get(i).getPostId(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this,DetailsActivity.class);
                 intent.putExtra("ownerId",arrayList.get(i).getOwnerId());
                 intent.putExtra("ownerPostId",arrayList.get(i).getPostId());
@@ -124,7 +123,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-               //Toast.makeText(MainActivity.this, ""+newText, Toast.LENGTH_SHORT).show();
                 flatAdapter.getFilter().filter(newText);
                 return false;
             }
@@ -139,9 +137,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.searchMainMenu:
                 // search
                 //OwnerSignOut();
-                break;
-            case R.id.filterMainMenu:
-                //
                 break;
             default:
                 //
@@ -159,9 +154,8 @@ public class MainActivity extends AppCompatActivity {
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Toast.makeText(MainActivity.this, ""+dataSnapshot.getKey(), Toast.LENGTH_SHORT).show();
+
                 for (DataSnapshot d: dataSnapshot.getChildren()){
-                    Toast.makeText(MainActivity.this, ""+d.getKey(), Toast.LENGTH_SHORT).show();
                    ownerIdList.add(d.getKey());
                    ownerPostId(databaseReference,d.getKey());
                 }
@@ -180,7 +174,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot d: dataSnapshot.getChildren()){
-                    Toast.makeText(MainActivity.this, ""+d.getKey(), Toast.LENGTH_SHORT).show();
                     postIdList.add(d.getKey());
                 }
             }
@@ -198,7 +191,6 @@ public class MainActivity extends AppCompatActivity {
         pd.show();
 
         for (int i = 0; i < ownerIdList.size(); i++) {
-            //Toast.makeText(this, ""+ownerIdList.get(i), Toast.LENGTH_SHORT).show();
             firebase = new Firebase("https://to-let-app-d0099.firebaseio.com/Owner/User/" + ownerIdList.get(i) + "/Post");
             databaseReference2 = database.getReference().child("Owner").child("User").child(ownerIdList.get(i)).child("Post");
             final int finalI = i;
@@ -222,7 +214,6 @@ public class MainActivity extends AppCompatActivity {
                                 String rentType = dataSnapshot.child("Rent Type").getValue(String.class);
                                 String totalRent = dataSnapshot.child("Total rent").getValue(String.class);
 
-                                //Toast.makeText(MainActivity.this, "Tvr/"+dataSnapshot.hasChild("Images"), Toast.LENGTH_SHORT).show();
 
                                 if (dataSnapshot.hasChild("Images")) {
                                     String image = dataSnapshot.child("Images").getValue(String.class);

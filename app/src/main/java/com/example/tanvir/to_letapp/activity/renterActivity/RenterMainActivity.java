@@ -47,11 +47,20 @@ public class RenterMainActivity extends AppCompatActivity implements
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-
         renterHomeFragment = new RenterHomeFragment();
         renterNotificationFragment = new RenterNotificationFragment();
         renterProfileFragment = new RenterProfileFragment();
+
+        try{
+            if(getIntent().getStringExtra("key").equals("1")){
+                setFragment(renterProfileFragment);
+            }else{
+                setFragment(renterHomeFragment);
+            }
+        }catch (Exception e){
+            setFragment(renterHomeFragment);
+        }
+
 
         frameLayout = findViewById(R.id.frame_container_renter);
         bottomNavigationView = findViewById(R.id.renterNavigationView);
@@ -77,48 +86,6 @@ public class RenterMainActivity extends AppCompatActivity implements
             }
         });
     }
-
-    //connecting menu with toolbar
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.renter_toolbar_menu, menu);
-        MenuItem search = menu.findItem(R.id.searchRenterHome);
-        SearchView searchView = (android.support.v7.widget.SearchView) search.getActionView();
-
-        searchView.setOnQueryTextListener(new android.support.v7.widget.SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                //Toast.makeText(MainActivity.this, ""+newText, Toast.LENGTH_SHORT).show();
-                renterHomeFragment.search(searchText);
-                return false;
-            }
-        });
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        switch (id) {
-            case R.id.searchRenterHome:
-                break;
-            case R.id.renterLogOut:
-               renterSignOut();
-                break;
-            case R.id.renterContact:
-                //
-                break;
-            default:
-                //
-                break;
-        }
-        return true;
-    }*/
 
 
 

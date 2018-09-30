@@ -52,8 +52,6 @@ public class OwnerDetailsActivity extends AppCompatActivity {
         ownerPostId = intent.getStringExtra("ownerPostId");
         ownerPostKey = intent.getStringExtra("ownerPostActivity");
 
-        Toast.makeText(this, ""+ownerId+"   "+ownerPostId, Toast.LENGTH_SHORT).show();
-
         postDetails();
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -110,8 +108,7 @@ public class OwnerDetailsActivity extends AppCompatActivity {
                         rentTypeTv.setText(rentType);
                     }
                     else if(dataSnapshot.getKey().equals("Images")){
-                        //Toast.makeText(DetailsActivity.this, ""+dataSnapshot.getValue(String.class), Toast.LENGTH_SHORT).show();
-                        //Picasso.get().load(dataSnapshot.getValue(String.class)).into(imageView);
+
                         image=dataSnapshot.getValue(String.class);
                         Picasso.get().load(image).resize(500,500).centerCrop().into(imageView);
 

@@ -164,7 +164,6 @@ public class RenterUpdateActivity extends AppCompatActivity implements AdapterVi
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-                    Toast.makeText(RenterUpdateActivity.this, "" + dataSnapshot.getKey(), Toast.LENGTH_SHORT).show();
                     if (!dataSnapshot.getKey().equals("Notification")) {
                         DatabaseReference databaseReference = databaseReferenceRenter.child(dataSnapshot.getKey());
                         databaseReference.child("Name").setValue(renterNameEt.getText().toString());
@@ -302,7 +301,6 @@ public class RenterUpdateActivity extends AppCompatActivity implements AdapterVi
                     FirebaseStorage.getInstance().getReference().child("Photo").child(uri.getLastPathSegment());
 
             Bitmap bitmap = BitmapFactory.decodeFile(uri.toString());
-            Toast.makeText(this, "upload checked", Toast.LENGTH_SHORT).show();
 
             storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override

@@ -50,7 +50,16 @@ public class OwnerMainActivity extends AppCompatActivity {
         ownerRequestFragment = new OwnerRequestFragment();
         ownerProfileFragment = new OwnerProfileFragment();
 
-        setFragment(ownerPostFragment);
+        try{
+            if(getIntent().getStringExtra("key").equals("1")){
+                setFragment(ownerProfileFragment);
+            }else{
+                setFragment(ownerPostFragment);
+            }
+        }catch (Exception e){
+            setFragment(ownerPostFragment);
+        }
+
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -90,9 +99,7 @@ public class OwnerMainActivity extends AppCompatActivity {
             case R.id.ownerLogOut:
                 OwnerSignOut();
                 break;
-            case R.id.ownerContact:
-                //
-                break;
+
             default:
                 //
                 break;

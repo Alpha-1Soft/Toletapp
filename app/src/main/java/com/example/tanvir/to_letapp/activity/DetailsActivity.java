@@ -75,7 +75,6 @@ public class DetailsActivity extends AppCompatActivity {
 
         }
 
-        Toast.makeText(this, ""+ownerId+"   "+ownerPostId, Toast.LENGTH_SHORT).show();
 
         postDetails();
     }
@@ -94,8 +93,7 @@ public class DetailsActivity extends AppCompatActivity {
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-                    //Toast.makeText(DetailsActivity.this, ""+dataSnapshot.child("Name").getValue(String.class), Toast.LENGTH_SHORT).show();
-                    //Toast.makeText(DetailsActivity.this, ""+dataSnapshot.getKey(), Toast.LENGTH_SHORT).show();
+
                     if(!dataSnapshot.getKey().equals("Notification")){
                         if(dataSnapshot.getChildrenCount()<8){
                             dialog.setTitle("Attention!");
@@ -181,7 +179,6 @@ public class DetailsActivity extends AppCompatActivity {
        databaseReferenceOwner.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-               // Toast.makeText(DetailsActivity.this, ""+dataSnapshot, Toast.LENGTH_SHORT).show();
                 if(dataSnapshot.getKey().equals("Address")){
                     locationTv.setText(dataSnapshot.getValue(String.class));
                 }
@@ -201,8 +198,7 @@ public class DetailsActivity extends AppCompatActivity {
                     rentTypeTv.setText(dataSnapshot.getValue(String.class));
                 }
                 else if(dataSnapshot.getKey().equals("Images")){
-                    //Toast.makeText(DetailsActivity.this, ""+dataSnapshot.getValue(String.class), Toast.LENGTH_SHORT).show();
-                    //Picasso.get().load(dataSnapshot.getValue(String.class)).into(imageView);
+
                     Picasso.get().load(dataSnapshot.getValue(String.class)).resize(500,500).centerCrop().into(imageView);
 
                 }

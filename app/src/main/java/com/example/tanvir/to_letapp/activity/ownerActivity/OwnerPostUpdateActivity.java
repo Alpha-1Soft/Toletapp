@@ -26,6 +26,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.example.tanvir.to_letapp.R;
 import com.example.tanvir.to_letapp.fragments.ownerFragmets.OwnerPostFragment;
@@ -83,6 +84,21 @@ public class OwnerPostUpdateActivity extends AppCompatActivity implements Adapte
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_owner_post_update);
+
+        this.setTitle("Update post");
+        android.support.v7.widget.Toolbar toolbar=findViewById(R.id.toolbarOwnwrPostUpdate);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
         postAddressEt = findViewById(R.id.locationEt);
         totalRentEt = findViewById(R.id.rentEt);
         bedroomEt = findViewById(R.id.bedroomEt);
@@ -127,7 +143,6 @@ public class OwnerPostUpdateActivity extends AppCompatActivity implements Adapte
         availableStatusSp.setAdapter(rentStatus);
 
         rentForSp.setAdapter(rentfor);
-        Toast.makeText(this, ""+getIntent().getStringExtra("key")+" "+getIntent().getStringExtra("OwnerPostId"), Toast.LENGTH_SHORT).show();
 
         try{
             if(getIntent().getStringExtra("key").equals("1")){
@@ -154,6 +169,13 @@ public class OwnerPostUpdateActivity extends AppCompatActivity implements Adapte
                 bathroomEt.setText(bathroom);
                 floorNoEt.setText(floor);
                 descriptionEt.setText(des);
+
+                try {
+                    if(image.length()!=0){
+                        //Picasso.get().load(profileImage).into(profileImageView);
+                        Picasso.get().load(image).resize(400,400).centerCrop().into(imageView1);
+                    }
+                }catch (Exception e){}
 
             }
         }catch (Exception e){
@@ -289,7 +311,6 @@ public class OwnerPostUpdateActivity extends AppCompatActivity implements Adapte
         databaseReferenceUpdate.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                //Toast.makeText(PostActivity.this, ""+dataSnapshot.getKey(), Toast.LENGTH_SHORT).show();
                 if(dataSnapshot.getKey().equals("Address")){
                     databaseReferenceUpdate.child("Address").setValue(postAddress);
                 }
@@ -330,7 +351,8 @@ public class OwnerPostUpdateActivity extends AppCompatActivity implements Adapte
 
                 imageList.clear();
                 progressDialog.dismiss();
-                //Toast.makeText(PostActivity.this, "Upload finished", Toast.LENGTH_SHORT).show();
+
+
                 finish();
             }
 
@@ -354,10 +376,6 @@ public class OwnerPostUpdateActivity extends AppCompatActivity implements Adapte
 
             }
         });
-
-    }
-
-    public void updatePost() {
 
     }
 
@@ -464,7 +482,6 @@ public class OwnerPostUpdateActivity extends AppCompatActivity implements Adapte
 
         }
         catch (Exception e){
-            Toast.makeText(this, "office checked", Toast.LENGTH_SHORT).show();
 
         }
     }
@@ -555,7 +572,6 @@ public class OwnerPostUpdateActivity extends AppCompatActivity implements Adapte
                     FirebaseStorage.getInstance().getReference().child("Photo").child(uri.getLastPathSegment());
 
             Bitmap bitmap = BitmapFactory.decodeFile(uri.toString());
-            Toast.makeText(this, "upload checked", Toast.LENGTH_SHORT).show();
 
             storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
@@ -564,11 +580,9 @@ public class OwnerPostUpdateActivity extends AppCompatActivity implements Adapte
                     storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
-                            //Toast.makeText(PostActivity.this, ""+databaseReference, Toast.LENGTH_SHORT).show();
+
                             databaseReference.setValue(uri.toString());
-                            //progressDialog.dismiss();
-                            //Picasso.get().load(uri.toString()).into(imageView);
-                            //Toast.makeText(PostActivity.this, "Uploading finished...", Toast.LENGTH_SHORT).show();
+
                         }
                     });
                 }

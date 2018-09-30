@@ -88,6 +88,7 @@ public class DefaultLoginActivity extends AppCompatActivity {
                                 });
                             } else {
                                 Toast.makeText(DefaultLoginActivity.this, "Login unsuccessful check your email and password", Toast.LENGTH_SHORT).show();
+                                progressDialog.dismiss();
                             }
                         }
                     });

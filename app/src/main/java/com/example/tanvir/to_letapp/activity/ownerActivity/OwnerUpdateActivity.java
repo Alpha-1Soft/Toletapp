@@ -137,7 +137,6 @@ public class OwnerUpdateActivity extends AppCompatActivity implements AdapterVie
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-                    Toast.makeText(OwnerUpdateActivity.this, ""+dataSnapshot.getKey(), Toast.LENGTH_SHORT).show();
                     DatabaseReference databaseReference = databaseReferenceOwner.child(dataSnapshot.getKey());
                     databaseReference.child("Name").setValue(ownerNameEt.getText().toString());
                     databaseReference.child("Phone Number").setValue(ownerPhoneNumberEt.getText().toString());
@@ -149,7 +148,11 @@ public class OwnerUpdateActivity extends AppCompatActivity implements AdapterVie
                     uploadImage(databaseReference);
                     //setFragment(ownerProfileFragment);
 
+                    Intent intent = new Intent(OwnerUpdateActivity.this,OwnerMainActivity.class);
+                    intent.putExtra("key","1");
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     finish();
+                    startActivity(intent);
                 }
 
                 @Override
@@ -223,7 +226,6 @@ public class OwnerUpdateActivity extends AppCompatActivity implements AdapterVie
                     FirebaseStorage.getInstance().getReference().child("Photo").child(uri.getLastPathSegment());
 
             Bitmap bitmap = BitmapFactory.decodeFile(uri.toString());
-            Toast.makeText(this, "upload checked", Toast.LENGTH_SHORT).show();
 
             storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
@@ -232,7 +234,6 @@ public class OwnerUpdateActivity extends AppCompatActivity implements AdapterVie
                     storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
-                            // Toast.makeText(PostActivity.this, ""+databaseReference, Toast.LENGTH_SHORT).show();
                             databaseReference.child("ProfileImage").setValue(uri.toString());
                         }
                     });

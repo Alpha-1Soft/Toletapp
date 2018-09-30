@@ -32,6 +32,15 @@ public class RenterProfileActivity extends AppCompatActivity {
         renterGender.setText(intent.getStringExtra("gender"));
         renterReligion.setText(intent.getStringExtra("religion"));
         renterNatinality.setText(intent.getStringExtra("nationality"));
+        try{
+            if (intent.getStringExtra("image").length()!=0){
+               // Picasso.get().load(intent.getStringExtra("image")).into(profileImage);
+                Picasso.get().load(intent.getStringExtra("image")).resize(400,400).centerCrop().into(profileImage);
+            }
+        }catch (Exception e){
+
+        }
+
 
         //Picasso.get().load(profileImage).into(profileImageView);
     }

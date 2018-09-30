@@ -84,6 +84,20 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
 
+        this.setTitle("Post");
+        android.support.v7.widget.Toolbar toolbar=findViewById(R.id.toolbarPostActivity);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
         postAddressEt = findViewById(R.id.locationEt);
         totalRentEt = findViewById(R.id.rentEt);
         bedroomEt = findViewById(R.id.bedroomEt);
@@ -124,7 +138,6 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
 
         ArrayAdapter<String> rentfor = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,rentFor);
         rentForSp.setAdapter(rentfor);
-        Toast.makeText(this, ""+getIntent().getStringExtra("key")+" "+getIntent().getStringExtra("OwnerPostId"), Toast.LENGTH_SHORT).show();
 
         try{
             if(getIntent().getStringExtra("key").equals("1")){
@@ -617,7 +630,6 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
 
         }
         catch (Exception e){
-            Toast.makeText(this, "office checked", Toast.LENGTH_SHORT).show();
 
         }
     }
@@ -708,7 +720,6 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
                             FirebaseStorage.getInstance().getReference().child("Photo").child(uri.getLastPathSegment());
 
                     Bitmap bitmap = BitmapFactory.decodeFile(uri.toString());
-                    Toast.makeText(this, "upload checked", Toast.LENGTH_SHORT).show();
 
                     storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
@@ -717,11 +728,7 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
                             storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
-                                    Toast.makeText(PostActivity.this, ""+databaseReference, Toast.LENGTH_SHORT).show();
                                     databaseReference.setValue(uri.toString());
-                                    //progressDialog.dismiss();
-                                    //Picasso.get().load(uri.toString()).into(imageView);
-                                    //Toast.makeText(PostActivity.this, "Uploading finished...", Toast.LENGTH_SHORT).show();
                                 }
                             });
                         }

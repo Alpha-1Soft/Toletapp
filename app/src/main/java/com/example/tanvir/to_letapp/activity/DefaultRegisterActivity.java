@@ -152,7 +152,7 @@ public class DefaultRegisterActivity extends AppCompatActivity {
                     progressDialog.dismiss();
                 }
                 else{
-                    Toast.makeText(DefaultRegisterActivity.this, "Unsucc"+" "+name+" "+email, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DefaultRegisterActivity.this, "Unable to sign up."+" "+name+" "+email, Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
                 }
             }
