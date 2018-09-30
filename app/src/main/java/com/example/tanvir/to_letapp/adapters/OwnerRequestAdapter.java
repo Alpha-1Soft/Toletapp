@@ -73,6 +73,7 @@ public class OwnerRequestAdapter extends ArrayAdapter {
                 intent.putExtra("gender",item.getRenterGender());
                 intent.putExtra("religion",item.getRenterReligion());
                 intent.putExtra("nationality",item.getRenterNationality());
+                intent.putExtra("image",item.getRenterImage());
                 getContext().startActivity(intent);
             }
         });
@@ -91,6 +92,7 @@ public class OwnerRequestAdapter extends ArrayAdapter {
                 intent.putExtra("gender",item.getRenterGender());
                 intent.putExtra("religion",item.getRenterReligion());
                 intent.putExtra("nationality",item.getRenterNationality());
+                intent.putExtra("image",item.getRenterImage());
                 getContext().startActivity(intent);
             }
         });
@@ -148,6 +150,7 @@ public class OwnerRequestAdapter extends ArrayAdapter {
                         dialogInterface.dismiss();
                     }
                 });
+                dialog.show();
             }
         });
         renterNameBt.setText(item.getRenterName());

@@ -4,8 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.renterActivity.RenterProfileActivity">
+    tools:context=".activity.renterActivity.RenterProfileActivity"
+    android:orientation="vertical">
 
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbarRenterProfile"
+            android:layout_width="match_parent"
+            app:titleTextColor="#ffffff"
+            android:layout_height="50dp"
+            android:background="#008f02">
+
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
 
     <ScrollView
         android:layout_width="match_parent"
