@@ -1,6 +1,8 @@
 package com.example.tanvir.to_letapp.adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,20 +13,24 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.tanvir.to_letapp.R;
 import com.example.tanvir.to_letapp.activity.renterActivity.RenterProfileActivity;
 import com.example.tanvir.to_letapp.models.FlatDetails;
 import com.example.tanvir.to_letapp.models.OwnerRequest;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 public class OwnerRequestAdapter extends ArrayAdapter {
     FirebaseDatabase database;
-    DatabaseReference databaseReference;
+    DatabaseReference databaseReference,databaseReferenceOwner;
 
     ArrayList<OwnerRequest> arrayList;
     Context context;
@@ -43,12 +49,13 @@ public class OwnerRequestAdapter extends ArrayAdapter {
         }
         final OwnerRequest item = arrayList.get(position);
 
+
         TextView renterAgeTv = view.findViewById(R.id.renterAgeTv);
         TextView renterProfessionTv = view.findViewById(R.id.renterProfessionTv);
         ImageView renterImage = view.findViewById(R.id.requestImage);
 
-        Button accept = view.findViewById(R.id.acceptBtn);
-        Button denied = view.findViewById(R.id.denideBtn);
+        final Button accept = view.findViewById(R.id.acceptBtn);
+        final Button denied = view.findViewById(R.id.denideBtn);
         Button renterNameBt = view.findViewById(R.id.renterNameBt);
 
         renterNameBt.setOnClickListener(new View.OnClickListener() {
@@ -87,17 +94,66 @@ public class OwnerRequestAdapter extends ArrayAdapter {
                 getContext().startActivity(intent);
             }
         });
+
+        database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference().child("Rentar").child("User").child(item.getRenterId()).child("Profile").child("Notification").child(item.getCurrentuser());
+        databaseReferenceOwner = database.getReference().child("Owner").child("User").child(item.getCurrentuser()).child("Post").child(item.getOwnerPostId()).child("Request").child(item.getRequestKey());
+
         accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                database = FirebaseDatabase.getInstance();
-                databaseReference = database.getReference().child("Rentar").child("User").child(item.getRenterId()).child("Profile").child("Notification");
-                databaseReference.push().setValue(item.getCurrentuser());
+                databaseReferenceOwner.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        databaseReferenceOwner.setValue(null);
+                        Toast.makeText(getContext(), "Request accepted.", Toast.LENGTH_SHORT).show();
+                        notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+                databaseReference.setValue(item.getOwnerPostId());
+            }
+        });
+        denied.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+                dialog.setTitle("Attention");
+                dialog.setMessage("Sure to denied this request ?");
+                dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        databaseReferenceOwner.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                databaseReferenceOwner.setValue(null);
+                                Toast.makeText(getContext(), "Request denied.", Toast.LENGTH_SHORT).show();
+                                notifyDataSetChanged();
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
+                });
+                dialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
             }
         });
         renterNameBt.setText(item.getRenterName());
         renterAgeTv.setText(item.getRenterAge());
         renterProfessionTv.setText(item.getRenterProfession());
+        Picasso.get().load(item.getRenterImage()).into(renterImage);
 
         try{
             if (item.getRenterImage().length()!=0){

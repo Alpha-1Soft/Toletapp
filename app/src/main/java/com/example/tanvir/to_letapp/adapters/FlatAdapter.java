@@ -11,6 +11,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.tanvir.to_letapp.R;
 import com.example.tanvir.to_letapp.models.FlatDetails;
@@ -48,26 +49,41 @@ public class FlatAdapter extends ArrayAdapter<FlatDetails> implements Filterable
         TextView locationTv = view.findViewById(R.id.locationTv);
         TextView rentConditionTv = view.findViewById(R.id.rentConditionTv);
         ImageView imageView = view.findViewById(R.id.locationImage);
-
-
+        TextView rentType = view.findViewById(R.id.rentTypeTv);
 
 
         //setting listview shape component to arrryList
-        flatConditionTv.setText(item.getBedroom()+" Bedroom,"+item.getKitchen()+" Kitchen,"+item.getBathroom()+" Bathroom");
-        amountTv.setText(item.getTotalRent());
-        rentDateTv.setText(item.getRentDate());
-        locationTv.setText(item.getFlatLocation());
-        rentConditionTv.setText(item.getCondition());
+        //if (item.getRentType().equals("Office")){
+            //flatConditionTv.setText("");
+            //amountTv.setText("");
+            //rentDateTv.setText("");
+            //locationTv.setText("");
+            //rentConditionTv.setText("");
+            //rentType.setText(item.getRentType());
+
+       // }
+        //else{
+
+        //Toast.makeText(context, ""+item.getRentFor()+" "+item.getRentType(), Toast.LENGTH_SHORT).show();
+            flatConditionTv.setText(item.getBedroom()+" Bedrooms...");
+            amountTv.setText(item.getTotalRent()+" Tk");
+            rentDateTv.setText(item.getRentDate());
+            locationTv.setText(item.getFlatLocation());
+            rentConditionTv.setText(item.getRentFor());
+            rentType.setText(item.getRentType());
+      //  }
+
         try{
             if (item.getImage().length()!=0){
                 //Picasso.get().load(item.getImage()).into(imageView);
                 Picasso.get().load(item.getImage()).resize(500,400).centerCrop().into(imageView);
             }
+            else {
+                imageView.setImageResource(R.drawable.defaultimage);
+            }
         }catch (Exception e){
 
         }
-
-
         return view;
     }
 
@@ -103,9 +119,34 @@ public class FlatAdapter extends ArrayAdapter<FlatDetails> implements Filterable
                 ArrayList<FlatDetails> filters = new ArrayList<>();
 
                 for (int i = 0; i < flatDetails.size(); i++) {
-                    if (flatDetails.get(i).getFlatLocation().toUpperCase().contains(charSequence)) {
+                    if (flatDetails.get(i).getTotalRent().toUpperCase().contains(charSequence)) {
                         FlatDetails contactsInfo = new FlatDetails(flatDetails.get(i).getFlatLocation(), flatDetails.get(i).getBedroom()
-                                ,flatDetails.get(i).getKitchen(), flatDetails.get(i).getTotalRent());
+                                ,flatDetails.get(i).getKitchen(), flatDetails.get(i).getTotalRent(),flatDetails.get(i).getKitchen(), flatDetails.get(i).getRentType()
+                        ,flatDetails.get(i).getRentFor(),flatDetails.get(i).getImage());
+                        filters.add(contactsInfo);
+                    }
+                    else if(flatDetails.get(i).getFlatLocation().toUpperCase().contains(charSequence)){
+                        FlatDetails contactsInfo = new FlatDetails(flatDetails.get(i).getFlatLocation(), flatDetails.get(i).getBedroom()
+                                ,flatDetails.get(i).getKitchen(), flatDetails.get(i).getTotalRent(),flatDetails.get(i).getKitchen(), flatDetails.get(i).getRentType()
+                                ,flatDetails.get(i).getRentFor(),flatDetails.get(i).getImage());
+                        filters.add(contactsInfo);
+                    }
+                    else if(flatDetails.get(i).getBathroom().toUpperCase().contains(charSequence)){
+                        FlatDetails contactsInfo = new FlatDetails(flatDetails.get(i).getFlatLocation(), flatDetails.get(i).getBedroom()
+                                ,flatDetails.get(i).getKitchen(), flatDetails.get(i).getTotalRent(),flatDetails.get(i).getKitchen(), flatDetails.get(i).getRentType()
+                                ,flatDetails.get(i).getRentFor(),flatDetails.get(i).getImage());
+                        filters.add(contactsInfo);
+                    }
+                    else if(flatDetails.get(i).getRentType().toUpperCase().contains(charSequence)){
+                        FlatDetails contactsInfo = new FlatDetails(flatDetails.get(i).getFlatLocation(), flatDetails.get(i).getBedroom()
+                                ,flatDetails.get(i).getKitchen(), flatDetails.get(i).getTotalRent(),flatDetails.get(i).getKitchen(), flatDetails.get(i).getRentType()
+                                ,flatDetails.get(i).getRentFor(),flatDetails.get(i).getImage());
+                        filters.add(contactsInfo);
+                    }
+                   else if(flatDetails.get(i).getRentDate().toUpperCase().contains(charSequence)){
+                        FlatDetails contactsInfo = new FlatDetails(flatDetails.get(i).getFlatLocation(), flatDetails.get(i).getBedroom()
+                                ,flatDetails.get(i).getKitchen(), flatDetails.get(i).getTotalRent(),flatDetails.get(i).getKitchen(), flatDetails.get(i).getRentType()
+                                ,flatDetails.get(i).getRentFor(),flatDetails.get(i).getImage());
                         filters.add(contactsInfo);
                     }
                 }
