@@ -10,6 +10,9 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -17,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tanvir.to_letapp.R;
+import com.example.tanvir.to_letapp.activity.MainActivity;
 import com.example.tanvir.to_letapp.activity.ownerActivity.OwnerUpdateActivity;
 import com.example.tanvir.to_letapp.activity.ownerActivity.PostActivity;
 import com.example.tanvir.to_letapp.activity.renterActivity.RenterUpdateActivity;
@@ -158,9 +162,39 @@ public class RenterProfileFragment extends Fragment {
                  intent.putExtra("MonthlyIncome",MonthlyIncome);
                  intent.putExtra("MaritalSatus",MaritalSatus);
                  intent.putExtra("Natinality",Natinality);
+                 intent.putExtra("image",profileImge);
                 startActivity(intent);
             }
         });
         return view;
+    }
+
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        getActivity().getMenuInflater().inflate(R.menu.renter_menu_2, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.renterLogOut:
+                renterSignOut();
+                break;
+            default:
+                //
+                break;
+        }
+        return true;
+    }
+    //user signOut method
+    private void renterSignOut() {
+        FirebaseAuth userSignOut = FirebaseAuth.getInstance();
+        userSignOut.signOut();
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        getActivity().finish();
+        startActivity(intent);
     }
 }

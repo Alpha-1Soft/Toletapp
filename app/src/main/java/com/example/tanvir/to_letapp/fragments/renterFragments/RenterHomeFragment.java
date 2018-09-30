@@ -126,9 +126,6 @@ public class RenterHomeFragment extends Fragment {
                 // search
                 //OwnerSignOut();
                 break;
-            case R.id.filterMainMenu:
-                //
-                break;
             case R.id.renterLogOut:
                 renterSignOut();
                 break;

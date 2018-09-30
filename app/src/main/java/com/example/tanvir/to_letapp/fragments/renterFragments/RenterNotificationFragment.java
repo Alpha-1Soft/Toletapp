@@ -1,6 +1,7 @@
 package com.example.tanvir.to_letapp.fragments.renterFragments;
 
 import android.app.AlertDialog;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,6 +14,9 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -23,6 +27,7 @@ import android.widget.Toast;
 
 import com.example.tanvir.to_letapp.R;
 import com.example.tanvir.to_letapp.activity.DetailsActivity;
+import com.example.tanvir.to_letapp.activity.MainActivity;
 import com.example.tanvir.to_letapp.activity.renterActivity.DetailsViewActivity;
 import com.example.tanvir.to_letapp.adapters.RenterNotificationAdapter;
 import com.example.tanvir.to_letapp.models.RenterNotification;
@@ -44,6 +49,19 @@ public class RenterNotificationFragment extends Fragment {
     ArrayList<RenterNotification> arrayList = new ArrayList<>();
     ArrayList<String> postIdList = new ArrayList<>();
     ArrayList<String> ownerIdList = new ArrayList<>();
+    ArrayList<String> addressList = new ArrayList<>();
+    ArrayList<String> bedroomList = new ArrayList<>();
+    ArrayList<String> bathroomList = new ArrayList<>();
+    ArrayList<String> kitchenList = new ArrayList<>();
+    ArrayList<String> rentForList = new ArrayList<>();
+    ArrayList<String> rentTypeList = new ArrayList<>();
+    ArrayList<String> rentAmountList = new ArrayList<>();
+    ArrayList<String> descriptionList = new ArrayList<>();
+    ArrayList<String> floorList = new ArrayList<>();
+    ArrayList<String> dateList = new ArrayList<>();
+    ArrayList<String> imageList = new ArrayList<>();
+
+
     ListView listView;
     String address,bedroom,bathroom,kitchen,rentFor,rentType,image,rentAmount,description,floor,rentDate;
     String Name,Email,PhoneNumber,Address,Age,Relagion,Gender;
@@ -89,17 +107,17 @@ public class RenterNotificationFragment extends Fragment {
                 //clickList.add(renterNotification);
                 Intent intent = new Intent(getActivity(), DetailsViewActivity.class);
                 intent.putExtra("phoneNum",arrayList.get(i).getPhoneNum());
-                intent.putExtra("address",address);
-                intent.putExtra("bedroom",bedroom);
-                intent.putExtra("bathroom",bathroom);
-                intent.putExtra("kitchen",kitchen);
-                intent.putExtra("rentFor",rentFor);
-                intent.putExtra("rentType",rentType);
-                intent.putExtra("rentAmount",rentAmount);
-                intent.putExtra("description",description);
-                intent.putExtra("floor",floor);
-                intent.putExtra("image",image);
-                intent.putExtra("date",rentDate);
+                intent.putExtra("address",addressList.get(i));
+                intent.putExtra("bedroom",bedroomList.get(i));
+                intent.putExtra("bathroom",bathroomList.get(i));
+                intent.putExtra("kitchen",kitchenList.get(i));
+                intent.putExtra("rentFor",rentForList.get(i));
+                intent.putExtra("rentType",rentTypeList.get(i));
+                intent.putExtra("rentAmount",rentAmountList.get(i));
+                intent.putExtra("description",descriptionList.get(i));
+                intent.putExtra("floor",floorList.get(i));
+                intent.putExtra("image",imageList.get(i));
+                intent.putExtra("date",dateList.get(i));
 
                 startActivity(intent);
             }
@@ -111,7 +129,7 @@ public class RenterNotificationFragment extends Fragment {
     public void notification(){
         final String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        Toast.makeText(getActivity(), ""+"checked", Toast.LENGTH_SHORT).show();
+
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference().child("Rentar").child("User").child(userID).child("Profile").child("Notification");
         databaseReference.addChildEventListener(new ChildEventListener() {
@@ -171,50 +189,64 @@ public class RenterNotificationFragment extends Fragment {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 if(dataSnapshot.getKey().equals("Address")){
                     address = dataSnapshot.getValue(String.class);
+                    addressList.add(address);
                 }
                 else if(dataSnapshot.getKey().equals("Bedroom quantity")){
                     bedroom = dataSnapshot.getValue(String.class);
+                    bedroomList.add(bedroom);
                 }
                 else if(dataSnapshot.getKey().equals("Bathroom quantity")){
                     bathroom=dataSnapshot.getValue(String.class);
+                    bathroomList.add(bathroom);
                 }
                 else if(dataSnapshot.getKey().equals("Kitchen quantity")){
                     kitchen=dataSnapshot.getValue(String.class);
+                    kitchenList.add(kitchen);
                 }
                 else if(dataSnapshot.getKey().equals("Rent For")){
                     rentFor=dataSnapshot.getValue(String.class);
+                    rentForList.add(rentFor);
                 }
                 else if(dataSnapshot.getKey().equals("Rent Type")){
                     rentType=dataSnapshot.getValue(String.class);
+                    rentTypeList.add(rentType);
                 }
                 else if(dataSnapshot.getKey().equals("Rent Date")){
                     rentDate=dataSnapshot.getValue(String.class);
+                    dateList.add(rentDate);
                 }
                 else if(dataSnapshot.getKey().equals("Images")){
                     //Toast.makeText(DetailsActivity.this, ""+dataSnapshot.getValue(String.class), Toast.LENGTH_SHORT).show();
                     //Picasso.get().load(dataSnapshot.getValue(String.class)).into(imageView);
                     //Picasso.get().load(dataSnapshot.getValue(String.class)).resize(500,500).centerCrop().into(imageView);
                     image=dataSnapshot.getValue(String.class);
+                    imageList.add(image);
 
                 }
                 else if(dataSnapshot.getKey().equals("Total rent")){
                     rentAmount=dataSnapshot.getValue(String.class)+" Tk";
+                    rentAmountList.add(rentAmount);
                 }
                 else if(dataSnapshot.getKey().equals("Description")){
                     description=dataSnapshot.getValue(String.class);
+                    descriptionList.add(description);
                 }
                 else if(dataSnapshot.getKey().equals("Floor No")){
                     if(dataSnapshot.getValue(String.class).equals("1")){
                         floor=dataSnapshot.getValue(String.class)+"st floor";
+                        floorList.add(floor);
                     }
                     else if(dataSnapshot.getValue(String.class).equals("2")){
                         floor=dataSnapshot.getValue(String.class)+"nd floor";
+                        floorList.add(floor);
                     }
                     else if(dataSnapshot.getValue(String.class).equals("3")){
                         floor=dataSnapshot.getValue(String.class)+"rd floor";
+                        floorList.add(floor);
                     }
                     else {
                         floor=dataSnapshot.getValue(String.class)+"th floor";
+                        floorList.add(floor);
                     }
                 }
             }
@@ -323,6 +355,34 @@ public class RenterNotificationFragment extends Fragment {
 
             }
         });
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        getActivity().getMenuInflater().inflate(R.menu.renter_menu_2, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.renterLogOut:
+                renterSignOut();
+                break;
+            default:
+                //
+                break;
+        }
+        return true;
+    }
+    //user signOut method
+    private void renterSignOut() {
+        FirebaseAuth userSignOut = FirebaseAuth.getInstance();
+        userSignOut.signOut();
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        getActivity().finish();
+        startActivity(intent);
     }
 }
 
