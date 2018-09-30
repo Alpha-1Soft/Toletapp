@@ -24,22 +24,33 @@
         android:gravity="center"
         android:background="#03396c"
         android:orientation="vertical">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/ownerProfileImage"
-            android:layout_width="96dp"
-            android:layout_height="96dp"
-            android:src="@drawable/renterprofile"
-            app:civ_border_width="2dp"
-            app:civ_border_color="#FF000000"/>
-        <TextView
-            android:id="@+id/ownerNameTv"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Saiful"
-            android:textColor="#FFFFFFFF"
-            />
+            android:orientation="vertical"
+            android:layout_marginTop="15dp"
+            android:layout_gravity="center">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/ownerProfileImage"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:src="@drawable/renterprofile"
+                app:civ_border_width="2dp"
+                app:civ_border_color="#FF000000"/>
+            <TextView
+                android:id="@+id/ownerNameTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Saiful"
+                android:textSize="22sp"
+                android:textColor="#FFFFFFFF"
+                />
+
+        </LinearLayout>
+
+
 
     </LinearLayout>
 

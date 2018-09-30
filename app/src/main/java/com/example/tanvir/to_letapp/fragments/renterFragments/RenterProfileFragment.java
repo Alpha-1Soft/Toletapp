@@ -145,7 +145,7 @@ public class RenterProfileFragment extends Fragment {
             }
         });
 
-        fab2.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#5348E8")));//fab background color
+        fab2.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#008f02")));//fab background color
         //fab.setBackgroundDrawable(R.drawable.add);
         fab2.setOnClickListener(new View.OnClickListener() {
             @Override

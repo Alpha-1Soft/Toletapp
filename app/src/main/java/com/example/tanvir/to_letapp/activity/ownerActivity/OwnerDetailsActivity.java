@@ -3,11 +3,14 @@ package com.example.tanvir.to_letapp.activity.ownerActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -45,6 +48,20 @@ public class OwnerDetailsActivity extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
 
+        this.setTitle("Details");
+        Toolbar toolbar=findViewById(R.id.toolbarOwnerDetails);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
         viewIntialization();
 
         Intent intent = getIntent();
@@ -53,6 +70,7 @@ public class OwnerDetailsActivity extends AppCompatActivity {
         ownerPostKey = intent.getStringExtra("ownerPostActivity");
 
         postDetails();
+        fab.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#008f02")));
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

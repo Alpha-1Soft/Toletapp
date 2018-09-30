@@ -3,6 +3,8 @@ package com.example.tanvir.to_letapp.activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -93,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //fab.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#5348E8")));//fab background color
+        fab.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#008f02")));//fab background color
         //fab.setBackgroundDrawable(R.drawable.add);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

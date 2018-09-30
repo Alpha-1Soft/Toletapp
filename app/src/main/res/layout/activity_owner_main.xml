@@ -30,7 +30,7 @@
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         app:itemTextColor="#acacac"
-        android:background="#dad7d7"
+        android:background="#d6d6d6"
         app:menu="@menu/owner_navigation_items">
 
     </android.support.design.widget.BottomNavigationView>

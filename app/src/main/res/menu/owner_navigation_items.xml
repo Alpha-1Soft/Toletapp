@@ -4,14 +4,14 @@
 
     <item
         android:id="@+id/owner_post_nav"
-        android:icon="@android:drawable/ic_menu_edit"
+        android:icon="@drawable/post"
         android:title="@string/owner_nav_post" />
     <item
         android:id="@+id/owner_request_nav"
-        android:icon="@android:drawable/ic_dialog_email"
+        android:icon="@drawable/req"
         android:title="@string/owner_nav_request" />
     <item
         android:id="@+id/owner_profile_nav"
-        android:icon="@android:drawable/ic_menu_my_calendar"
+        android:icon="@drawable/pro"
         android:title="@string/owner_nav_profile" />
 </menu>
