@@ -1,12 +1,11 @@
 package com.example.tanvir.to_letapp.fragments.ownerFragmets;
 
-import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +14,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.app.NotificationManager;
+import android.support.v4.app.NotificationCompat;
 
 import com.example.tanvir.to_letapp.R;
 import com.example.tanvir.to_letapp.activity.renterActivity.RenterProfileActivity;
@@ -69,25 +70,6 @@ public class OwnerRequestFragment extends Fragment {
         ownerRequestAdapter = new OwnerRequestAdapter(getActivity(),arrayList);
         ownerId();
 
-       /* listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getActivity(), "cllicked", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getActivity(), RenterProfileActivity.class);
-                intent.putExtra("name",renterName);
-                intent.putExtra("email",renterEmail);
-                intent.putExtra("phoneNumber",renterPhoneNum);
-                intent.putExtra("address",renterAddress);
-                intent.putExtra("Age",renterAge);
-                intent.putExtra("profession",renterProfession);
-                intent.putExtra("monthlyIncome",renterMonthlyIn);
-                intent.putExtra("maritialStatus",renterMaritStatus);
-                intent.putExtra("gender",renterGender);
-                intent.putExtra("religion",renterReligion);
-                intent.putExtra("nationality",renterNationality);
-                startActivity(intent);
-            }
-        });*/
         return view;
     }
 
@@ -114,13 +96,13 @@ public class OwnerRequestFragment extends Fragment {
         });
     }
 
-    private void ownerRequestId (DatabaseReference databaseReference, String postId){
+    private void ownerRequestId (DatabaseReference databaseReference, final String postId){
         databaseReference.child(postId).child("Request").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot d : dataSnapshot.getChildren()) {
                     Toast.makeText(getActivity(), ""+d.getValue(), Toast.LENGTH_SHORT).show();
-                    renterProfile(d.getValue().toString());
+                    renterProfile(d.getValue().toString(),postId,d.getKey());
                 }
             }
 
@@ -130,7 +112,7 @@ public class OwnerRequestFragment extends Fragment {
             }
         });
     }
-    private void renterProfile(final String renterId){
+    private void renterProfile(final String renterId, final String postId,final String requestKey){
         arrayList.clear();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         try{
@@ -150,15 +132,16 @@ public class OwnerRequestFragment extends Fragment {
                        renterGender = dataSnapshot.child("Gender").getValue(String.class);
                        renterReligion = dataSnapshot.child("Religion").getValue(String.class);
                        renterNationality = dataSnapshot.child("Nationality").getValue(String.class);
-                       renterImage = dataSnapshot.child("Images").getValue(String.class);
+                       renterImage = dataSnapshot.child("ProfileImage").getValue(String.class);
                        renterEmail = dataSnapshot.child("Email").getValue(String.class);
 
 
                        OwnerRequest ownerRequest = new OwnerRequest(renterImage,renterName,renterAge,renterProfession,renterPhoneNum,
                                renterAddress,renterMonthlyIn,renterMaritStatus,renterGender,renterReligion,renterNationality,renterId,
-                               currentuser,renterEmail);
+                               currentuser,renterEmail,postId,requestKey);
                        arrayList.add(ownerRequest);
                        listView.setAdapter(ownerRequestAdapter);
+
                    }
                 }
 

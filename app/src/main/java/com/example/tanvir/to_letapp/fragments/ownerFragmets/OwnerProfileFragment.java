@@ -133,7 +133,7 @@ public class OwnerProfileFragment extends Fragment {
                 intent.putExtra("Phone Number",PhoneNumber);
                 intent.putExtra("Address",Address);
                 intent.putExtra("Age",Age);
-                intent.putExtra("Relagion",Relagion);
+                intent.putExtra("Religion",Relagion);
                 intent.putExtra("Gender",Gender);
                 intent.putExtra("ownerProfileImage",profileImage);
                 startActivity(intent);

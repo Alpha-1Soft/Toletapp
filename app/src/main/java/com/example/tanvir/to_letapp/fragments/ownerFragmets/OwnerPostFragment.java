@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.example.tanvir.to_letapp.R;
 import com.example.tanvir.to_letapp.activity.DetailsActivity;
 import com.example.tanvir.to_letapp.activity.MainActivity;
+import com.example.tanvir.to_letapp.activity.ownerActivity.OwnerDetailsActivity;
 import com.example.tanvir.to_letapp.activity.ownerActivity.PostActivity;
 import com.example.tanvir.to_letapp.adapters.OwnerPostAdapter;
 import com.example.tanvir.to_letapp.models.FlatDetails;
@@ -108,7 +109,7 @@ public class OwnerPostFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(getActivity(), DetailsActivity.class);
+                Intent intent = new Intent(getActivity(), OwnerDetailsActivity.class);
                 intent.putExtra("ownerId",userID);
                 intent.putExtra("ownerPostId",arrayList.get(i).getPostId());
                 intent.putExtra("ownerPostActivity","1");
