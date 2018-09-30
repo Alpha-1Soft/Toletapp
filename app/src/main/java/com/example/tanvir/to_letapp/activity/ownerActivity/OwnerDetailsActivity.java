@@ -32,8 +32,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 public class OwnerDetailsActivity extends AppCompatActivity {
-    TextView locationTv,bedroomsTv, conditionTv,bathroomTv,rentForTv,rentAmountTv,rentDateTv,kitchenTv,rentTypeTv,floorTv,descriptionTv;
-    String location,bedrooms, condition,bathroom,rentFor,rentAmount,rentDate,kitchen,rentType,image,floor,des;
+    TextView locationTv,bedroomsTv, conditionTv,bathroomTv,rentForTv,rentAmountTv,rentDateTv,kitchenTv,rentTypeTv,floorTv,descriptionTv,availableStatusTv;
+    String location,bedrooms, condition,bathroom,rentFor,rentAmount,rentDate,kitchen,rentType,image,floor,des,availableStatus;
     String ownerId,ownerPostId,ownerPostKey;
     ImageView imageView;
     Button requestBt;
@@ -131,6 +131,10 @@ public class OwnerDetailsActivity extends AppCompatActivity {
                         Picasso.get().load(image).resize(500,500).centerCrop().into(imageView);
 
                     }
+                    else if(dataSnapshot.getKey().equals("Available status")){
+                        availableStatus = dataSnapshot.getValue(String.class);
+                        availableStatusTv.setText(availableStatus);
+                    }
                     else if(dataSnapshot.getKey().equals("Total rent")){
                         rentAmount=dataSnapshot.getValue(String.class);
                         rentAmountTv.setText(rentAmount+" Tk");
@@ -203,6 +207,7 @@ public class OwnerDetailsActivity extends AppCompatActivity {
         rentTypeTv = findViewById(R.id.rentertype);
         floorTv = findViewById(R.id.flore);
         descriptionTv = findViewById(R.id.descriptionTv);
+        availableStatusTv = findViewById(R.id.availableStatusTv);
 
         fab = findViewById(R.id.fabDetails);
     }
