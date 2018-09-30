@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -29,7 +30,7 @@ import com.squareup.picasso.Picasso;
 import org.w3c.dom.Text;
 
 public class DetailsActivity extends AppCompatActivity {
-    TextView locationTv,bedroomsTv, conditionTv,bathroomTv,rentForTv,rentAmountTv,rentDateTv,kitchenTv,rentTypeTv;
+    TextView locationTv,bedroomsTv, conditionTv,bathroomTv,rentForTv,rentAmountTv,rentDateTv,kitchenTv,rentTypeTv,floorTv,descriptionTv;
     String ownerId,ownerPostId,ownerPostKey;
     ImageView imageView;
     Button requestBt;
@@ -38,11 +39,25 @@ public class DetailsActivity extends AppCompatActivity {
     FirebaseAuth.AuthStateListener mAuthListener;
     DatabaseReference databaseReferenceOwner, databaseReferenceRenter;
     String currentuser;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
+        this.setTitle("Details");
+        toolbar=findViewById(R.id.toolbarDetails);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         viewIntialization();
 
@@ -91,12 +106,13 @@ public class DetailsActivity extends AppCompatActivity {
                             final String phoneNumber=dataSnapshot.child("Phone Number").getValue(String.class);
                             final String address=dataSnapshot.child("Address").getValue(String.class);
                             final String age=dataSnapshot.child("Age").getValue(String.class);
-                            final String relagion=dataSnapshot.child("Relagion").getValue(String.class);
+                            final String relagion=dataSnapshot.child("Religion").getValue(String.class);
                             final String gender=dataSnapshot.child("Gender").getValue(String.class);
                             final String profession=dataSnapshot.child("Profession").getValue(String.class);
                             final String monthlyIncome=dataSnapshot.child("MonthlyIncome").getValue(String.class);
                             final String maritalSatus=dataSnapshot.child("MaritalSatus").getValue(String.class);
-                            final String natinality=dataSnapshot.child("Natinality").getValue(String.class);
+                            final String natinality=dataSnapshot.child("Nationality").getValue(String.class);
+                            final String description = dataSnapshot.child("Description").getValue(String.class);
 
                             dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                 @Override
@@ -170,13 +186,13 @@ public class DetailsActivity extends AppCompatActivity {
                     locationTv.setText(dataSnapshot.getValue(String.class));
                 }
                 else if(dataSnapshot.getKey().equals("Bedroom quantity")){
-                    bedroomsTv.setText(dataSnapshot.getValue(String.class)+" Bedroom");
+                    bedroomsTv.setText(dataSnapshot.getValue(String.class));
                 }
                 else if(dataSnapshot.getKey().equals("Bathroom quantity")){
-                    bathroomTv.setText(dataSnapshot.getValue(String.class)+" Bathroom");
+                    bathroomTv.setText(dataSnapshot.getValue(String.class));
                 }
                 else if(dataSnapshot.getKey().equals("Kitchen quantity")){
-                    kitchenTv.setText(dataSnapshot.getValue(String.class)+" Kitchen");
+                    kitchenTv.setText(dataSnapshot.getValue(String.class));
                 }
                 else if(dataSnapshot.getKey().equals("Rent For")){
                     rentForTv.setText(dataSnapshot.getValue(String.class));
@@ -191,7 +207,24 @@ public class DetailsActivity extends AppCompatActivity {
 
                 }
                 else if(dataSnapshot.getKey().equals("Total rent")){
-                    rentAmountTv.setText(dataSnapshot.getValue(String.class));
+                    rentAmountTv.setText(dataSnapshot.getValue(String.class)+" Tk");
+                }
+                else if(dataSnapshot.getKey().equals("Description")){
+                    descriptionTv.setText(dataSnapshot.getValue(String.class));
+                }
+                else if(dataSnapshot.getKey().equals("Floor No")){
+                    if(dataSnapshot.getValue(String.class).equals("1")){
+                        floorTv.setText(dataSnapshot.getValue(String.class)+"st floor");
+                    }
+                    else if(dataSnapshot.getValue(String.class).equals("2")){
+                        floorTv.setText(dataSnapshot.getValue(String.class)+"nd floor");
+                    }
+                    else if(dataSnapshot.getValue(String.class).equals("3")){
+                        floorTv.setText(dataSnapshot.getValue(String.class)+"rd floor");
+                    }
+                    else {
+                        floorTv.setText(dataSnapshot.getValue(String.class)+"th floor");
+                    }
                 }
             }
 
@@ -265,5 +298,8 @@ public class DetailsActivity extends AppCompatActivity {
         rentDateTv = findViewById(R.id.rentDateTv);
         kitchenTv = findViewById(R.id.kitchenTv);
         rentTypeTv = findViewById(R.id.rentertype);
+
+        floorTv = findViewById(R.id.flore);
+        descriptionTv = findViewById(R.id.descriptionTv);
     }
 }

@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference databaseReference,databaseReference2,databaseReferenceForImage;
     FlatDetails flatDetails = null;
+    //ArrayList<String> postIdList = new ArrayList<>();
 
     FloatingActionButton fab;
 
@@ -202,56 +203,64 @@ public class MainActivity extends AppCompatActivity {
             databaseReference2 = database.getReference().child("Owner").child("User").child(ownerIdList.get(i)).child("Post");
             final int finalI = i;
 
-            //this method is for retriving data from user
-            databaseReference2.addChildEventListener(new ChildEventListener() {
-                @Override
-                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                //this method is for retriving data from user
+                databaseReference2.addChildEventListener(new ChildEventListener() {
+                    @Override
+                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-                    DatabaseReference databaseReference = databaseReference2.child(dataSnapshot.getKey());
-                    String postId = dataSnapshot.getKey();
+                        DatabaseReference databaseReference = databaseReference2.child(dataSnapshot.getKey());
+                        String postId = dataSnapshot.getKey();
+                        postIdList.add(postId);
+                        try {
+                            if (dataSnapshot.child("Available status").getValue(String.class).equals("Available")) {
+                                String address = dataSnapshot.child("Address").getValue(String.class);
+                                String bedroom = dataSnapshot.child("Bedroom quantity").getValue(String.class);
+                                String kitchen = dataSnapshot.child("Kitchen quantity").getValue(String.class);
+                                String bathroom = dataSnapshot.child("Bathroom quantity").getValue(String.class);
+                                String rentDate = dataSnapshot.child("Rent Date").getValue(String.class);
+                                String rentFor = dataSnapshot.child("Rent For").getValue(String.class);
+                                String rentType = dataSnapshot.child("Rent Type").getValue(String.class);
+                                String totalRent = dataSnapshot.child("Total rent").getValue(String.class);
 
-                    String address = dataSnapshot.child("Address").getValue(String.class);
-                    String bedroom = dataSnapshot.child("Bedroom quantity").getValue(String.class);
-                    String kitchen = dataSnapshot.child("Kitchen quantity").getValue(String.class);
-                    String bathroom = dataSnapshot.child("Bathroom quantity").getValue(String.class);
-                    String rentDate = dataSnapshot.child("Rent Date").getValue(String.class);
-                    String condition = dataSnapshot.child("Rent condition").getValue(String.class);
-                    String totalRent = dataSnapshot.child("Total rent").getValue(String.class);
-                    String image = dataSnapshot.child("Images").getValue(String.class);
+                                //Toast.makeText(MainActivity.this, "Tvr/"+dataSnapshot.hasChild("Images"), Toast.LENGTH_SHORT).show();
 
-                   // Toast.makeText(MainActivity.this, "Tvr/"+postIdList.get(finalI), Toast.LENGTH_SHORT).show();
+                                if (dataSnapshot.hasChild("Images")) {
+                                    String image = dataSnapshot.child("Images").getValue(String.class);
+                                    flatDetails = new FlatDetails(ownerIdList.get(finalI), address, bedroom, kitchen, bathroom, rentDate, rentFor,rentType, totalRent, image, postId);
+                                    arrayList.add(flatDetails);
+                                    listView.setAdapter(flatAdapter);
+                                } else {
+                                    flatDetails = new FlatDetails(ownerIdList.get(finalI), address, bedroom, kitchen, bathroom, rentDate, rentFor,rentType, totalRent, "", postId);
+                                    arrayList.add(flatDetails);
+                                    listView.setAdapter(flatAdapter);
+                                }
+                            }
+                        }catch (Exception e){
 
-                    //if(dataSnapshot.hasChild("Images")){
-                        flatDetails= new FlatDetails(ownerIdList.get(finalI),address, bedroom, kitchen,bathroom,rentDate,condition,totalRent,image,postId);
-                    //}
-                    //else {
-                        //flatDetails= new FlatDetails(ownerIdList.get(finalI),address, bedroom, kitchen,bathroom,rentDate,condition,totalRent,"",postId);
-                        arrayList.add(flatDetails);
-                        listView.setAdapter(flatAdapter);
-                   // }
-                }
+                        }
+                    }
 
-                @Override
-                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                    @Override
+                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-                }
+                    }
 
-                @Override
-                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                    @Override
+                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
 
-                }
+                    }
 
-                @Override
-                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                    @Override
+                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-                }
+                    }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                }
-            });
-        }
+                    }
+                });
+            }
         pd.dismiss();
     }
 

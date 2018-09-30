@@ -1,7 +1,9 @@
 package com.example.tanvir.to_letapp.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -48,6 +50,9 @@ public class DefaultLoginActivity extends AppCompatActivity {
         } else if (renterPassOnLoginEt.getText().toString().length() < 6 || renterPassOnLoginEt.getText().toString().length() == 0) {
             Toast.makeText(DefaultLoginActivity.this, "Enter at least 6 characters password", Toast.LENGTH_SHORT).show();
         } else {
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setTitle("Sign in...");
+            progressDialog.show();
             firebaseAuth.signInWithEmailAndPassword(renterEmailOnLoginEt.getText().toString(), renterPassOnLoginEt.getText().toString())
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
@@ -56,7 +61,6 @@ public class DefaultLoginActivity extends AppCompatActivity {
                                 database.child("Owner").child("User").child(task.getResult().getUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
                                         //checking current user id exist or not
                                         //if exist then owner activity will be start
                                         if (dataSnapshot.exists() && key.equals("1")) {
@@ -64,6 +68,7 @@ public class DefaultLoginActivity extends AppCompatActivity {
                                             Intent intent = new Intent(DefaultLoginActivity.this, OwnerMainActivity.class);
                                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                             finish();
+                                            progressDialog.dismiss();
                                             startActivity(intent);
                                         } else {//else renter activity will be start
                                             //finish();
@@ -71,6 +76,7 @@ public class DefaultLoginActivity extends AppCompatActivity {
                                             Intent intent = new Intent(DefaultLoginActivity.this, RenterMainActivity.class);
                                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                             finish();
+                                            progressDialog.dismiss();
                                             startActivity(intent);
                                         }
                                     }
