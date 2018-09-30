@@ -38,6 +38,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 public class RenterUpdateActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -97,8 +98,8 @@ public class RenterUpdateActivity extends AppCompatActivity implements AdapterVi
         age = getIntent().getStringExtra("Age");
         relagion = getIntent().getStringExtra("Relagion");
         profession = getIntent().getStringExtra("Profession");
-        maritalSatus = getIntent().getStringExtra("maritialStatus");
-        monthlyIncome = getIntent().getStringExtra("monthlyIncome");
+        maritalSatus = getIntent().getStringExtra("MaritalSatus");
+        monthlyIncome = getIntent().getStringExtra("MonthlyIncome");
         nationality = getIntent().getStringExtra("Natinality");
 
         renterNameEt.setText(name);
@@ -108,8 +109,15 @@ public class RenterUpdateActivity extends AppCompatActivity implements AdapterVi
         //renterProfessionSp.setText(profession);
         renterMonthlyIncomeEt.setText(monthlyIncome);
         renterNationality.setText(nationality);
+        try{
+            if (getIntent().getStringExtra("image").length()!=0){
+                // Picasso.get().load(intent.getStringExtra("image")).into(profileImage);
+                Picasso.get().load(getIntent().getStringExtra("image")).resize(400,400).centerCrop().into(renterImage);
+            }
+        }catch (Exception e){}
 
-        renterImage.setOnClickListener(new View.OnClickListener() {
+
+            renterImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 

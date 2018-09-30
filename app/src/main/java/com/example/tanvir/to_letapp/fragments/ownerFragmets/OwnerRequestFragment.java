@@ -128,7 +128,7 @@ public class OwnerRequestFragment extends Fragment {
                        renterPhoneNum = dataSnapshot.child("Phone Number").getValue(String.class);
                        renterAddress = dataSnapshot.child("Address").getValue(String.class);
                        renterMonthlyIn = dataSnapshot.child("MonthlyIncome").getValue(String.class);
-                       renterMaritStatus = dataSnapshot.child("MaritalStatus").getValue(String.class);
+                       renterMaritStatus = dataSnapshot.child("MaritalSatus").getValue(String.class);
                        renterGender = dataSnapshot.child("Gender").getValue(String.class);
                        renterReligion = dataSnapshot.child("Religion").getValue(String.class);
                        renterNationality = dataSnapshot.child("Nationality").getValue(String.class);
