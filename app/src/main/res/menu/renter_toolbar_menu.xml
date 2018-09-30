@@ -9,16 +9,6 @@
         app:showAsAction="always"
         app:actionViewClass="android.support.v7.widget.SearchView" />
     <item
-        android:id="@+id/filterrenterHome"
-        android:title="Filter"
-        app:showAsAction="always"
-        android:icon="@drawable/filter"/>
-    <item
         android:id="@+id/renterLogOut"
         android:title="Log out" />
-    <item
-        android:id="@+id/renterContact"
-        app:showAsAction="never"
-        android:title="Contact us"
-        />
 </menu>
