@@ -155,7 +155,7 @@ public class OwnerPostUpdateActivity extends AppCompatActivity implements Adapte
                 totalRent =  intent.getStringExtra("rentAmount");
                 rentForSt =  intent.getStringExtra("rentFor");
                 rentTypeSt =  intent.getStringExtra("rentType");
-                image =  intent.getStringExtra("bedroom");
+                image =  intent.getStringExtra("image");
                 rentDate  =  intent.getStringExtra("rentDate");
                 bathroom = intent.getStringExtra("bathroom");
                 floor = intent.getStringExtra("floorNo");
