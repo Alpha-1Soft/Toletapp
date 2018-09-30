@@ -62,7 +62,7 @@ public class OwnerProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_owner_profile, container, false);
-
+        getActivity().setTitle("Profile");
         viewInisialization(view);
         final String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         database=FirebaseDatabase.getInstance();
@@ -95,7 +95,8 @@ public class OwnerProfileFragment extends Fragment {
                 ownerGender.setText(Gender);
                 try {
                     if(profileImage.length()!=0){
-                        Picasso.get().load(profileImage).into(profileImageView);
+                        //Picasso.get().load(profileImage).into(profileImageView);
+                        Picasso.get().load(profileImage).resize(400,400).centerCrop().into(profileImageView);
                     }
                 }catch (Exception e){}
 

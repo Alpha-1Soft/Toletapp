@@ -66,6 +66,7 @@ public class OwnerPostFragment extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_owner_post, container, false);
 
+        getActivity().setTitle("Post list");
         final ArrayList<OwnerPost> arrayList = new ArrayList<>();
 
         FloatingActionButton fab = view.findViewById(R.id.fab);
@@ -117,7 +118,7 @@ public class OwnerPostFragment extends Fragment {
             }
         });
 
-        fab.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#5348E8")));//fab background color
+        fab.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#008f02")));//fab background color
         //fab.setBackgroundDrawable(R.drawable.add);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

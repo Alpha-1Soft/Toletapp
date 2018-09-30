@@ -63,6 +63,8 @@ public class OwnerRequestFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_owner_request, container, false);
+
+        getActivity().setTitle("Request");
         listView = view.findViewById(R.id.requestLv);
         renterNameBt = view.findViewById(R.id.renterNameBt);
         requestIm = view.findViewById(R.id.requestImage);
@@ -101,7 +103,6 @@ public class OwnerRequestFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot d : dataSnapshot.getChildren()) {
-                    Toast.makeText(getActivity(), ""+d.getValue(), Toast.LENGTH_SHORT).show();
                     renterProfile(d.getValue().toString(),postId,d.getKey());
                 }
             }
@@ -117,7 +118,6 @@ public class OwnerRequestFragment extends Fragment {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         try{
             final DatabaseReference databaseReference = database.getReference().child("Rentar").child("User").child(renterId).child("Profile");
-            Toast.makeText(getActivity(), "Tanvir   "+renterId, Toast.LENGTH_SHORT).show();
             databaseReference.addChildEventListener(new ChildEventListener() {
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
