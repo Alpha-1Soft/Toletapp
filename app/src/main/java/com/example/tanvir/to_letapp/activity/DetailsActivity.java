@@ -194,6 +194,9 @@ public class DetailsActivity extends AppCompatActivity {
                 else if(dataSnapshot.getKey().equals("Rent For")){
                     rentForTv.setText(dataSnapshot.getValue(String.class));
                 }
+                else if(dataSnapshot.getKey().equals("Rent Date")){
+                    rentDateTv.setText(dataSnapshot.getValue(String.class));
+                }
                 else if(dataSnapshot.getKey().equals("Rent Type")){
                     rentTypeTv.setText(dataSnapshot.getValue(String.class));
                 }
