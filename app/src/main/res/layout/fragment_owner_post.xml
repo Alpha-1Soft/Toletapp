@@ -22,7 +22,7 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         apps:layout_anchorGravity="bottom|right|end"
-        apps:srcCompat="@android:drawable/ic_input_add"
+        apps:srcCompat="@drawable/add"
         />
 
 </android.support.design.widget.CoordinatorLayout>

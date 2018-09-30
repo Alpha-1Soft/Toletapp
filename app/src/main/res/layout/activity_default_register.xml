@@ -29,7 +29,7 @@
             >
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/renterNameEt"
+                android:id="@+id/NameEt"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:hint="Name"
@@ -42,13 +42,14 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/rentarEmailEt"
+                android:id="@+id/EmailEt"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_marginTop="10dp"
                 android:hint="Email"
                 android:inputType="textEmailAddress"
-                android:layout_marginTop="10dp"
                 android:padding="5dp"
                 />
 
@@ -58,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/rentarPasswordEt"
+                android:id="@+id/PasswordEt"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:hint="Password"
@@ -73,7 +74,7 @@
             android:layout_height="wrap_content">
 
             <android.support.design.widget.TextInputEditText
-                android:id="@+id/rentarConfirmPasswordEt"
+                android:id="@+id/ConfirmPasswordEt"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:hint="Confirm Password"
@@ -106,6 +107,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Male"/>
+
 
                 <RadioButton
                     android:id="@+id/femaleRb"

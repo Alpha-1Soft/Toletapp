@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.ownerActivity.PostActivity"
+    tools:context=".activity.ownerActivity.OwnerPostUpdateActivity"
     android:background="#d7d6d6">
 
     <ScrollView
@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            >
+            android:padding="5dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -31,11 +31,50 @@
                     android:onClick="uploadImage1"
                     android:src="@drawable/addimage2"/>
             </LinearLayout>
+           <!-- <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                >
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:layout_gravity="center"
+                    android:background="#cecdcd"
+                    android:onClick="uploadImage2"
+                    android:src="@drawable/addimage2"
+                    android:layout_margin="3dp"
+                    />
+
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:layout_gravity="center"
+                    android:background="#cecdcd"
+                    android:onClick="uploadImage3"
+                    android:src="@drawable/addimage2"
+                    android:layout_margin="3dp"/>
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:layout_gravity="center"
+                    android:background="#cecdcd"
+                    android:onClick="uploadImage4"
+                    android:src="@drawable/addimage2"
+                    android:layout_margin="3dp"/>
+
+            </LinearLayout>-->
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-               android:background="#ffffff"
+                android:background="#ffffff"
                 >
                 <android.support.design.widget.TextInputEditText
                     android:id="@+id/locationEt"
@@ -69,20 +108,19 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="2"
-
+                android:layout_marginTop="10dp"
                 android:background="@drawable/edittext_border">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:padding="5dp">
+                    android:layout_weight="1">
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Rent type"
-                        android:textSize="18sp"
+                        android:textSize="20sp"
                         android:textColor="#000"/>
                     <Spinner
                         android:id="@+id/rentTypeSp"
@@ -106,27 +144,50 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Rent for"
-                        android:textSize="18sp"
+                        android:textSize="20sp"
                         android:textColor="#000"/>
                     <Spinner
                         android:id="@+id/rentForSp"
                         android:layout_width="100dp"
                         android:layout_height="40dp">
-
                     </Spinner>
+
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/edittext_border"
                 android:orientation="vertical"
-                android:padding="5dp">
+                android:background="@drawable/edittext_border">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Available status"
+                        android:textSize="20sp"
+                        android:textColor="#000000"/>
+
+                    <Spinner
+                        android:id="@+id/rentStatusSp"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp">
+                    </Spinner>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittext_border">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Rent date"
-                    android:textSize="18sp"
+                    android:textSize="20sp"
                     android:textColor="#000"/>
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -143,16 +204,17 @@
                         android:text="Select date"
                         android:textAllCaps="false" />
                 </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="#ffffff"
-                android:padding="5dp">
+                android:background="@drawable/edittext_border">
+
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
                     <TextView
@@ -191,12 +253,11 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
                     <TextView
-                        android:id="@+id/bedroomquantity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Bedroom quantity"
                         android:textColor="#000"
-                        android:textSize="18sp"/>
+                        android:textSize="20sp"/>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -211,7 +272,6 @@
                             android:id="@+id/bedroomEt"
                             android:layout_width="60dp"
                             android:layout_height="60dp"
-                            android:layout_gravity="center"
                             />
                         <ImageButton
                             android:id="@+id/bedroomPlusBt"
@@ -229,12 +289,11 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
                     <TextView
-                        android:id="@+id/kitchenquantity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Kitchen quantity"
                         android:textColor="#000"
-                        android:textSize="18sp"/>
+                        android:textSize="20sp"/>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -249,7 +308,6 @@
                             android:id="@+id/kitchenEt"
                             android:layout_width="60dp"
                             android:layout_height="60dp"
-                            android:layout_gravity="center"
                             />
                         <ImageButton
                             android:id="@+id/kitchenPlusBt"
@@ -265,12 +323,11 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
                     <TextView
-                        android:id="@+id/bathroomquantity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Bathroom quantity"
                         android:textColor="#000"
-                        android:textSize="18sp"/>
+                        android:textSize="20sp"/>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -285,7 +342,6 @@
                             android:id="@+id/bathroomEt"
                             android:layout_width="60dp"
                             android:layout_height="60dp"
-                            android:layout_gravity="center"
                             />
                         <ImageButton
                             android:id="@+id/bathroomPlusBt"
@@ -301,11 +357,11 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/edittext_border"
+                android:background="#ffffff"
                 >
 
                 <android.support.design.widget.TextInputEditText
-                    android:id="@+id/descriptionEt"
+                    android:id="@+id/posDescriptionEt"
                     android:layout_width="match_parent"
                     android:layout_height="126dp"
                     android:layout_marginTop="10dp"
