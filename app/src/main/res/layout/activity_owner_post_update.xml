@@ -396,7 +396,7 @@
                 android:id="@+id/postBt"
                 android:text="Post"
                 android:textSize="20dp"
-                android:textColor="#000"
+                android:textColor="#ffffff"
                 android:textAllCaps="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
