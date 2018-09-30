@@ -96,8 +96,8 @@ public class RenterProfileFragment extends Fragment {
                     Relagion=dataSnapshot.child("Religion").getValue(String.class);
                     Gender=dataSnapshot.child("Gender").getValue(String.class);
                     Profession=dataSnapshot.child("Profession").getValue(String.class);
-                    MonthlyIncome=dataSnapshot.child("Monthly Income").getValue(String.class);
-                    MaritalSatus=dataSnapshot.child("Marital Status").getValue(String.class);
+                    MonthlyIncome=dataSnapshot.child("MonthlyIncome").getValue(String.class);
+                    MaritalSatus=dataSnapshot.child("MaritalSatus").getValue(String.class);
                     Natinality=dataSnapshot.child("Nationality").getValue(String.class);
                     profileImge = dataSnapshot.child("ProfileImage").getValue(String.class);
 
