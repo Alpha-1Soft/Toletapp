@@ -68,7 +68,7 @@ public class OwnerUpdateActivity extends AppCompatActivity implements AdapterVie
         phoneNumber=getIntent().getStringExtra("Phone Number");
         address=getIntent().getStringExtra("Address");
         age=getIntent().getStringExtra("Age");
-        relagion=getIntent().getStringExtra("Relagion");
+        relagion=getIntent().getStringExtra("Religion");
 
         ownerProfileImageLink=getIntent().getStringExtra("ownerProfileImage");
 
@@ -76,7 +76,11 @@ public class OwnerUpdateActivity extends AppCompatActivity implements AdapterVie
        ownerPhoneNumberEt.setText(phoneNumber);
        ownerAddresEt.setText(address);
        ownerAgeEt.setText(age);
-        Picasso.get().load(ownerProfileImageLink).into(ownerProfileImage);
+       try{
+           if(ownerProfileImageLink.length()!=0){
+               Picasso.get().load(ownerProfileImageLink).into(ownerProfileImage);
+           }
+       }catch (Exception e){}
 
        ownerProfileImage.setOnClickListener(new View.OnClickListener() {
            @Override
@@ -143,7 +147,7 @@ public class OwnerUpdateActivity extends AppCompatActivity implements AdapterVie
                    // databaseReference.child("ProfileImage").setValue(ownerProfileImage);
 
                     uploadImage(databaseReference);
-                    setFragment(ownerProfileFragment);
+                    //setFragment(ownerProfileFragment);
 
                     finish();
                 }

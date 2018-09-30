@@ -8,35 +8,28 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Build;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tanvir.to_letapp.R;
-import com.example.tanvir.to_letapp.activity.DefaultRegisterActivity;
-import com.example.tanvir.to_letapp.activity.MainActivity;
 import com.example.tanvir.to_letapp.fragments.ownerFragmets.OwnerPostFragment;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -52,24 +45,26 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class PostActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class OwnerPostUpdateActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     TextView bedroomquantity,kitchenquantity,bathroomquantity;
     private EditText postAddressEt, totalRentEt, bedroomEt, kitchenroomEt, bathroomEt,rentDateEt,floorNoEt,descriptionEt;
-    private String postAddress, totalRent, bedroom, kitchenroom, bathroom,rentDate,rentForSt,rentTypeSt,image, postId;
+    private String postAddress, totalRent, bedroom, kitchenroom, bathroom,rentDate,
+            rentForSt,rentTypeSt,image, postId,availableStatusText,floor,des;
     private Button postBt;
     OwnerPostFragment ownerPostFragment;
-    Spinner rentForSp, rentTypeSp;
+    Spinner rentForSp, rentTypeSp,availableStatusSp;
     String rentForSpinnerText, rentTypeSpinnerText;
     DatePickerDialog datePickerDialog;
     String[] rentType = null;
     String[] rentFor = {"Male", "Female", "Family"};
+    String[] availableStatus = {"Available","Not available"};
     ImageView imageView1, imageView2, imageView3, imageView4;
     ProgressDialog progressDialog;
     FirebaseDatabase database;
 
     ImageButton bedroomMInusBt,bedroomPlusBt,kitchenMinusBt,kitchenPlusBt,bathroomMinusBt,bathroomPlusBt,floorNoPlusBt,floorNoMinusBt;
 
-    int bedoomCount=0,kitchenCount=0,bathroomCount=0,floorNoCount=0;
+    int bedoomCount=0,kitchenCount=0,bathroomCount=0,floorNoCount = 0;
     String currentUserId;
 
     DatabaseReference imageReference,databaseReferenceUpdate;
@@ -79,11 +74,15 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
 
     ArrayList<String> imageList = new ArrayList<>();
 
+
+    // String[] rentType = {"Flat", "Sub let", "Hostel", "Office"};
+    // String[] rentFor = {"Male", "Female", "Family"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_post);
 
+        setContentView(R.layout.activity_owner_post_update);
         postAddressEt = findViewById(R.id.locationEt);
         totalRentEt = findViewById(R.id.rentEt);
         bedroomEt = findViewById(R.id.bedroomEt);
@@ -109,20 +108,24 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
         bathroomquantity=findViewById(R.id.bathroomquantity);
         kitchenquantity=findViewById(R.id.kitchenquantity);
         floorNoEt = findViewById(R.id.floorNoEt);
-        descriptionEt = findViewById(R.id.descriptionEt);
+        descriptionEt = findViewById(R.id.posDescriptionEt);
 
         postBt = findViewById(R.id.postBt);
 
         rentForSp = findViewById(R.id.rentForSp);
         rentTypeSp = findViewById(R.id.rentTypeSp);
+        availableStatusSp = findViewById(R.id.rentStatusSp);
 
         //listener
         rentTypeSp.setOnItemSelectedListener(this);
 
-       ownerPostFragment = new OwnerPostFragment();
+        ownerPostFragment = new OwnerPostFragment();
         progressDialog = new ProgressDialog(this);
 
         ArrayAdapter<String> rentfor = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,rentFor);
+        ArrayAdapter<String> rentStatus = new ArrayAdapter<>(this,android.R.layout.simple_dropdown_item_1line,availableStatus);
+        availableStatusSp.setAdapter(rentStatus);
+
         rentForSp.setAdapter(rentfor);
         Toast.makeText(this, ""+getIntent().getStringExtra("key")+" "+getIntent().getStringExtra("OwnerPostId"), Toast.LENGTH_SHORT).show();
 
@@ -139,6 +142,9 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
                 rentTypeSt =  intent.getStringExtra("rentType");
                 image =  intent.getStringExtra("bedroom");
                 rentDate  =  intent.getStringExtra("rentDate");
+                bathroom = intent.getStringExtra("bathroom");
+                floor = intent.getStringExtra("floorNo");
+                des = intent.getStringExtra("description");
 
                 postAddressEt.setText(postAddress);
                 bedroomEt.setText(bedroom);
@@ -146,30 +152,8 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
                 totalRentEt.setText(totalRent);
                 rentDateEt.setText(rentDate);
                 bathroomEt.setText(bathroom);
-
-                if(rentForSt.equals("Flat")){
-                    rentForSp.setSelection(0);
-                }
-                else if(rentForSt.equals("Sub-Let")){
-                    rentForSp.setSelection(1);
-                }
-                else if(rentForSt.equals("Hostel")){
-                    rentForSp.setSelection(2);
-                }
-                else if(rentForSt.equals("Office")){
-                    rentForSp.setSelection(3);
-                }
-
-                if(rentTypeSt.equals("Male")){
-                    rentTypeSp.setSelection(0);
-
-                }else if(rentTypeSt.equals("Female")){
-                    rentTypeSp.setSelection(1);
-
-                }else if(rentTypeSt.equals("Family")){
-                    rentTypeSp.setSelection(2);
-                }
-
+                floorNoEt.setText(floor);
+                descriptionEt.setText(des);
 
             }
         }catch (Exception e){
@@ -214,9 +198,9 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
                 }
                 else {
                 }
-                bedoomCount--;
-                bedroomEt.setText(String.valueOf(bedoomCount));
-            }
+                 bedoomCount--;
+                 bedroomEt.setText(String.valueOf(bedoomCount));
+                }
         });
 
         kitchenPlusBt.setOnClickListener(new View.OnClickListener() {
@@ -265,7 +249,7 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
                 postBt.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        updatePost();
+                        post();
                     }
                 });
             }
@@ -274,14 +258,13 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
             postBt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    post(ownerPostFragment);
+                    post();
                 }
             });
         }
-
     }
 
-    private void post(final Fragment fragment) {
+    private void post() {
 
        /* ProgressDialog pd = new ProgressDialog(this);
         pd.setMessage("loading");
@@ -291,6 +274,7 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
 
         rentTypeSpinnerText=rentTypeSp.getSelectedItem().toString();
         rentForSpinnerText=rentForSp.getSelectedItem().toString();
+        availableStatusText=availableStatusSp.getSelectedItem().toString();
 
         final String postAddress = postAddressEt.getText().toString();
         final String totalRent = totalRentEt.getText().toString();
@@ -298,160 +282,9 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
         final String kitchenroomQuantity = kitchenroomEt.getText().toString();
         final String bathroomQuantity = bathroomEt.getText().toString();
 
-        if(rentTypeSpinnerText.equals("Office")){
-            bedroomEt.setError(null);
-            kitchenroomEt.setError(null);
-            bathroomEt.setError(null);
-
-            if(postAddress.length()==0 && totalRent.length()==0){
-                postAddressEt.setError("Enter location.");
-                totalRentEt.setError("Enter rent amount.");
-
-            }
-            else if(postAddress.length()==0){
-                postAddressEt.setError("Enter location.");
-            }
-            else if(totalRent.length()==0){
-                totalRentEt.setError("Enter rent amount.");
-            }
-            else {
-                try {
-                    progressDialog.setMessage("Uploading...");
-                    progressDialog.show();
-
-                    currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-                    database = FirebaseDatabase.getInstance();
-                    databaseReferenceOwner = database.getReference().child("Owner").child("User").child(currentUserId).child("Post").push();
-                    DatabaseReference defaultDatabase = FirebaseDatabase.getInstance().getReference();//database reference
-
-
-                    //checking current user here
-                    //if user is renter then he will be able to send request
-                    defaultDatabase.child("Owner").child("User").child(currentUserId).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            //checking current user id exist or not
-                            //if exist then owner activity will be start
-                            if (dataSnapshot.exists()) {
-                                databaseReferenceOwner.child("Address").setValue(postAddress);
-                                databaseReferenceOwner.child("Total rent").setValue(totalRent);
-                                databaseReferenceOwner.child("Bedroom quantity").setValue(bedroomQuantity);
-                                databaseReferenceOwner.child("Kitchen quantity").setValue(kitchenroomQuantity);
-                                databaseReferenceOwner.child("Bathroom quantity").setValue(bathroomQuantity);
-                                databaseReferenceOwner.child("Rent Type").setValue(rentTypeSpinnerText);
-                                databaseReferenceOwner.child("Rent For").setValue(rentForSpinnerText);
-                                databaseReferenceOwner.child("Rent Date").setValue(rentDateEt.getText().toString());
-                                databaseReferenceOwner.child("Floor No").setValue(floorNoEt.getText().toString());
-                                databaseReferenceOwner.child("Available status").setValue("Available");
-
-                                imageReference = databaseReferenceOwner.child("Images");
-                                uploadImages(imageReference);
-
-                                imageList.clear();
-                                progressDialog.dismiss();
-                                Toast.makeText(PostActivity.this, "Upload finished", Toast.LENGTH_SHORT).show();
-                                finish();
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
-                } catch (Exception e) {
-                }
-            }
-        }
-        else{
-            if(postAddress.length()==0){
-                postAddressEt.setError("Enter location.");
-            }
-            if(kitchenroomQuantity.length()==0){
-                kitchenroomEt.setError("Enter kithenroom quantity.");
-            }
-            if(totalRent.length()==0){
-                totalRentEt.setError("Enter rent amount.");
-            }
-            if(bedroomQuantity.length()==0){
-                bedroomEt.setError("Enter bedroom quantity.");
-            }
-            if(bathroomQuantity.length()==0){
-                bathroomEt.setError("Enter bathroom quantity.");
-            }
-            if(rentDateEt.getText().toString().length()==0){
-                rentDateEt.setError("Enter rent's date.");
-            }
-            if(kitchenroomQuantity.length()>0 && totalRent.length()>0 && bedroomQuantity.length()>0 &&
-                    bathroomQuantity.length()>0 && postAddress.length()>0 && rentDateEt.getText().toString().length()>0) {
-
-
-                //if current user id not null then it's will execute try block
-                //otherwise it will execute catch block
-                try {
-                    progressDialog.setMessage("Uploading...");
-                    progressDialog.show();
-
-                    currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-                    database = FirebaseDatabase.getInstance();
-                    databaseReferenceOwner = database.getReference().child("Owner").child("User").child(currentUserId).child("Post").push();
-                    DatabaseReference defaultDatabase = FirebaseDatabase.getInstance().getReference();//database reference
-
-
-                    //checking current user here
-                    //if user is renter then he will be able to send request
-                    defaultDatabase.child("Owner").child("User").child(currentUserId).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            //checking current user id exist or not
-                            //if exist then owner activity will be start
-                            if (dataSnapshot.exists()) {
-                                databaseReferenceOwner.child("Address").setValue(postAddress);
-                                databaseReferenceOwner.child("Total rent").setValue(totalRent);
-                                databaseReferenceOwner.child("Bedroom quantity").setValue(bedroomQuantity);
-                                databaseReferenceOwner.child("Kitchen quantity").setValue(kitchenroomQuantity);
-                                databaseReferenceOwner.child("Bathroom quantity").setValue(bathroomQuantity);
-                                databaseReferenceOwner.child("Rent Type").setValue(rentTypeSpinnerText);
-                                databaseReferenceOwner.child("Rent For").setValue(rentForSpinnerText);
-                                databaseReferenceOwner.child("Rent Date").setValue(rentDateEt.getText().toString());
-                                databaseReferenceOwner.child("Floor No").setValue(floorNoEt.getText().toString());
-                                databaseReferenceOwner.child("Description").setValue(descriptionEt.getText().toString());
-                                databaseReferenceOwner.child("Available status").setValue("Available");
-
-                                imageReference = databaseReferenceOwner.child("Images");
-                                uploadImages(imageReference);
-
-                                imageList.clear();
-                                progressDialog.dismiss();
-                                Toast.makeText(PostActivity.this, "Upload finished", Toast.LENGTH_SHORT).show();
-                                finish();
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
-                } catch (Exception e) {
-                }
-            }
-        }
-        progressDialog.dismiss();
-
-    }
-
-    public void updatePost() {
         currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         database = FirebaseDatabase.getInstance();
         databaseReferenceUpdate = database.getReference().child("Owner").child("User").child(currentUserId).child("Post").child(postId);
-        final String postAddress = postAddressEt.getText().toString();
-        final String totalRent = totalRentEt.getText().toString();
-        final String bedroomQuantity = bedroomEt.getText().toString();
-        final String kitchenroomQuantity = kitchenroomEt.getText().toString();
-        final String bathroomQuantity = bathroomEt.getText().toString();
 
         databaseReferenceUpdate.addChildEventListener(new ChildEventListener() {
             @Override
@@ -473,22 +306,31 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
                     databaseReferenceUpdate.child("Bathroom quantity").setValue(bathroomQuantity);
                 }
                 else if(dataSnapshot.getKey().equals("Rent Type")){
-                    databaseReferenceUpdate.child("Rent Type").setValue(postAddress);
+                    databaseReferenceUpdate.child("Rent Type").setValue(rentTypeSpinnerText);
                 }
                 else if(dataSnapshot.getKey().equals("Rent Date")){
-                    databaseReferenceUpdate.child("Rent Date").setValue(postAddress);
+                    databaseReferenceUpdate.child("Rent Date").setValue(rentDate);
+                }
+                else if(dataSnapshot.getKey().equals("Rent For")){
+                    databaseReferenceUpdate.child("Rent For").setValue(rentForSpinnerText);
+                }
+                else if(dataSnapshot.getKey().equals("Floor No")){
+                    databaseReferenceUpdate.child("Floor No").setValue(floorNoEt.getText().toString());
+                }
+                else if(dataSnapshot.getKey().equals("Description")){
+                    databaseReferenceUpdate.child("Description").setValue(descriptionEt.getText().toString());
                 }
                 else if(dataSnapshot.getKey().equals("Available status")){
-                    databaseReferenceUpdate.child("Available status").setValue(postAddress);
+                    databaseReferenceUpdate.child("Available status").setValue(availableStatusText);
                 }
 
 
-                //imageReference = databaseReferenceOwner.child("Images");
-                //uploadImages(imageReference);
+                imageReference = databaseReferenceUpdate.child("Images");
+                uploadImages(imageReference);
 
                 imageList.clear();
                 progressDialog.dismiss();
-                Toast.makeText(PostActivity.this, "Upload finished", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(PostActivity.this, "Upload finished", Toast.LENGTH_SHORT).show();
                 finish();
             }
 
@@ -512,6 +354,11 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
 
             }
         });
+
+    }
+
+    public void updatePost() {
+
     }
 
     @Override
@@ -545,11 +392,11 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
                 bathroomPlusBt.setClickable(false);
                 bathroomEt.setEnabled(false);
                 bathroomEt.setClickable(false);
-               // Toast.makeText(this, "office checked", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(this, "office checked", Toast.LENGTH_SHORT).show();
             }
 
-          //  else if (rentForSpinnerText.equals("Family")) {//if user select family then "hostel" option will be disabled
-              else if(i==2){
+            //  else if (rentForSpinnerText.equals("Family")) {//if user select family then "hostel" option will be disabled
+            else if(i==2){
 
                 rentFor[0]="Male";
                 rentFor[1]="Female";
@@ -583,9 +430,9 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
 
             } else {//otherwise all disabled options will be enabled
 
-               rentFor[0]="Male";
-               rentFor[1]="Female";
-               rentFor[2]="Family";
+                rentFor[0]="Male";
+                rentFor[1]="Female";
+                rentFor[2]="Family";
                 rentForSp.setEnabled(true);
                 rentForSp.setClickable(true);
 
@@ -633,7 +480,7 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
         int month = calendar.get(Calendar.MONTH);
         int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
 
-        datePickerDialog = new DatePickerDialog(PostActivity.this, new DatePickerDialog.OnDateSetListener() {
+        datePickerDialog = new DatePickerDialog(OwnerPostUpdateActivity.this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
                 rentDate = i + " - " + (i1 + 1) + " - " + i2;
@@ -652,7 +499,7 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
         if (requestCode == 1 && resultCode == RESULT_OK) {
             count1++;
             if (count1 == 1) {
-               uri = data.getData();
+                uri = data.getData();
 
 
                 String[] filePathColumn = {MediaStore.Images.Media.DATA};
@@ -704,28 +551,28 @@ public class PostActivity extends AppCompatActivity implements AdapterView.OnIte
 
     public void uploadImages(final DatabaseReference databaseReference) {
         try {
-                    final StorageReference storageReference =
-                            FirebaseStorage.getInstance().getReference().child("Photo").child(uri.getLastPathSegment());
+            final StorageReference storageReference =
+                    FirebaseStorage.getInstance().getReference().child("Photo").child(uri.getLastPathSegment());
 
-                    Bitmap bitmap = BitmapFactory.decodeFile(uri.toString());
-                    Toast.makeText(this, "upload checked", Toast.LENGTH_SHORT).show();
+            Bitmap bitmap = BitmapFactory.decodeFile(uri.toString());
+            Toast.makeText(this, "upload checked", Toast.LENGTH_SHORT).show();
 
-                    storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                    storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
-                            storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                @Override
-                                public void onSuccess(Uri uri) {
-                                    Toast.makeText(PostActivity.this, ""+databaseReference, Toast.LENGTH_SHORT).show();
-                                    databaseReference.setValue(uri.toString());
-                                    //progressDialog.dismiss();
-                                    //Picasso.get().load(uri.toString()).into(imageView);
-                                    //Toast.makeText(PostActivity.this, "Uploading finished...", Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                        public void onSuccess(Uri uri) {
+                            //Toast.makeText(PostActivity.this, ""+databaseReference, Toast.LENGTH_SHORT).show();
+                            databaseReference.setValue(uri.toString());
+                            //progressDialog.dismiss();
+                            //Picasso.get().load(uri.toString()).into(imageView);
+                            //Toast.makeText(PostActivity.this, "Uploading finished...", Toast.LENGTH_SHORT).show();
                         }
                     });
+                }
+            });
         }catch (Exception e){
 
         }
