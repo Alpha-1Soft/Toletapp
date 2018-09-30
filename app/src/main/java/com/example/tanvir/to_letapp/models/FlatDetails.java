@@ -11,16 +11,23 @@ public class FlatDetails {
     private String condition;
     public  String image;
     private String postId;
+    private String rentFor;
+    private String rentType;
 
-    public FlatDetails(String flatLocation, String bedroom, String kitchen, String totalRent) {
+    public FlatDetails(String flatLocation, String bedroom, String kitchen,
+                       String totalRent,String rentDate,String rentType,String rentFor,String image) {
         this.flatLocation = flatLocation;
         this.bedroom =  bedroom;
         this.kitchen = kitchen;
         this.totalRent = totalRent;
+        this.rentDate = rentDate;
+        this.rentType = rentType;
+        this.rentFor = rentFor;
+        this.image = image;
     }
 
     public FlatDetails(String ownerId, String flatLocation, String bedroom
-            , String kitchen, String bathroom, String rentDate, String condition
+            , String kitchen, String bathroom, String rentDate, String rentFor,String rentType
             , String totalRent, String s1, String postId) {
         this.ownerId = ownerId;
         this.flatLocation = flatLocation;
@@ -28,10 +35,11 @@ public class FlatDetails {
         this.kitchen = kitchen;
         this.bathroom = bathroom;
         this.rentDate = rentDate;
-        this.condition = condition;
         this.totalRent=totalRent;
         this.postId = postId;
         this.image = s1;
+        this.rentFor=rentFor;
+        this.rentType=rentType;
     }
 
     public FlatDetails(String ownerId,String flatLocation, String bedroom, String kitchen, String bathroom, String rentDate, String condition, String totalRent,String image) {
@@ -59,6 +67,14 @@ public class FlatDetails {
         this.totalRent=totalRent;
         this.postId = postId;
     }*/
+
+    public String getRentFor() {
+        return rentFor;
+    }
+
+    public String getRentType() {
+        return rentType;
+    }
 
     public String getImage() {
         return image;

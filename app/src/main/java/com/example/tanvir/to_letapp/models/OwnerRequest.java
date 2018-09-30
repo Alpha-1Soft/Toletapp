@@ -16,6 +16,9 @@ public class OwnerRequest {
     private String currentuser;
     private String renterEmail;
 
+    private String ownerPostId;
+    private String requestKey;
+
     /*public OwnerRequest(String renterImage, String renterName, String renterAge, String renterProfession, String renterPhoneNum,
                         String renterAddress, String renterMonthlyIn, String renterMaritStatus, String renterGender,
                         String renterReligion, String renterNationality, String renterId, String currentuser) {
@@ -23,7 +26,9 @@ public class OwnerRequest {
 
     public OwnerRequest(String renterImage, String renterName, String renterAge, String renterProfession,
                         String renterPhoneNum, String renterAddress, String renterMonthlyIn, String renterMaritStatus,
-                        String renterGender, String renterReligion, String renterNationality, String renterId, String currentuser,String renterEmail) {
+                        String renterGender, String renterReligion, String renterNationality, String renterId,
+                        String currentuser,String renterEmail,String ownerPostId,String requestKey) {
+
         this.renterImage = renterImage;
         this.renterName = renterName;
         this.renterAge = renterAge;
@@ -38,6 +43,16 @@ public class OwnerRequest {
         this.renterId = renterId;
         this.currentuser = currentuser;
         this.renterEmail = renterEmail;
+        this.ownerPostId = ownerPostId;
+        this.requestKey = requestKey;
+    }
+
+    public String getRequestKey() {
+        return requestKey;
+    }
+
+    public String getOwnerPostId() {
+        return ownerPostId;
     }
 
     public String getRenterEmail() {
