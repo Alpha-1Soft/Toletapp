@@ -9,16 +9,20 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="#03396c"
+        >
         <Button
             android:onClick="cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Cancel"
-            android:textColor="#000"
+            android:textColor="#ffffff"
             android:textSize="20dp"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false"
+            android:background="#008f02"
+            android:layout_margin="3dp"/>
         <Button
             android:onClick="save"
             android:layout_width="wrap_content"
@@ -27,7 +31,9 @@
             android:text="Save"
             android:textAllCaps="false"
             android:textSize="20dp"
-            android:textColor="#000"/>
+            android:textColor="#ffffff"
+            android:background="#008f02"
+            android:layout_margin="3dp"/>
     </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"

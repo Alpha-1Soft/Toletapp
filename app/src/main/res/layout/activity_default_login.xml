@@ -63,6 +63,6 @@
         android:text="Create a new Account"
         android:textSize="20dp"
         android:layout_marginTop="20dp"
-        android:background="#036818"
+        android:background="#008f02"
         />
 </LinearLayout>

@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:text="Tanvir Hasan"
                 android:textSize="18sp"
-                android:textColor="#000"
+                android:textColor="#365eca"
                 android:padding="2dp"
                 android:layout_marginLeft="4dp"
                 android:background="#0000ffff"/>

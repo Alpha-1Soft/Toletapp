@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             app:titleTextColor="#ffffff"
             android:layout_height="50dp"
-            android:background="@color/colorPrimary">
+            android:background="#008f02">
 
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
@@ -262,7 +262,8 @@
             android:layout_height="match_parent"
             android:textSize="20dp"
             android:text="Request"
-            android:textColor="#000"
+            android:textColor="#ffffff"
+            android:background="#008f02"
             android:textAllCaps="false"/>
     </LinearLayout>
 </LinearLayout>

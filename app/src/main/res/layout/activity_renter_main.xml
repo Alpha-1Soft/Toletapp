@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             app:titleTextColor="#ffffff"
             android:layout_height="50dp"
-            android:background="@color/colorPrimary">
+            android:background="#008f02">
 
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
@@ -27,8 +27,8 @@
         android:layout_height="56dp"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
-        app:itemTextColor="@color/colorAccent"
-        android:background="@color/colorPrimary"
+        app:itemTextColor="#acacac"
+        android:background="#dad7d7"
         app:menu="@menu/renter_navigation_items">
 
     </android.support.design.widget.BottomNavigationView>

@@ -19,7 +19,7 @@
             android:id="@+id/cameraDialogImageBt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/addimage2"
+            android:src="@drawable/camera"
             android:layout_gravity="center"
             />
         <TextView
@@ -32,7 +32,7 @@
             android:id="@+id/gallaryDialogImageBt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/addimage2"
+            android:src="@drawable/gallary"
             android:layout_gravity="center"
             />
         <TextView
