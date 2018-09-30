@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp">
+            <TextView
+                android:id="@+id/ownerNameTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tanvir hasan"
+                android:textAllCaps="false"
+                android:background="#0000ffff"
+                android:textStyle="bold"
+                android:textSize="16dp"
+                android:padding="3dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="accepted your rent's request."
+                android:textAllCaps="false"
+                android:padding="3dp"
+                android:textSize="16dp"
+                android:textColor="#000"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>
