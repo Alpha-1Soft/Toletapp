@@ -1,5 +1,7 @@
 package com.example.tanvir.to_letapp.fragments.renterFragments;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -17,9 +19,11 @@ import android.widget.ListView;
 
 import com.example.tanvir.to_letapp.R;
 import com.example.tanvir.to_letapp.activity.DetailsActivity;
+import com.example.tanvir.to_letapp.activity.MainActivity;
 import com.example.tanvir.to_letapp.adapters.FlatAdapter;
 import com.example.tanvir.to_letapp.models.FlatDetails;
 import com.firebase.client.Firebase;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -55,16 +59,18 @@ public class RenterHomeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setHasOptionsMenu(true);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        getActivity().setTitle("Home");
         View view = inflater.inflate(R.layout.fragment_renter_home, container, false);
 
         renterHomeListview = view.findViewById(R.id.renterHomelistView);
-
         Firebase.setAndroidContext(getActivity());
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference().child("Owner").child("User");
@@ -90,11 +96,12 @@ public class RenterHomeFragment extends Fragment {
         return view;
     }
 
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_activity_menu, menu);
-        MenuItem search = menu.findItem(R.id.searchMainMenu);
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        getActivity().getMenuInflater().inflate(R.menu.renter_toolbar_menu, menu);
+        MenuItem search = menu.findItem(R.id.searchRenterHome);
         searchView = (android.support.v7.widget.SearchView) search.getActionView();
+        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
 
         searchView.setOnQueryTextListener(new android.support.v7.widget.SearchView.OnQueryTextListener() {
             @Override
@@ -109,7 +116,6 @@ public class RenterHomeFragment extends Fragment {
                 return false;
             }
         });
-        return true;
     }
 
     @Override
@@ -123,12 +129,15 @@ public class RenterHomeFragment extends Fragment {
             case R.id.filterMainMenu:
                 //
                 break;
+            case R.id.renterLogOut:
+                renterSignOut();
+                break;
             default:
                 //
                 break;
         }
         return true;
-    }*/
+    }
 
     public void search(String newText){
         flatAdapter.getFilter().filter(newText);
@@ -189,24 +198,34 @@ public class RenterHomeFragment extends Fragment {
                     DatabaseReference databaseReference = databaseReference2.child(dataSnapshot.getKey());
                     String postId = dataSnapshot.getKey();
 
-                    String address = dataSnapshot.child("Address").getValue(String.class);
-                    String bedroom = dataSnapshot.child("Bedroom quantity").getValue(String.class);
-                    String kitchen = dataSnapshot.child("Kitchen quantity").getValue(String.class);
-                    String bathroom = dataSnapshot.child("Bathroom quantity").getValue(String.class);
-                    String rentDate = dataSnapshot.child("Rent Date").getValue(String.class);
-                    String condition = dataSnapshot.child("Rent condition").getValue(String.class);
-                    String totalRent = dataSnapshot.child("Total rent").getValue(String.class);
-                    String image = dataSnapshot.child("Images").getValue(String.class);
+                    try {
+                        if (dataSnapshot.child("Available status").getValue(String.class).equals("Available")) {
+                            String address = dataSnapshot.child("Address").getValue(String.class);
+                            String bedroom = dataSnapshot.child("Bedroom quantity").getValue(String.class);
+                            String kitchen = dataSnapshot.child("Kitchen quantity").getValue(String.class);
+                            String bathroom = dataSnapshot.child("Bathroom quantity").getValue(String.class);
+                            String rentDate = dataSnapshot.child("Rent Date").getValue(String.class);
+                            String rentFor = dataSnapshot.child("Rent For").getValue(String.class);
+                            String rentType = dataSnapshot.child("Rent Type").getValue(String.class);
+                            String totalRent = dataSnapshot.child("Total rent").getValue(String.class);
 
-                    // Toast.makeText(MainActivity.this, "Tvr/"+postIdList.get(finalI), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(MainActivity.this, "Tvr/"+dataSnapshot.hasChild("Images"), Toast.LENGTH_SHORT).show();
 
-                    //if(dataSnapshot.hasChild("Images")){
-                    flatDetails= new FlatDetails(ownerIdList.get(finalI),address, bedroom, kitchen,bathroom,rentDate,condition,totalRent,image,postId);
-                    //}
-                    //else {
-                    //flatDetails= new FlatDetails(ownerIdList.get(finalI),address, bedroom, kitchen,bathroom,rentDate,condition,totalRent,"",postId);
-                    arrayList.add(flatDetails);
-                    renterHomeListview.setAdapter(flatAdapter);
+                            if (dataSnapshot.hasChild("Images")) {
+                                String image = dataSnapshot.child("Images").getValue(String.class);
+                                flatDetails = new FlatDetails(ownerIdList.get(finalI), address, bedroom, kitchen, bathroom, rentDate, rentFor,rentType, totalRent, image, postId);
+                                arrayList.add(flatDetails);
+                                renterHomeListview.setAdapter(flatAdapter);
+                            } else {
+                                flatDetails = new FlatDetails(ownerIdList.get(finalI), address, bedroom, kitchen, bathroom, rentDate, rentFor,rentType, totalRent, "", postId);
+                                arrayList.add(flatDetails);
+                                renterHomeListview.setAdapter(flatAdapter);
+                            }
+                        }
+                    }
+                    catch (Exception e){
+
+                    }
                 }
 
                 @Override
@@ -241,8 +260,8 @@ public class RenterHomeFragment extends Fragment {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                // Toast.makeText(MainActivity.this, ""+dataSnapshot.getValue(String.class), Toast.LENGTH_SHORT).show();
                 image = dataSnapshot.getValue(String.class);
-                FlatDetails flatDetails= new FlatDetails(ownerIdList.get(finalI), address, bedroom, kitchen,bathroom,rentDate,condition,totalRent,image,postId);
-                arrayList.add(flatDetails);
+                //FlatDetails flatDetails= new FlatDetails(ownerIdList.get(finalI), address, bedroom, kitchen,bathroom,rentDate,condition,totalRent,image,postId);
+                //arrayList.add(flatDetails);
                 renterHomeListview.setAdapter(flatAdapter);
             }
 
@@ -266,6 +285,15 @@ public class RenterHomeFragment extends Fragment {
 
             }
         });
+    }
+    //user signOut method
+    private void renterSignOut() {
+        FirebaseAuth userSignOut = FirebaseAuth.getInstance();
+        userSignOut.signOut();
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        getActivity().finish();
+        startActivity(intent);
     }
 }
 

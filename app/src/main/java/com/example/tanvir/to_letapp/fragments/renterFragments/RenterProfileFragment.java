@@ -12,6 +12,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +26,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 
 public class RenterProfileFragment extends Fragment {
@@ -35,8 +37,8 @@ public class RenterProfileFragment extends Fragment {
     FirebaseDatabase database;
     DatabaseReference databaseReference;
     private String profileId;
-
-    String Name,Email,PhoneNumber,Address,Age,Relagion,Gender,Profession,MonthlyIncome,MaritalSatus,Natinality;
+    ImageView imageView;
+    String Name,Email,PhoneNumber,Address,Age,Relagion,Gender,Profession,MonthlyIncome,MaritalSatus,Natinality,profileImge;
 
     public interface OnFragmentInteractionListener {
 
@@ -55,6 +57,8 @@ public class RenterProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        getActivity().setTitle("Profile");
         View view=inflater.inflate(R.layout.fragment_renter_profile, container, false);
         renterName=view.findViewById(R.id.renterNameTv);
         renterEmail=view.findViewById(R.id.renterEmailTv);
@@ -67,7 +71,7 @@ public class RenterProfileFragment extends Fragment {
         renterMonthlyIncome=view.findViewById(R.id.renterMonthlyIncome);
         renterMaritalSatus=view.findViewById(R.id.renterMaritalsatus);
         renterNatinality=view.findViewById(R.id.renterNatinality);
-
+        imageView = view.findViewById(R.id.renterProfileImg);
         FloatingActionButton fab2 = view.findViewById(R.id.fab2);
 
         final String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -91,6 +95,7 @@ public class RenterProfileFragment extends Fragment {
                     MonthlyIncome=dataSnapshot.child("Monthly Income").getValue(String.class);
                     MaritalSatus=dataSnapshot.child("Marital Status").getValue(String.class);
                     Natinality=dataSnapshot.child("Nationality").getValue(String.class);
+                    profileImge = dataSnapshot.child("ProfileImage").getValue(String.class);
 
                     renterName.setText(Name);
                     renterEmail.setText(Email);
@@ -103,6 +108,14 @@ public class RenterProfileFragment extends Fragment {
                     renterMonthlyIncome.setText(MonthlyIncome);
                     renterMaritalSatus.setText(MaritalSatus);
                     renterNatinality.setText(Natinality);
+
+                    try{
+                        if (profileImge.length()!=0){
+                            Picasso.get().load(profileImge).into(imageView);
+                        }
+                    }catch (Exception e){
+
+                    }
                 }
 
             }
